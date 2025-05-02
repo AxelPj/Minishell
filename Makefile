@@ -6,22 +6,20 @@
 #    By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/05/02 14:02:57 by axelpeti         ###   ########.fr        #
+#    Updated: 2025/05/02 17:51:42 by axelpeti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Nom de l'exécutable
-NAME = push_swap
+NAME = minishell
 
 # Sources
-SRCS =  ./src/error/verif.c \
-		./src/utils/utils.c ./src/utils/utils_lst.c ./src/utils/algo.c ./src/utils/mouv.c ./src/utils/first_step.c ./src/utils/final_step.c\
-		./src/main/pushswap.c \
-		./src/mouv/push.c ./src/mouv/rotate.c ./src/mouv/swap.c ./src/mouv/reverse_rotate.c \
+SRCS =  source/main.c \
+		utils/utils.c utils/init_data.c \
 		
 # Répertoire et archive de la libft
 LIBFT_DIR = ./include/libft
-LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT = $(LIBFT_DIR)/libft.h
 
 # Répertoires
 BUILD_DIR = build
@@ -31,7 +29,8 @@ OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 # Compilateur et options
 CC = cc
-CFLAGS = -Werror -Wextra -Wall -g
+CFLAGS = -Werror -Wextra -Wall #-ggdbft
+//LDFLAGS = -lreadline
 
 # Couleurs pour affichage
 YELLOW = \033[0;33m
@@ -51,7 +50,7 @@ $(NAME): $(OBJS)
 # Compilation de la libft
 $(LIBFT):
 	@echo "$(YELLOW)🔨 Compiling libft... 🚀$(RESET)"
-	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_D IR)
 
 # Règle pour les fichiers objets, en créant les dossiers nécessaires
 $(BUILD_DIR)/%.o: %.c
