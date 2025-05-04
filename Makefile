@@ -6,7 +6,7 @@
 #    By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/05/02 17:51:42 by axelpeti         ###   ########.fr        #
+#    Updated: 2025/05/04 15:10:30 by axelpeti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,12 @@ NAME = minishell
 
 # Sources
 SRCS =  source/main.c \
-		utils/utils.c utils/init_data.c \
-		
+		source/utils/utils.c source/utils/init_data.c \
+		source/parsing/parsing_step1.c \
+
 # Répertoire et archive de la libft
 LIBFT_DIR = ./include/libft
-LIBFT = $(LIBFT_DIR)/libft.h
+LIBFT = $(LIBFT_DIR)/libft.a
 
 # Répertoires
 BUILD_DIR = build
@@ -29,8 +30,8 @@ OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 # Compilateur et options
 CC = cc
-CFLAGS = -Werror -Wextra -Wall #-ggdbft
-//LDFLAGS = -lreadline
+CFLAGS = -Werror -Wextra -Wall -g #-ggdd
+LDFLAGS = -lreadline
 
 # Couleurs pour affichage
 YELLOW = \033[0;33m
@@ -50,7 +51,7 @@ $(NAME): $(OBJS)
 # Compilation de la libft
 $(LIBFT):
 	@echo "$(YELLOW)🔨 Compiling libft... 🚀$(RESET)"
-	$(MAKE) -C $(LIBFT_D IR)
+	$(MAKE) -C $(LIBFT_DIR)
 
 # Règle pour les fichiers objets, en créant les dossiers nécessaires
 $(BUILD_DIR)/%.o: %.c
