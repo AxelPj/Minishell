@@ -36,8 +36,9 @@ ls -la | rev | wc -l
 
 //--------------tokenisation--------------//
 int		is_one_delimiter(char c);
+int		is_two_delimiter(char c, char c2);
+int		count_len_input(char *input, int i, int len, int in_word);
 char	*space_to_input(char *input, int len, int i, int j);
-int	skip_space(char c, char c2);
 
 //--------------parsing--------------//
 int		check_quote(char *str);
