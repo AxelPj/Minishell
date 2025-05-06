@@ -8,18 +8,31 @@
 #include <readline/history.h>
 #include <unistd.h>
 
+
+enum e_token_type
+{
+    TOKEN_WORD,
+	TOKEN_BUILT_IN,
+    TOKEN_PIPE,
+    TOKEN_REDIRECT_IN,
+    TOKEN_REDIRECT_OUT,
+    TOKEN_REDIRECT_APPEND,
+    TOKEN_DOLLAR,
+    TOKEN_BACKTICK,
+    TOKEN_UNKNOWN
+};
+
 typedef struct t_list
 {
-	char			*s;
-	int				token;
-	struct t_list	*next;
+	char			**s;
+	enum			e_token_type type;
+	struct t_pars	*next;
 } t_list;
 
 typedef struct s_data
 {
-	t_list	*list;
+	t_list	*parsing;
 	char	**envp_cpy;
-
 } s_data;
 
 /* typedef struct t_parsing

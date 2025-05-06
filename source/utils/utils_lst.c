@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 14:41:59 by axel              #+#    #+#             */
-/*   Updated: 2025/05/03 14:13:40 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:05:33 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,4 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (size);
 }
+// a revoir

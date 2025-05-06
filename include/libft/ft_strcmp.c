@@ -1,14 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenisation.c                                     :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 17:34:31 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/05 17:34:39 by axelpeti         ###   ########.fr       */
+/*   Created: 2025/05/06 16:20:56 by axelpeti          #+#    #+#             */
+/*   Updated: 2025/05/06 16:23:02 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/header/minishell.h"
+int	ft_strcmp(char *s, char *s2)
+{
+	int	i;
 
+	i = 0;
+	while (s[i] && s2[i])
+	{
+		if (s[i] != s2[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
