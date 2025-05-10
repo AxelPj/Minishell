@@ -17,7 +17,7 @@ int main (int argc, char **argv, char **envp)
 	char	*command;
 	s_data	*data;
 	char	*after_cmd;
-
+	char **tab;	
 	(void) argc;
 	(void) argv;
 	data = NULL;
@@ -26,11 +26,13 @@ int main (int argc, char **argv, char **envp)
 	else
 		init_data(data, 0, envp); // jai mis un int comme boolean pour savoir si on copi l'env en fonction de si on le donne a la compilation (1) pour non, (0) pour oui
 	while (1)
-	{	
+	{
 		command = readline("minishell> "); //fonction permettant de lire et garder en memoire l'entree utilisateur
 		add_history(command); //permet de garder dans l'historique
 		after_cmd = space_to_input(command, ft_strlen(command), 0, 0);
 		printf("\n\n%s\n\n", after_cmd);
+		tab = ft_split_token(after_cmd, 0, 0);
+		printf("%s", tab[0]);
 		free(command); //liberer la memoire que readline alloue
 	}
 }

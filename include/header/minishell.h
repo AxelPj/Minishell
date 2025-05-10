@@ -58,10 +58,17 @@ int		check_quote(char *str);
 
 //--------------Utils--------------//
 void	init_data(s_data *data, int bool, char **envp);
+int     in_simple_quote(char c);
+int     in_double_quote(char c);
+int	verif_quote(char *processed, int i);
 char	**envp_cpy(s_data *data, char **envp);
 t_list	*ft_lstnw(int content);
 void	ft_lstadd_bck(t_list **lst, t_list *new);
 t_list	*lstlast(t_list *lst);
 int		ft_lstsize(t_list *lst);
+int    in_space (char c);
+char	*place_token(const char *str, size_t start, size_t end);
+int     count_token(char *processed, int i, int word);
+char	**ft_split_token(char *s, int i, int j);
 
 #endif

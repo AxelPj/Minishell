@@ -15,8 +15,8 @@ NAME = minishell
 
 # Sources
 SRCS =  source/main.c \
-		source/utils/utils.c source/utils/init_data.c \
-		source/parsing/parsing_step1.c \
+		source/utils/utils.c source/utils/init_data.c source/utils/split_modif.c source/utils/input_utils.c\
+		source/tokenisation/format_input.c \
 
 # Répertoire et archive de la libft
 LIBFT_DIR = ./include/libft

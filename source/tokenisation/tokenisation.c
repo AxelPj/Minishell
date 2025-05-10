@@ -13,28 +13,10 @@
 #include "../../include/header/minishell.h"
 
 
-int	count_token(char *processed, int i, int flag_sq, int flag_dq, int word)
-{
-	while (processed[i])
-	{
-		if (processed[i] == '\"')
-		{
-			i++;
-			while (processed[i] == '\"')
-			{
-				i++;
-			}
-			word++;
-		}
-		else if (processed[i] == '\'')
-			while (processed[i] == '\"')
-			{
-				i++;
-				word++;
-			}
-		else if (processed[i] != ' ' || processed[i])
 
-	}	
+
+ //faire en sorte que lon passe dans la str et que si on est sur un " ou un ' 
+ //aller jusqu a la prochaine quote fermante et prendre toute la str et la mettre dans un ** 
 }
 
 //je veut passer dans ma chaine processed, verifier si je suis sur un " ou un ' 
