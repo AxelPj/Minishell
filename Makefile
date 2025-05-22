@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+         #
+#    By: axel <axel@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2025/05/20 17:39:36 by lesalmon         ###   ########.fr        #
-=======
-#    Updated: 2025/05/17 14:58:59 by axelpeti         ###   ########.fr        #
->>>>>>> origin/main
+#    Updated: 2025/05/22 23:05:41 by axel             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,22 +15,18 @@ NAME = minishell
 
 # Sources
 SRCS =  source/main.c \
-<<<<<<< HEAD
-		source/utils/utils.c source/utils/init_data.c source/utils/split_modif.c source/utils/input_utils.c\
-		source/tokenisation/format_input.c source/utils/env_utils.c\
-		source/built-in/ft_cd.c source/built-in/ft_echo.c source/built-in/ft_env.c source/built-in/exit.c\
-		source/built-in/export.c source/built-in/ft_pwd.c source/built-in/ft_unset.c\
-=======
-		source/utils/utils.c source/utils/init_data.c source/utils/split_modif.c source/utils/input_utils.c source/utils/utils_lst1.c source/utils/utils_lst2.c source/utils/free.c \
-		source/tokenisation/format_input.c source/tokenisation/tokenisation.c \
->>>>>>> origin/main
-
+		source/parsing/syntax_utils/delimiteur_utils.c source/parsing/syntax_utils/quote_utils.c source/parsing/syntax_utils/braces_utils.c source/parsing/syntax_utils/parens_utils.c source/parsing/syntax_utils/brackets_utils.c \
+		source/parsing/input/input_normalizer.c source/parsing/input/input_processor.c \
+		source/parsing/tokenisation/sort_token.c source/parsing/tokenisation/split_modif.c source/parsing/tokenisation/tokenisation.c \
+		source/utils/utils.c source/utils/free.c source/utils/init_data.c source/utils/utils_lst1.c source/utils/utils_lst2.c \
+		source/built-in/ft_cd.c source/built-in/ft_echo.c source/built-in/ft_env.c source/built-in/ft_exit.c\
+		source/built-in/ft_export.c source/built-in/ft_pwd.c source/built-in/ft_unset.c\
+		include/pipex/pipex.c include/pipex/path.c include/pipex/pipex_utils.c include/pipex/utils1.c\
+		include/pipex/utils2.c include/pipex/utils3.c\
+		
 # Répertoire et archive de la libft
 LIBFT_DIR = ./include/libft
 LIBFT = $(LIBFT_DIR)/libft.a
-
-PIPEX_DIR = ./include/pipex
-PIPEX = $(LIBFT_DIR)/pipex.a
 
 # Répertoires
 BUILD_DIR = build
@@ -44,7 +36,8 @@ OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 # Compilateur et options
 CC = cc
-CFLAGS = -Werror -Wextra -Wall -g #-ggdd
+CFLAGS   = -Wall -Wextra -Werror -g
+CPPFLAGS = -Iinclude/header -I$(LIBFT_DIR)
 LDFLAGS = -lreadline
 
 # Couleurs pour affichage
@@ -59,20 +52,19 @@ all: $(LIBFT) $(NAME)
 # Compilation de l'exécutable
 $(NAME): $(OBJS)
 	@echo "$(YELLOW)🔨 Linking $(NAME)... 🚀$(RESET)"
-	$(CC) $(OBJS) $(LIBFT) $(PIPEX) $(LDFLAGS) -o $(NAME)
+	$(CC) $(OBJS) $(LIBFT) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)✅ Compilation successful!$(RESET)"
 
 # Compilation de la libft
 $(LIBFT):
 	@echo "$(YELLOW)🔨 Compiling libft... 🚀$(RESET)"
 	$(MAKE) -C $(LIBFT_DIR)
-	$(MAKE) -C $(PIPEX_DIR)
 
 # Règle pour les fichiers objets, en créant les dossiers nécessaires
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@echo "$(YELLOW)📝 Compiling $<...$(RESET)"
-	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(PIPEX_DIR) -c $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 	@echo "$(GREEN)✅ Compilation of $< finished$(RESET)"
 
 # Nettoyage des fichiers objets
@@ -81,7 +73,6 @@ clean:
 	rm -rf $(BUILD_DIR)
 	@echo "$(RED)🧹 Cleaning libft objects...$(RESET)"
 	$(MAKE) clean -C $(LIBFT_DIR)
-	$(MAKE) clean -C $(PIPEX_DIR)
 
 # Nettoyage complet
 fclean: clean
@@ -89,7 +80,6 @@ fclean: clean
 	rm -f $(NAME)
 	@echo "$(RED)🧼 Cleaning libft archive...$(RESET)"
 	$(MAKE) fclean -C $(LIBFT_DIR)
-	$(MAKE) fclean -C $(PIPEX_DIR)
 
 # Recompilation complète
 re: fclean all
@@ -98,5 +88,4 @@ re: fclean all
 debug: CFLAGS += -g -fsanitize=address
 debug: re
 
-# Déclaration des cibles phony
 .PHONY: all clean fclean re debug

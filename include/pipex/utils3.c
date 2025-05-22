@@ -3,40 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:00:31 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/22 00:17:47 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:14:20 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-int	is_valid_command(char *cmd)
+int	is_valid_command(t_pipex *info, char *cmd)
 {
 	char	*path;
-	char	**paths;
-	char	*full;
-	int		i;
 
-	path = getenv("PATH");
-	paths = ft_split_pipex(path, ':');
-	i = 0;
-	while (paths[i])
+	if (!cmd || !*cmd)
+		return (0);
+	if (is_builtin(cmd))
+		return (1);
+	path = cmd_path(cmd, info->envp);
+	if (path)
 	{
-		full = ft_strjoin(paths[i], "/");
-		full = ft_strjoin(full, cmd);
-		if (access(full, X_OK) == 0)
-		{
-			free_args(paths);
-			free(full);
-			return (0);
-		}
-		free(full);
-		i++;
+		free(path);
+		return (0); // commande valide
 	}
-	free_args(paths);
-	return (1);
+	return (1); // commande introuvable
 }
 
 int	is_valid_builtin(char *cmd)
@@ -58,23 +48,37 @@ int	is_valid_builtin(char *cmd)
 	return (1);
 }
 
-void	is_valid(t_pipex *info, char **args)
+int count_valid_commands(char **args, t_pipex *info)
 {
-	int	i;
-	int	j;
-	int	nb_args;
-
-	i = 0;
-	j = 0;
-	nb_args = 0;
-	while (args[nb_args])
-		nb_args++;
-	info->cmds = malloc(sizeof(char *) * (nb_args + 1));
+	int i = 0;
+	int count = 0;
 	while (args[i])
 	{
-		if (is_valid_command(args[i]) || is_valid_builtin(args[i]))
+		if (!is_valid_command(info, args[i]) || !is_valid_builtin(args[i]))
+			count++;
+		i++;
+	}
+	return count;
+}
+
+void	is_valid(t_pipex *info, char **args)
+{
+	int	i = 0;
+	int	j = 0;
+	int	valid_count;
+	
+	valid_count = count_valid_commands(args, info);
+	info->cmds = malloc(sizeof(char *) * (valid_count + 1));
+	if (!info->cmds)
+		exit(EXIT_FAILURE);
+
+	while (args[i])
+	{
+		if (!is_valid_command(info, args[i]) || !is_valid_builtin(args[i]))
 		{
-			info->cmds[j] = args[i];
+			info->cmds[j] = ft_strdup(args[i]);
+			if (!info->cmds[j])
+				exit(EXIT_FAILURE);
 			j++;
 		}
 		i++;

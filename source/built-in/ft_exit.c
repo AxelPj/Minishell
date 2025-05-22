@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 18:07:11 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/22 00:09:49 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:42:57 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	is_numeric(char *str)
 	return (1);
 }
 
-int	ft_exit(s_data *data, char **args)
+int	ft_exit(char **args)
 {
 	long	code;
 
