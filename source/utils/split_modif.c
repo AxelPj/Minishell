@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_modif.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:06:44 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 12:54:28 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/22 13:37:27 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	in_space(char c)
 }
 
 
-char	**ft_split_token(char *processed, s_data *data, int i, int j)
+char	**ft_split_token(char *processed, t_data *data, int i, int j)
 {
 	char	**tab;
 	size_t	start;

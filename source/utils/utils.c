@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 17:29:04 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 12:34:46 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/22 13:37:14 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/minishell.h"
 
-char	**envp_cpy(s_data *data, char **envp)
+char	**envp_cpy(t_data *data, char **envp)
 {
 	int	i;
 	int	sizelen;
@@ -48,7 +48,7 @@ int	verif_built_in(char *str)
 	return (0);
 }
 
-char	*ft_tokenjoin(s_data *data, char *s1, char *s2, int start, int end)
+char	*ft_tokenjoin(t_data *data, char *s1, char *s2, int start, int end)
 {
 	size_t	i;
 	char *new_processed;
@@ -74,7 +74,7 @@ char	*ft_tokenjoin(s_data *data, char *s1, char *s2, int start, int end)
 	return (new_processed);
 }
 
-char	*ft_tokenquote(s_data *data, char *s1, char *s2, int start, int end)
+char	*ft_tokenquote(t_data *data, char *s1, char *s2, int start, int end)
 {
 	size_t	i;
 	char *new_processed;
@@ -131,7 +131,7 @@ int	is_one_delimiter(char c)
 	return (0);
 }
 
-void	print_lst(s_data *data)
+void	print_lst(t_data *data)
 {
 	t_list *current;
 
@@ -144,7 +144,7 @@ void	print_lst(s_data *data)
 	printf("str token = %s token = %d a l'index %d\n", current->s, current->token, current->index);
 }
 
-void	print_pars_lst(s_data *data)
+void	print_pars_lst(t_data *data)
 {
 	t_pars *current;
 	int i;

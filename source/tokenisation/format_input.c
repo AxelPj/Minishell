@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 14:02:22 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 12:32:53 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/22 13:36:05 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	has_multi_q(char *input, int i)
 	return (0);
 }
 
-char *process_multi_q(s_data *data, char *input, char *processed, int i, int start)
+char *process_multi_q(t_data *data, char *input, char *processed, int i, int start)
 {
 	while (has_multi_q(input, i) == 1)
 	{
@@ -106,7 +106,7 @@ char *process_multi_q(s_data *data, char *input, char *processed, int i, int sta
 	return (processed);
 }
 
-char *process_q(s_data *data, char *input, char *processed, int i, int start)
+char *process_q(t_data *data, char *input, char *processed, int i, int start)
 {
 	if (in_sq(input[i]))
 	{
@@ -125,7 +125,7 @@ char *process_q(s_data *data, char *input, char *processed, int i, int start)
 	return (processed);
 }
 
-char	*check_quote_or_delim(s_data *data, char *input, char *processed, int i)
+char	*check_quote_or_delim(t_data *data, char *input, char *processed, int i)
 {
 	if (in_sq(input[i]) == 1 || in_dq(input[i]) == 1)
 		{
@@ -140,7 +140,7 @@ char	*check_quote_or_delim(s_data *data, char *input, char *processed, int i)
 	return (processed);
 }
 
-char	*process_del(s_data *data, char *input, char *processed, int i)
+char	*process_del(t_data *data, char *input, char *processed, int i)
 {
 	if (is_two_delimiter(input[i], input[i + 1]))
 		processed = ft_tokenjoin(data, processed, input, i, i + 2);
@@ -162,7 +162,7 @@ int	in_quote_or_delim(char *input, int i)
 		return (0);
 }
 
-char	*space_to_input(s_data *data, char *input, int i)
+char	*space_to_input(t_data *data, char *input, int i)
 {
 	char	*processed;
 	int		start;

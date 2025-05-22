@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:56:15 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/22 00:17:56 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:11:55 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ int	command(char *cmd, char **envp)
 	return (-1);
 }
 
-int	pipex_mod(s_data *data, char **args, char **envp)
+int	pipex_mod(t_data *data, char **args)
 {
 	t_pipex	info;
 	pid_t	pid;
 	int		i;
 
 	i = 0;
-	info = init_infos(args, envp);
+	info = init_infos(args, data->envp_cpy);
 	if (info.nb_cmds == 1 && is_builtin_parent(info.cmds[0]))
 	{
 		g_status = execute_builtin(info.cmds[0], info.args, data);
@@ -103,7 +103,7 @@ int	pipex_mod(s_data *data, char **args, char **envp)
 	return (0);
 }
 
-int	main(int argc, char **tab, char **envp)
+int	pipex_setup(t_data *data, char **tab)
 {
 	int		nb_args;
 	int		i;
@@ -116,7 +116,7 @@ int	main(int argc, char **tab, char **envp)
 	g_status = 0;
 	while (tab[i])
 	{
-		if (strcmp(tab[i], "|") != 0)
+		if (ft_strcmp(tab[i], "|") != 0)
 			nb_args++;
 		i++;
 	}
@@ -127,7 +127,7 @@ int	main(int argc, char **tab, char **envp)
 	i = 2;
 	j = 2;
 	args = new_tab(tab, args, i, j);
-	pipex_mod(args, envp);
+	pipex_mod(data, args);
 	free(args);
 	return (0);
 }

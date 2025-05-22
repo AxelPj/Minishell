@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:27:52 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/22 00:13:46 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:12:32 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*copy_path(char *start, int len, char *cmd)
 		return (NULL);
 	ft_memcpy(full_path, start, len);
 	full_path[len] = '/';
-	ft_strcpy(full_path + len + 1, cmd);
+	ft_strlcpy(full_path + len + 1, cmd, ft_strlen(cmd));
 	full_path[len + 1 + ft_strlen(cmd)] = '\0';
 	if (access(full_path, X_OK) == 0)
 		return (full_path);

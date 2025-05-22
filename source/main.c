@@ -3,22 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/19 21:35:27 by lesalmon         ###   ########.fr       */
-=======
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/21 20:41:03 by axel             ###   ########.fr       */
->>>>>>> origin/main
+/*   Updated: 2025/05/22 14:15:35 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/header/minishell.h"
-void	a_out(s_data *data, char *command)
+
+long	g_status = 0;
+
+void	a_out(t_data *data, char *command)
 {
 	if (command)
 	{
@@ -39,7 +35,7 @@ void	a_out(s_data *data, char *command)
 int main (int argc, char **argv, char **envp)
 {
 	char	*command;
-	s_data *data = malloc(sizeof(s_data));
+	t_data *data = malloc(sizeof(t_data));
 	(void) argc;
 	(void) argv;
 	data = NULL;

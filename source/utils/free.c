@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:32:15 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/17 14:59:49 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:37:56 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/minishell.h"
 
-void	free_all(s_data *data, char *cmd)
+void	free_all(t_data *data, char *cmd)
 {
 	free(cmd);
 	free (data->processed);

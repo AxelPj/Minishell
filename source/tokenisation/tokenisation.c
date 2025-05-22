@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tokenisation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:31 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/20 17:03:24 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/22 13:49:30 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/minishell.h"
 
-t_list	*token_lst(s_data *data)
+t_list	*token_lst(t_data *data)
 {
 	int		i;
 	int		j;
@@ -58,7 +58,7 @@ int	token_type(char *s_token, int i)
 	return (0);
 }
 
-t_pars	*sort_token(s_data *data, int i, int j)
+t_pars	*sort_token(t_data *data, int i, int j)
 {
 	t_list	*current = data->token_lst;
 	t_pars	*new_node;

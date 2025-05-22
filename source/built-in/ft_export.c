@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 11:20:14 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/20 16:17:49 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:41:37 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_export(char **tab)
 	}
 }
 
-int	ft_export(s_data *data)
+int	ft_export(t_data *data)
 {
 	int		i;
 	int		j;
@@ -52,7 +52,7 @@ int	ft_export(s_data *data)
 	return (0);
 }
 
-int	create_var(s_data *data, char *str)
+int	create_var(t_data *data, char *str)
 {
 	int	i;
 	int	j;
