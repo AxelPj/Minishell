@@ -6,7 +6,11 @@
 #    By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2025/05/20 17:39:36 by lesalmon         ###   ########.fr        #
+=======
+#    Updated: 2025/05/17 14:58:59 by axelpeti         ###   ########.fr        #
+>>>>>>> origin/main
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +19,15 @@ NAME = minishell
 
 # Sources
 SRCS =  source/main.c \
+<<<<<<< HEAD
 		source/utils/utils.c source/utils/init_data.c source/utils/split_modif.c source/utils/input_utils.c\
 		source/tokenisation/format_input.c source/utils/env_utils.c\
 		source/built-in/ft_cd.c source/built-in/ft_echo.c source/built-in/ft_env.c source/built-in/exit.c\
 		source/built-in/export.c source/built-in/ft_pwd.c source/built-in/ft_unset.c\
+=======
+		source/utils/utils.c source/utils/init_data.c source/utils/split_modif.c source/utils/input_utils.c source/utils/utils_lst1.c source/utils/utils_lst2.c source/utils/free.c \
+		source/tokenisation/format_input.c source/tokenisation/tokenisation.c \
+>>>>>>> origin/main
 
 # Répertoire et archive de la libft
 LIBFT_DIR = ./include/libft
