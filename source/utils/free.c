@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:32:15 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 13:37:56 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:36:42 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_tab(char **tab)
 
 t_list	*free_token_lst(t_list *token_lst)
 {
-	t_list *current;
+	t_list	*current;
 
 	current = token_lst;
 	while (current)
@@ -49,9 +49,10 @@ t_list	*free_token_lst(t_list *token_lst)
 	token_lst = NULL;
 	return (token_lst);
 }
+
 t_pars	*free_lst_pars(t_pars *parsing)
 {
-	t_pars *current;
+	t_pars	*current;
 
 	current = parsing;
 	while (current)

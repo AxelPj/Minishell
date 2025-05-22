@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:31 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 13:49:30 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:34:39 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	token_type(char *s_token, int i)
 	while (s_token[i])
 	{
 		if (verif_built_in(s_token))
-			return(1);
+			return (1);
 		else if (s_token[0] == '|')
 			return (2);
 		else if (s_token[0] == '>')
@@ -60,12 +60,12 @@ int	token_type(char *s_token, int i)
 
 t_pars	*sort_token(t_data *data, int i, int j)
 {
-	t_list	*current = data->token_lst;
+	t_list	*current;
 	t_pars	*new_node;
 	int		size;
 	t_list *temp;
 
-
+	current = data->token_lst;
 	while (current)
 	{
 		i = 0;
@@ -87,7 +87,7 @@ t_pars	*sort_token(t_data *data, int i, int j)
 			}
 			new_node->tab_tok[i] = NULL;
 			ft_pars_lstadd_bck(&data->parsing, new_node);
-			current = temp; // Avance current au-delà des tokens traités
+			current = temp;
 		}
 		else
 		{
@@ -98,6 +98,5 @@ t_pars	*sort_token(t_data *data, int i, int j)
 		}
 		j++;
 	}
-	return data->parsing;
+	return (data->parsing);
 }
-

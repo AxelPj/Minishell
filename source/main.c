@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 14:15:35 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:53:44 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,10 @@ void	a_out(t_data *data, char *command)
 	if (command)
 	{
 		data->processed = space_to_input(data, command, 0);
-		printf("%s\n", data->processed);
-		write(1, "format input ok\n", 17);
 		data->tab_token = ft_split_token(data->processed, data, 0, 0);
-		write(1, "split ok\n", 10);
 		data->token_lst = token_lst(data);
-		write(1, "token ok\n", 10);
-		print_lst(data);
 		data->parsing = sort_token(data, 1, 0);
-		print_pars_lst(data);
+		pipex_setup(data, data->tab_token);
 		free_all(data, command);
 	}
 }
@@ -47,7 +42,6 @@ int main (int argc, char **argv, char **envp)
 	while (1)
 	{
 		command = readline("minishell> "); //fonction permettant de lire et garder en memoire l'entree utilisateur
-		printf("command ok\n");
 		if (ft_strlen(command) >= 1)
 		{
 			add_history(command); //permet de garder dans l'historique

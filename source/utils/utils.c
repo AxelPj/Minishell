@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 17:29:04 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 13:37:14 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:52:41 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,24 @@ char	**envp_cpy(t_data *data, char **envp)
 	int	sizelen;
 
 	sizelen = tablen((void **)envp);
+	data->envp_cpy = malloc((sizelen + 1) * sizeof(char *));
+	if (!data->envp_cpy)
+		return (NULL);
 	i = 0;
-	data->envp_cpy = malloc (sizeof sizelen + 1);
 	while (i < sizelen)
 	{
 		data->envp_cpy[i] = ft_strdup(envp[i]);
+		if (!data->envp_cpy[i])
+		{
+			free(data->envp_cpy);
+			return (NULL);
+		}
 		i++;
 	}
 	data->envp_cpy[i] = NULL;
 	return (data->envp_cpy);
 }
+
 
 int	verif_built_in(char *str)
 {
@@ -129,42 +137,4 @@ int	is_one_delimiter(char c)
 		i++;
 	}
 	return (0);
-}
-
-void	print_lst(t_data *data)
-{
-	t_list *current;
-
-	current = data->token_lst;
-	while (current->next)
-	{
-		printf("str token = %s token = %d a l'index %d\n", current->s, current->token, current->index);
-		current = current->next;
-	}
-	printf("str token = %s token = %d a l'index %d\n", current->s, current->token, current->index);
-}
-
-void	print_pars_lst(t_data *data)
-{
-	t_pars *current;
-	int i;
-	printf ("token parse =\n\n");
-	current = data->parsing;
-	while (current->next)
-	{
-		i = 0;
-		while (current->tab_tok[i])
-		{
-			printf("tab_tok = %s\n", current->tab_tok[i]);
-			i++;
-		}
-		printf("token = %d a l'index %d\n", current->token, current->index);
-		current = current->next;
-	}
-	i = 0;
-	while (current->tab_tok[i])
-		{
-			printf("tab_tok = %s\n", current->tab_tok[i]);
-			i++;
-		}
 }

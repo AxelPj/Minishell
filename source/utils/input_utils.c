@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 15:31:46 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/21 21:58:58 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/22 14:35:50 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	verif_quote(char *processed, int i)
 			{
 				if (processed[i] == '\0')
 					return (1);
-				i++; 
+				i++;
 			}
 		}
 		else if (processed[i] == '\'')
@@ -33,7 +33,7 @@ int	verif_quote(char *processed, int i)
 			{
 				if (processed[i] == '\0')
 					return (1);
-				i++; 
+				i++;
 			}
 		}
 		i++;
@@ -54,6 +54,3 @@ int	in_dq(char c)
 		return (1);
 	return (0);
 }
-
-
-// verification synthaxique de la chaine traite precedement (si les quote sont bien fermer)

@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/22 14:21:21 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:50:27 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,9 @@ t_list	*free_token_lst(t_list *token_lst);
 t_pars	*free_lst_pars(t_pars *parsing);
 
 //----------------PIPEX----------------//
-int		pipex_mod(t_data *data, char **argv);
-int		command(char *cmd, char **envp);
+int		pipex_setup(t_data *data, char **tab);
+int		pipex_mod(t_data *data);
+int		command(t_pipex *infos, char **envp);
 
 //----------------PATH----------------//
 char	*cmd_path(char *cmd, char **envp);
@@ -144,12 +145,15 @@ void	wait_all_children(int nb_cmds);
 
 //----------------UTILS1--------------//
 int		execute_builtin(char *cmd, char **args, t_data *data);
+void	ft_tabfree(char **tab);
+int		is_builtin_child(char *cmd);
+int		is_builtin(char *cmd);
 
 //----------------SPLIT_PIPEX(UTILS2)-------//
 char	**ft_split_pipex(char const *s, char c);
 
 //----------------UTILS3--------------//
-int		is_valid_command(char *cmd);
+int		is_valid_command(t_pipex *info, char *cmd);
 int		is_valid_builtin(char *cmd);
 void	is_valid(t_pipex *info, char **args);
 int		is_builtin_parent(char *cmd);

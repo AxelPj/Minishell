@@ -6,7 +6,7 @@
 #    By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/05/22 14:13:24 by lesalmon         ###   ########.fr        #
+#    Updated: 2025/05/22 16:43:10 by lesalmon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,6 @@ fclean: clean
 	rm -f $(NAME)
 	@echo "$(RED)🧼 Cleaning libft archive...$(RESET)"
 	$(MAKE) fclean -C $(LIBFT_DIR)
-	$(MAKE) fclean -C $(PIPEX_DIR)
 
 # Recompilation complète
 re: fclean all

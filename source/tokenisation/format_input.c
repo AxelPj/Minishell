@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 14:02:22 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 13:36:05 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:33:10 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	has_multi_q(char *input, int i)
 		while (in_sq(input[i]) == 0)
 			i++;
 	}
-	if ((in_dq(input[i]) && in_dq(input[i + 1])) 
+	if ((in_dq(input[i]) && in_dq(input[i + 1]))
 		|| (in_dq(input[i]) && in_sq(input[i + 1]))
 		|| (in_sq(input[i]) && in_sq(input[i + 1]))
 		|| (in_sq(input[i]) && in_dq(input[i + 1])))
@@ -67,14 +67,14 @@ int	has_multi_q(char *input, int i)
 	return (0);
 }
 
-char *process_multi_q(t_data *data, char *input, char *processed, int i, int start)
+char	*process_multi_q(t_data *data, char *input, char *processed, int i, int start)
 {
 	while (has_multi_q(input, i) == 1)
 	{
 		if (in_dq(input[i]))
 		{
 			i++;
-			while(in_dq(input[i]) == 0)
+			while (in_dq(input[i]) == 0)
 				i++;
 			processed = ft_tokenquote(data, processed, input, start, i);
 			start = i + 2;
@@ -83,7 +83,7 @@ char *process_multi_q(t_data *data, char *input, char *processed, int i, int sta
 		else if (in_sq(input[i]))
 		{
 			i++;
-			while(in_sq(input[i]) == 0)
+			while (in_sq(input[i]) == 0)
 				i++;
 			processed = ft_tokenquote(data, processed, input, start, i);
 			start = i + 2;
@@ -93,13 +93,13 @@ char *process_multi_q(t_data *data, char *input, char *processed, int i, int sta
 	if (in_dq(input[i]))
 	{
 		i++;
-		while(in_dq(input[i]) == 0)
+		while (in_dq(input[i]) == 0)
 			i++;
 	}
 	else if (in_sq(input[i]))
 	{
 		i++;
-		while(in_sq(input[i]) == 0)
+		while (in_sq(input[i]) == 0)
 			i++;
 	}
 	processed = ft_tokenquote(data, processed, input, start, i + 1);
@@ -128,13 +128,13 @@ char *process_q(t_data *data, char *input, char *processed, int i, int start)
 char	*check_quote_or_delim(t_data *data, char *input, char *processed, int i)
 {
 	if (in_sq(input[i]) == 1 || in_dq(input[i]) == 1)
-		{
-			if (has_multi_q(input, i) == 0)
-				processed = process_q(data, input, processed, i, i);
-			else
-				processed = process_multi_q(data, input, processed, i, i);
-		}
-	else if (is_one_delimiter(input[i]) == 1 
+	{
+		if (has_multi_q(input, i) == 0)
+			processed = process_q(data, input, processed, i, i);
+		else
+			processed = process_multi_q(data, input, processed, i, i);
+	}
+	else if (is_one_delimiter(input[i]) == 1
 		|| is_two_delimiter(input[i], input[i + 1]) == 1)
 		processed = process_del(data, input, processed, i);
 	return (processed);
@@ -146,7 +146,7 @@ char	*process_del(t_data *data, char *input, char *processed, int i)
 		processed = ft_tokenjoin(data, processed, input, i, i + 2);
 	else if (is_one_delimiter(input[i]))
 	{
-		printf("delimiteur\n");	
+		printf("delimiteur\n");
 		processed = ft_tokenjoin(data, processed, input, i, i + 1);
 	}
 	return (processed);
@@ -155,9 +155,9 @@ char	*process_del(t_data *data, char *input, char *processed, int i)
 int	in_quote_or_delim(char *input, int i)
 {
 	if (in_sq(input[i]) == 1 || in_dq(input[i]) == 1
-			|| is_one_delimiter(input[i]) == 1
-			|| is_two_delimiter(input[i], input[i + 1]) == 1)
-			return(1);
+		|| is_one_delimiter(input[i]) == 1
+		|| is_two_delimiter(input[i], input[i + 1]) == 1)
+		return (1);
 	else
 		return (0);
 }
@@ -180,7 +180,7 @@ char	*space_to_input(t_data *data, char *input, int i)
 		{
 			start = i;
 			while ((input[i] && in_space(input[i]) == 0
-				&& is_one_delimiter(input[i]) == 0))
+					&& is_one_delimiter(input[i]) == 0))
 				i++;
 			if (input[i - 1] == ' ')
 				break ;
