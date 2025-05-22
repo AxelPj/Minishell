@@ -6,7 +6,7 @@
 #    By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/05/04 15:10:30 by axelpeti         ###   ########.fr        #
+#    Updated: 2025/05/17 14:58:59 by axelpeti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME = minishell
 
 # Sources
 SRCS =  source/main.c \
-		source/utils/utils.c source/utils/init_data.c source/utils/split_modif.c source/utils/input_utils.c\
-		source/tokenisation/format_input.c \
+		source/utils/utils.c source/utils/init_data.c source/utils/split_modif.c source/utils/input_utils.c source/utils/utils_lst1.c source/utils/utils_lst2.c source/utils/free.c \
+		source/tokenisation/format_input.c source/tokenisation/tokenisation.c \
 
 # Répertoire et archive de la libft
 LIBFT_DIR = ./include/libft

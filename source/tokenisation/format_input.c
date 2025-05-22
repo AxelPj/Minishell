@@ -3,45 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   format_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 14:02:22 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/05 17:25:56 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:32:53 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/minishell.h"
-
-int	is_two_delimiter(char c1, char c2)
-{
-	const char	*pairs[] = { ">>", "<<" };
-	int			i;
-
-	i = 0;
-	while (i < 2)
-	{
-		if (c1 == pairs[i][0] && c2 == pairs[i][1])
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	is_one_delimiter(char c)
-{
-	char	*del;
-	int		i;
-
-	i = 0;
-	del = "\"'()<>|${}[]`";
-	while (del[i])
-	{
-		if (del[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 int	count_len_input(char *input, int i, int len, int in_word)
 {
@@ -76,43 +45,148 @@ int	count_len_input(char *input, int i, int len, int in_word)
 	return (len);
 }
 
-char	*space_to_input(char *input, int len, int i, int j)
+int	has_multi_q(char *input, int i)
 {
-	len = count_len_input(input, 0, 0, 0);
-	char	*processed = malloc(sizeof(char) * (len + 1));
-
-	while (input[i])
+	if (in_dq(input[i]))
 	{
-		if (input[i] == ' ' || input[i] == '\t' || input[i] == '\n')
+		i++;
+		while (in_dq(input[i]) == 0)
+			i++;
+	}
+	else if (in_sq(input[i]))
+	{
+		i++;
+		while (in_sq(input[i]) == 0)
+			i++;
+	}
+	if ((in_dq(input[i]) && in_dq(input[i + 1])) 
+		|| (in_dq(input[i]) && in_sq(input[i + 1]))
+		|| (in_sq(input[i]) && in_sq(input[i + 1]))
+		|| (in_sq(input[i]) && in_dq(input[i + 1])))
+		return (1);
+	return (0);
+}
+
+char *process_multi_q(s_data *data, char *input, char *processed, int i, int start)
+{
+	while (has_multi_q(input, i) == 1)
+	{
+		if (in_dq(input[i]))
 		{
-			if (j > 0 && processed[j - 1] != ' ')
-				processed[j++] = ' ';
-			while (input[i + 1] == ' ' || input[i + 1] == '\t' || input[i + 1] == '\n')
+			i++;
+			while(in_dq(input[i]) == 0)
 				i++;
+			processed = ft_tokenquote(data, processed, input, start, i);
+			start = i + 2;
 			i++;
 		}
-		else if (is_two_delimiter(input[i], input[i + 1]))
+		else if (in_sq(input[i]))
 		{
-			if (j > 0 && processed[j - 1] != ' ')
-				processed[j++] = ' ';
-			processed[j++] = input[i++];
-			processed[j++] = input[i++];
-			if (input[i] && input[i] != ' ')
-				processed[j++] = ' ';
+			i++;
+			while(in_sq(input[i]) == 0)
+				i++;
+			processed = ft_tokenquote(data, processed, input, start, i);
+			start = i + 2;
+			i++;
 		}
-		else if (is_one_delimiter(input[i]))
-		{
-			if (j > 0 && processed[j - 1] != ' ')
-				processed[j++] = ' ';
-			processed[j++] = input[i++];
-			if (input[i] && input[i] != ' ')
-				processed[j++] = ' ';
-		}
-		else
-			processed[j++] = input[i++];
 	}
-	processed[j] = '\0';
+	if (in_dq(input[i]))
+	{
+		i++;
+		while(in_dq(input[i]) == 0)
+			i++;
+	}
+	else if (in_sq(input[i]))
+	{
+		i++;
+		while(in_sq(input[i]) == 0)
+			i++;
+	}
+	processed = ft_tokenquote(data, processed, input, start, i + 1);
 	return (processed);
 }
 
-// premiere etape, qui consiste a recuperer l'entree utilisateur, a la transformer pour quelle ai n seul espace entres argument/commande/delimiter
+char *process_q(s_data *data, char *input, char *processed, int i, int start)
+{
+	if (in_sq(input[i]))
+	{
+		i++;
+		while (in_sq(input[i]) == 0)
+			i++;
+		processed = ft_tokenjoin(data, processed, input, start, i + 1);
+	}
+	else
+	{
+		i++;
+		while (in_dq(input[i]) == 0)
+			i++;
+		processed = ft_tokenjoin(data, processed, input, start, i + 1);
+	}
+	return (processed);
+}
+
+char	*check_quote_or_delim(s_data *data, char *input, char *processed, int i)
+{
+	if (in_sq(input[i]) == 1 || in_dq(input[i]) == 1)
+		{
+			if (has_multi_q(input, i) == 0)
+				processed = process_q(data, input, processed, i, i);
+			else
+				processed = process_multi_q(data, input, processed, i, i);
+		}
+	else if (is_one_delimiter(input[i]) == 1 
+		|| is_two_delimiter(input[i], input[i + 1]) == 1)
+		processed = process_del(data, input, processed, i);
+	return (processed);
+}
+
+char	*process_del(s_data *data, char *input, char *processed, int i)
+{
+	if (is_two_delimiter(input[i], input[i + 1]))
+		processed = ft_tokenjoin(data, processed, input, i, i + 2);
+	else if (is_one_delimiter(input[i]))
+	{
+		printf("delimiteur\n");	
+		processed = ft_tokenjoin(data, processed, input, i, i + 1);
+	}
+	return (processed);
+}
+
+int	in_quote_or_delim(char *input, int i)
+{
+	if (in_sq(input[i]) == 1 || in_dq(input[i]) == 1
+			|| is_one_delimiter(input[i]) == 1
+			|| is_two_delimiter(input[i], input[i + 1]) == 1)
+			return(1);
+	else
+		return (0);
+}
+
+char	*space_to_input(s_data *data, char *input, int i)
+{
+	char	*processed;
+	int		start;
+
+	processed = NULL;
+	if (!data)
+		return (NULL);
+	while (input[i])
+	{
+		while (in_space(input[i]) == 1)
+			i++;
+		if (in_quote_or_delim(input, i))
+			processed = check_quote_or_delim(data, input, processed, i);
+		else
+		{
+			start = i;
+			while ((input[i] && in_space(input[i]) == 0
+				&& is_one_delimiter(input[i]) == 0))
+				i++;
+			if (input[i - 1] == ' ')
+				break ;
+			processed = ft_tokenjoin(data, processed, input, start, i);
+		}
+		i = data->index_input;
+	}
+	return (processed);
+}

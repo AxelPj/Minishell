@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 15:31:46 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/06 16:29:13 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/05/21 21:58:58 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ int	verif_quote(char *processed, int i)
 	return (0);
 }
 
-int	in_simple_quote(char c)
+int	in_sq(char c)
 {
-	if (c == '"')
+	if (c == '\'')
 		return (1);
 	return (0);
 }
 
-int	in_double_quote(char c)
+int	in_dq(char c)
 {
-	if (c == '\'')
+	if (c == '\"')
 		return (1);
 	return (0);
 }

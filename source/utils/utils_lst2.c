@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_lst.c                                        :+:      :+:    :+:   */
+/*   utils_lst2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 14:41:59 by axel              #+#    #+#             */
-/*   Updated: 2025/05/06 17:05:33 by axelpeti         ###   ########.fr       */
+/*   Created: 2025/05/16 14:19:44 by axelpeti          #+#    #+#             */
+/*   Updated: 2025/05/17 15:00:19 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/minishell.h"
 
-t_list	*ft_lstnw(int content)
+t_pars	*ft_lst_parsnw(char *s_tok, int type_tok, int index, int size)
 {
-	t_list	*newelem;
+	t_pars	*newelem;
 
-	newelem = (t_list *) malloc(sizeof(t_list));
+	newelem = (t_pars *) malloc (sizeof(t_pars));
 	if (!newelem)
 		return (NULL);
-	newelem->content = content;
+	if (size == 0)
+		newelem->tab_tok = (char **)malloc(2);
+	else
+		newelem->tab_tok = (char **)malloc(size + 1);
+	newelem->tab_tok[0] = ft_strdup(s_tok);
+	newelem->token = type_tok;
+	newelem->index = index;
 	newelem->next = NULL;
 	return (newelem);
 }
 
-void	ft_lstadd_bck(t_list **lst, t_list *new)
+void	ft_pars_lstadd_bck(t_pars **lst, t_pars *new)
 {
-	t_list	*last;
+	t_pars	*last;
 
 	if (!lst || !new)
 		return ;
@@ -37,23 +43,22 @@ void	ft_lstadd_bck(t_list **lst, t_list *new)
 	}
 	else
 	{
-		last = lstlast(*lst);
+		last = pars_lstlast(*lst);
 		last->next = new;
 	}
 }
 
-t_list	*lstlast(t_list *lst)
+t_pars	*pars_lstlast(t_pars *lst)
 {
 	while (lst && lst->next != NULL)
 		lst = lst->next;
 	return (lst);
 }
 
-
-int	ft_lstsize(t_list *lst)
+int	ft_lst_pars_size(t_pars *lst)
 {
 	int		size;
-	t_list	*current;
+	t_pars	*current;
 
 	current = lst;
 	size = 0;
@@ -64,4 +69,3 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (size);
 }
-// a revoir
