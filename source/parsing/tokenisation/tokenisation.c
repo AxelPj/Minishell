@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenisation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:31 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 14:34:39 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:10:39 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/header/minishell.h"
+#include "minishell.h"
 
 t_list	*token_lst(t_data *data)
 {
@@ -58,45 +58,15 @@ int	token_type(char *s_token, int i)
 	return (0);
 }
 
-t_pars	*sort_token(t_data *data, int i, int j)
+int	count_non_delim(t_list *start)
 {
-	t_list	*current;
-	t_pars	*new_node;
-	int		size;
-	t_list *temp;
+	int	count;
 
-	current = data->token_lst;
-	while (current)
+	count = 0;
+	while (start && start->token == 0)
 	{
-		i = 0;
-		if (current->token == 0)
-		{
-			size = 0;
-			temp = current;
-			while (temp && temp->token == 0)
-			{
-				size++;
-				temp = temp->next;
-			}
-			new_node = ft_lst_parsnw(current->s, 0, j, size);
-			temp = current;
-			while (i < size && temp && temp->token == 0)
-			{
-				new_node->tab_tok[i++] = ft_strdup(temp->s);
-				temp = temp->next;
-			}
-			new_node->tab_tok[i] = NULL;
-			ft_pars_lstadd_bck(&data->parsing, new_node);
-			current = temp;
-		}
-		else
-		{
-			new_node = ft_lst_parsnw(current->s, current->token, j, 1);
-			new_node->tab_tok[1] = NULL;
-			ft_pars_lstadd_bck(&data->parsing, new_node);
-			current = current->next;
-		}
-		j++;
+		count++;
+		start = start->next;
 	}
-	return (data->parsing);
+	return (count);
 }

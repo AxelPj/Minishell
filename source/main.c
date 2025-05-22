@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 16:53:44 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:21:37 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	a_out(t_data *data, char *command)
 		data->processed = space_to_input(data, command, 0);
 		data->tab_token = ft_split_token(data->processed, data, 0, 0);
 		data->token_lst = token_lst(data);
-		data->parsing = sort_token(data, 1, 0);
+		data->parsing = sort_token(data, 1);
 		pipex_setup(data, data->tab_token);
 		free_all(data, command);
 	}
@@ -44,8 +44,12 @@ int main (int argc, char **argv, char **envp)
 		command = readline("minishell> "); //fonction permettant de lire et garder en memoire l'entree utilisateur
 		if (ft_strlen(command) >= 1)
 		{
-			add_history(command); //permet de garder dans l'historique
-			a_out(data, command);
+			if (syntax_are_closed(command))
+			{
+				printf("command ok\n");
+				add_history(command); //permet de garder dans l'historique
+				a_out(data, command);
+			}
 		}
 	}
 }

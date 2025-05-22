@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:00:31 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/22 18:47:41 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:14:20 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	is_valid_command(t_pipex *info, char *cmd)
 	char	*path;
 
 	if (!cmd || !*cmd)
-        return (0);
-    if (is_builtin(cmd))
-        return (1);
+		return (0);
+	if (is_builtin(cmd))
+		return (1);
 	path = cmd_path(cmd, info->envp);
 	if (path)
 	{

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split_modif.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:06:44 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 13:37:27 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:10:37 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../../include/header/minishell.h"
+#include "minishell.h"
 
 int	count_token(char *s, int i, int word)
 {
@@ -23,13 +22,13 @@ int	count_token(char *s, int i, int word)
 		{
 			i++;
 			while (in_dq(s[i - 1]) == 0)
-			i++;
+				i++;
 		}
 		else if (in_sq(s[i]))
 		{
 			i++;
 			while (s[i] && in_sq(s[i - 1]) == 0)
-			i++;
+				i++;
 		}
 		else if (in_space(s[i]) == 0)
 		{
@@ -44,7 +43,6 @@ int	count_token(char *s, int i, int word)
 	}
 	return (word);
 }
-
 
 char	*place_token(const char *str, size_t start, size_t end)
 {
@@ -65,14 +63,12 @@ char	*place_token(const char *str, size_t start, size_t end)
 	return (tab);
 }
 
-
 int	in_space(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n')
 		return (1);
 	return (0);
 }
-
 
 char	**ft_split_token(char *processed, t_data *data, int i, int j)
 {
