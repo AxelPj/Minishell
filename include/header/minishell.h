@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/24 16:24:26 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:08:13 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct t_pars
 	int					index;
 	enum e_token_type	token;
 	struct t_pars		*next;
+	int					index_expand;
 }	t_pars;
 
 typedef struct s_data
@@ -110,7 +111,7 @@ char	*process_multi_q(t_data *data, char *input, int i, int start);
 char	*process_del(t_data *data, char *input, int i);
 char	*process_join(t_data *data, char *s2, int start, int end);
 char	*process_join_quote(t_data *data, char *s2, int start, int end);
-			
+
 				//------tokenisation------//
 t_list	*token_lst(t_data *data);
 int		token_type(char *s_token, int i);
@@ -120,15 +121,27 @@ t_pars	*delim_node(t_list *cur, int idx);
 t_list	*process_non_delim(t_list *cur, t_data *data, int j);
 t_list	*process_delim(t_list *cur, t_data *data, int j);
 t_pars	*sort_token(t_data *data, int j);
-char	*place_token(const char *str, size_t start, size_t end);
+char	*place_token(char *str, int start, int end);
 int     count_token(char *processed, int i, int word);
-char	**ft_split_token(char *processed, t_data *data, int i, int j);
-				
+char	**split_into_tokens(char *processed, t_data *data);
+char	*find_end_token(char *processed, int *i);
+void	skip_dq(char *processed, int *i);
+void	skip_sq(char *processed, int *i);
+void	skip_to_space_or_q(char *processed, int *i);
+
+				//------expand------//
+int		count_word_to_expand(char *s, int i, int word);
+char	*place_word_to_expand(const char *str, size_t start, size_t end);
+char	**ft_split_expand(char *s, t_data *data, int i, int j);
+void	process_expand (t_data *data, t_pars *parsing);
+void	print_tab(char **tab);
+int		count_dollars(char *s);
+void	skip_to_space_or_q_or_dol(char *processed, int *i);
+void	skip_after_dol(char *processed, int *i);
 //-----------------------------------//
-				
+
 				//--------------Utils--------------//
 int		verif_built_in(char *str);
-int     in_space (char c);
 void	print_lst(t_data *data);
 t_data	*init_data(t_data *data, int bool, char **envp);
 char	**envp_cpy(t_data *data, char **envp);
