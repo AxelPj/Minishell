@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/22 23:13:23 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/24 16:24:26 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,10 @@ typedef struct s_data
 typedef struct s_pipex
 {
 	int		nb_cmds;
-	char	**args;
+	int		nb_args;
 	char	**cmds;
 	char	**envp;
+	char	***tab_args;
 	int		*fd;
 }	t_pipex;
 
@@ -151,8 +152,8 @@ t_pars	*free_lst_pars(t_pars *parsing);
 
 //----------------PIPEX----------------//
 int		pipex_setup(t_data *data, char **tab);
-int		pipex_mod(t_data *data);
-int		command(t_pipex *infos, char **envp);
+int		pipex_mod(t_data *data, t_pipex *info);
+int		command(t_pipex *infos, char **envp, int i, t_data *data);
 
 //----------------PATH----------------//
 char	*cmd_path(char *cmd, char **envp);
@@ -163,12 +164,12 @@ void	free_args(char **args);
 //----------------PIPEX_UTILS---------//
 int		create_pipes(int *fd, int nb_pipes);
 void	dup_pipe(int i, t_pipex *info);
-void	launch_child(int i, t_pipex *info);
+void	launch_child(int i, t_pipex *info, t_data *data);
 void	close_all_pipes(int *fd, int nb_pipes);
 void	wait_all_children(int nb_cmds);
 
 //----------------UTILS1--------------//
-int		execute_builtin(char *cmd, char **args, t_data *data);
+int		execute_builtin(char *cmd, char **args, t_pipex *info, t_data *data);
 void	ft_tabfree(char **tab);
 int		is_builtin_child(char *cmd);
 int		is_builtin(char *cmd);
@@ -184,15 +185,27 @@ int		is_builtin_parent(char *cmd);
 void	set_last_status(int status);
 
 //--------------BUILT-IN--------------//
-int		ft_cd(char **input, t_data *data);
+int		ft_cd(char **input, t_pipex *info);
 int		ft_echo(char **input, int fd);
 int		check_n(char **input);
 int		is_all_n(char *s);
 int		ft_exit(char **args);
 int		ft_env(t_data *data);
-int		ft_export(t_data *data);
-void	print_export(char **tab);
+int		ft_export(t_pipex *info, t_data *data);
 int		ft_pwd(void);
-int		ft_unset(t_data *data, char *str);
+int		ft_unset(t_pipex *info, char *str);
+
+//--------------EXPORT_UTILS--------------//
+int		is_valid_varname(char *str);
+int		var_exists(char **env, char *name);
+void	update_var(char **env, int idx, char *str);
+int		add_var(t_data *data, char *str);
+
+//--------------------MAIN---------------//
+void	set_shell(t_data *data);
+
+//--------------TAB_ARGS---------------//
+void	free_tab_args(char ***cmds_args);
+char	***tab_args(char **tab);
 
 #endif
