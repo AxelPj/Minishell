@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:00:31 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/22 23:14:20 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/24 16:58:42 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	is_valid_command(t_pipex *info, char *cmd)
 	if (path)
 	{
 		free(path);
-		return (0); // commande valide
+		return (0);
 	}
-	return (1); // commande introuvable
+	return (1);
 }
 
 int	is_valid_builtin(char *cmd)
@@ -48,43 +48,20 @@ int	is_valid_builtin(char *cmd)
 	return (1);
 }
 
-int count_valid_commands(char **args, t_pipex *info)
+int	count_valid_commands(char **args, t_pipex *info)
 {
-	int i = 0;
-	int count = 0;
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
 	while (args[i])
 	{
 		if (!is_valid_command(info, args[i]) || !is_valid_builtin(args[i]))
 			count++;
 		i++;
 	}
-	return count;
-}
-
-void	is_valid(t_pipex *info, char **args)
-{
-	int	i = 0;
-	int	j = 0;
-	int	valid_count;
-	
-	valid_count = count_valid_commands(args, info);
-	info->cmds = malloc(sizeof(char *) * (valid_count + 1));
-	if (!info->cmds)
-		exit(EXIT_FAILURE);
-
-	while (args[i])
-	{
-		if (!is_valid_command(info, args[i]) || !is_valid_builtin(args[i]))
-		{
-			info->cmds[j] = ft_strdup(args[i]);
-			if (!info->cmds[j])
-				exit(EXIT_FAILURE);
-			j++;
-		}
-		i++;
-	}
-	info->cmds[j] = NULL;
-	info->nb_cmds = j;
+	return (count);
 }
 
 int	is_builtin_parent(char *cmd)
