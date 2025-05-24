@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:00:49 by axel              #+#    #+#             */
-/*   Updated: 2025/05/24 21:03:26 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/24 22:28:21 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char **change_var_to_value(char **tab, int count_doll)
         {
             char *var_name = extract_var_name(tab[i]);
             char *var_value = getenv(var_name);
-
+            printf ("var_valu = %s", var_value);
             free(tab[i]);
             if (var_value)
                 tab[i] = ft_strdup(var_value);
