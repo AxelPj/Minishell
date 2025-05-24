@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/24 19:16:36 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:21:49 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	a_out(t_data *data, char *command)
 	if (command)
 	{
 		data->processed = space_to_input(data, command, 0);
-		data->tab_token = split_into_tokens(data->processed, data, 0);
+		data->tab_token = split_into_tokens(data->processed, data);
 		data->token_lst = token_lst(data);
 		data->parsing = sort_token(data, 1);
 /* 		process_expand(data, data->parsing);
