@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:07:36 by axel              #+#    #+#             */
-/*   Updated: 2025/05/24 18:21:54 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/24 19:18:03 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ char *find_end_token(char *processed, int *i)
 			end++;			
 		}
 		else if (processed[end] == '$')
-			
+		{
+			skip_after_dol(processed, &end);
+		}	
         else
             skip_to_space_or_q(processed, &end);
     }
@@ -81,7 +83,7 @@ char *find_end_token(char *processed, int *i)
 }
 
 
-void	skip_dq(char *processed, int *i)
+void	skip_dq_for_expand(char *processed, int *i)
 {
 	int	start;
 
@@ -92,18 +94,22 @@ void	skip_dq(char *processed, int *i)
 	*i = start;
 }
 
-void	skip_sq(char *processed, int *i)
+void	skip_sq_for_expand(char *processed, int *i)
 {
 	int	start;
 
 	start = *i;
 	start++;
 	while (processed[start] && (!in_sq(processed[start])))
+	{
 		start++;
+		if (processed[start] == '$')
+			break;
+	}
 	*i = start;
 }
 
-void skip_after_dol(char *processed, int *i)
+void skip_after_dol_for_expand(char *processed, int *i)
 {
     int start = *i;
 
@@ -124,7 +130,7 @@ void skip_after_dol(char *processed, int *i)
     *i = start;
 }
 
-void	skip_to_space_or_q(char *processed, int *i)
+void	skip_to_space_or_q_for_expand(char *processed, int *i)
 {
 	int	start;
 
