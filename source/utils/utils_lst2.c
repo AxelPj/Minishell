@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lst2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:19:44 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 14:36:01 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/23 20:57:50 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_pars	*ft_lst_parsnw(char *s_tok, int type_tok, int index, int size)
 	newelem->tab_tok[0] = ft_strdup(s_tok);
 	newelem->token = type_tok;
 	newelem->index = index;
+	newelem->index_expand = 0;
 	newelem->next = NULL;
 	return (newelem);
 }

@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:06:44 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/24 13:23:07 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:14:20 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	count_token(char *s, int i, int word)
 	return (word);
 }
 
-char	*place_token(const char *str, size_t start, size_t end)
+char	*place_token(char *str, int start, int end)
 {
-	size_t	i;
+	int	i;
 	char	*tab;
 
 	i = 0;
@@ -63,19 +63,14 @@ char	*place_token(const char *str, size_t start, size_t end)
 	return (tab);
 }
 
-int	in_space(char c)
+char **split_into_tokens(char *processed, t_data *data)
 {
-	if (c == ' ' || c == '\t' || c == '\n')
-		return (1);
-	return (0);
-}
-
-char	**ft_split_token(char *processed, t_data *data, int i, int j)
-{
-	char	**tab;
-	size_t	start;
+    char **tab;
+    int i = 0;
+    int j = 0;
 
 	data->nb_token = count_token (processed, 0, 0);
+	printf("nb token = %d\n", data->nb_token);
 	tab = (char **)malloc((data->nb_token + 1) * sizeof(char *));
 	if (!tab || !processed)
 		return (NULL);
@@ -99,16 +94,45 @@ char	**ft_split_token(char *processed, t_data *data, int i, int j)
 				i++;
 			tab[j] = place_token(processed, start, i);
 		}
-		else
-		{
-			start = i;
-			while (processed[i] && in_space(processed[i]) == 0)
-				i++;
-			tab[j] = place_token(processed, start, i - 1);
-		}
-		i++;
-		j++;
-	}
-	tab[j] = NULL;
-	return (tab);
+        else
+            skip_to_space_or_q(processed, &end);
+    }
+    s = place_token(processed, start, end);
+    *i = end;
+    return (s);
+}
+
+
+void	skip_dq(char *processed, int *i)
+{
+	int	start;
+
+	start = *i;
+	start++;
+	while (processed[start] && (!in_dq(processed[start])))
+		start++;
+	*i = start;
+}
+
+void	skip_sq(char *processed, int *i)
+{
+	int	start;
+
+	start = *i;
+	start++;
+	while (processed[start] && (!in_sq(processed[start])))
+		start++;
+	*i = start;
+}
+
+void	skip_to_space_or_q(char *processed, int *i)
+{
+	int	start;
+
+	start = *i;
+	start++;
+	while (processed[start] && !in_space(processed[start]) &&
+		!in_sq(processed[start]) && !in_dq(processed[start]))
+		start++;
+	*i = start;
 }

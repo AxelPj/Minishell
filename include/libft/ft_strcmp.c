@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:20:56 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 00:29:17 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:44:47 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_strcmp(char *s, char *s2)
 	while (s[i] && s2[i])
 	{
 		if (s[i] != s2[i])
-			return (1);
+			return (s[i] - s2[i]);
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/24 14:36:56 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:16:36 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ void	a_out(t_data *data, char *command)
 	if (command)
 	{
 		data->processed = space_to_input(data, command, 0);
-		data->tab_token = ft_split_token(data->processed, data, 0, 0);
+		data->tab_token = split_into_tokens(data->processed, data, 0);
 		data->token_lst = token_lst(data);
 		data->parsing = sort_token(data, 1);
-		pipex_setup(data, data->tab_token);
+/* 		process_expand(data, data->parsing);
+ */		pipex_setup(data, data->tab_token);
 		free_all(data, command);
 	}
 }
@@ -62,6 +63,6 @@ int main (int argc, char **argv, char **envp)
 				add_history(command); //permet de garder dans l'historique
 				a_out(data, command);
 			}
-		}
+		}	
 	}
 }

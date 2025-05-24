@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 17:31:16 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 13:33:11 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/24 14:38:56 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ t_data	*init_data(t_data *data, int bool, char **envp)
 		data->envp_cpy = envp_cpy(data, envp);
 	else
 		(void) envp;
+	set_shell(data);
 	return (data);
 }

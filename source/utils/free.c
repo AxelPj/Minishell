@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:32:15 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/23 14:25:06 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:16:41 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	free_all(t_data *data, char *cmd)
 	data->processed = NULL;
 	free_tab(data->tab_token);
 	data->token_lst = free_token_lst(data->token_lst);
+
 	data->parsing = free_lst_pars(data->parsing);
 }
 
