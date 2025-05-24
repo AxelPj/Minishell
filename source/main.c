@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 23:21:37 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/24 14:36:56 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/header/minishell.h"
 
 long	g_status = 0;
+
+void	set_shell(t_data *data)
+{
+	int		i;
+
+	i = 0;
+	while (data->envp_cpy[i])
+	{
+		if (ft_strncmp(data->envp_cpy[i], "SHELL=", 6) == 0)
+			data->envp_cpy[i] = ft_strdup("SHELL=minishell");
+		i++;
+	}
+}
 
 void	a_out(t_data *data, char *command)
 {
@@ -46,7 +59,6 @@ int main (int argc, char **argv, char **envp)
 		{
 			if (syntax_are_closed(command))
 			{
-				printf("command ok\n");
 				add_history(command); //permet de garder dans l'historique
 				a_out(data, command);
 			}
