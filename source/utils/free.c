@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:32:15 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 14:36:42 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/24 14:18:11 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	free_all(t_data *data, char *cmd)
 {
 	free(cmd);
 	free (data->processed);
+	data->processed = NULL;
 	free_tab(data->tab_token);
 	data->token_lst = free_token_lst(data->token_lst);
+
 	data->parsing = free_lst_pars(data->parsing);
 }
 

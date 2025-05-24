@@ -61,4 +61,5 @@ void		ft_putnbr_fd(int n, int fd);
 //------------------------------+++++----------------------//
 int			tablen(void **tab);
 long		ft_atol(const char *str);
+int			in_space(char c);
 #endif
