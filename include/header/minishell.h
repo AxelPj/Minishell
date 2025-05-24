@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/24 19:20:37 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:17:55 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,18 @@ void	skip_sq(char *processed, int *i);
 void	skip_to_space_or_q(char *processed, int *i);
 
 				//------expand------//
+char	**split_into_expand(char *processed, t_data *data);
+char	*find_end_word_to_expand(char *processed, int *i);
+void	skip_dq_for_expand(char *processed, int *i);
+void	skip_after_dol_for_expand(char *processed, int *i);
+void	skip_to_space_or_q_for_expand(char *processed, int *i);
 int		count_word_to_expand(char *s, int i, int word);
 char	*place_word_to_expand(const char *str, size_t start, size_t end);
-char	**ft_split_expand(char *s, t_data *data, int i, int j);
-void	process_expand (t_data *data, t_pars *parsing);
-void	print_tab(char **tab);
+void	process_expand(t_data *data, t_pars *parsing);
+char	**change_var_to_value(char **tab, int count_doll);
+char	*extract_var_name(char *s);
 int		count_dollars(char *s);
+char	*join_expanded_tokens(char **tab);
 void	skip_to_space_or_q_or_dol(char *processed, int *i);
 void	skip_after_dol(char *processed, int *i);
 //-----------------------------------//
