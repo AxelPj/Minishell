@@ -6,23 +6,38 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 18:06:46 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/22 13:43:37 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:04:48 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/minishell.h"
 
-int	ft_unset(t_data *data, char *str)
+static int	prefix_match(const char *var, const char *name)
 {
-	int		i;
-	char	**tab;
+	int	len;
 
+	len = ft_strlen(name);
+	return (!ft_strncmp(var, name, len) && var[len] == '=');
+}
+
+int	ft_unset(t_pipex *info, char *name)
+{
+	char	**env;
+	int		i;
+	int		found;
+
+	env = info->envp;
 	i = 0;
-	tab = data->envp_cpy;
-	while (tab[i])
+	found = 0;
+	while (env[i])
 	{
-		if (ft_strcmp(data->envp_cpy[i], str) == 0)
-			data->envp_cpy[i] = NULL;
+		if (!found && prefix_match(env[i], name))
+		{
+			free(env[i]);
+			found = 1;
+		}
+		if (found)
+			env[i] = env[i + 1];
 		i++;
 	}
 	return (0);
