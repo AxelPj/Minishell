@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:06:44 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/24 22:34:43 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/24 23:01:41 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char *find_end_token(char *processed, int *i)
         else
             skip_to_space_or_q(processed, &end);
     }
-    s = place_token(processed, start, end);
+    s = place_token(processed, start, end - 1);
     *i = end;
     return (s);
 }

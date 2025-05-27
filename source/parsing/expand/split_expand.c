@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:07:36 by axel              #+#    #+#             */
-/*   Updated: 2025/05/24 21:05:26 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/24 22:41:07 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char *find_end_word_to_expand(char *processed, int *i)
 
 	start = *i;
 	end = *i;
+    if (processed[end] == '$')
+        end++;
     while (processed[end] && processed[end] != '$')
     {
         if (in_sq(processed[end]))
