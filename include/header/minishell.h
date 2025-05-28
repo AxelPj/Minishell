@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/24 21:17:55 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/27 16:04:44 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,19 @@ void	skip_after_dol_for_expand(char *processed, int *i);
 void	skip_to_space_or_q_for_expand(char *processed, int *i);
 int		count_word_to_expand(char *s, int i, int word);
 char	*place_word_to_expand(const char *str, size_t start, size_t end);
-void	process_expand(t_data *data, t_pars *parsing);
+void	process_expand(t_data *data, t_pars *parsing, int count_dol, int i);
 char	**change_var_to_value(char **tab, int count_doll);
 char	*extract_var_name(char *s);
 int		count_dollars(char *s);
 char	*join_expanded_tokens(char **tab);
 void	skip_to_space_or_q_or_dol(char *processed, int *i);
 void	skip_after_dol(char *processed, int *i);
+
+				//------clean_quote------//
+t_pars  *clear_tab(t_data *data);
+int verif_clean_q(char *tab);
+char  *clean_q(char *tab);
+
 //-----------------------------------//
 
 				//--------------Utils--------------//
@@ -165,7 +171,7 @@ int		ft_lst_pars_size(t_pars *lst);
 		
 		//-----------free-----------//
 void	free_all(t_data *data, char *cmd);
-void	free_tab(char **tab);
+char	**free_tab(char **tab);
 t_list	*free_token_lst(t_list *token_lst);
 t_pars	*free_lst_pars(t_pars *parsing);
 

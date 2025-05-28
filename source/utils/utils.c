@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 17:29:04 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 23:35:17 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/27 14:55:40 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,24 @@ int	has_pipe_edges(char *s)
 	if (i >= 0 && s[i] == '|')
 		return (1);
 	return (0);
+}
+void    print_pars_lst(t_data *data)
+{
+    t_pars *current = data->parsing;
+    int i = 0;
+    while (current && current->next)
+    {
+        while (current->tab_tok[i])
+        {
+            printf("tab[i] = %s", current->tab_tok[i]);
+            i++;
+        }
+        i = 0;
+        current = current->next;
+    }
+    while (current->tab_tok[i])
+        {
+            printf("tab[%d] = %s\n", i, current->tab_tok[i]);
+            i++;
+        }
 }

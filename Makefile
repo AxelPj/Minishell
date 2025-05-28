@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: axel <axel@student.42.fr>                  +#+  +:+       +#+         #
+#    By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/05/24 21:16:19 by axel             ###   ########.fr        #
+#    Updated: 2025/05/27 16:05:33 by axelpeti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS =  source/main.c \
 		source/parsing/input/input_normalizer.c source/parsing/input/input_processor.c \
 		source/parsing/tokenisation/sort_token.c source/parsing/tokenisation/split_modif.c source/parsing/tokenisation/tokenisation.c \
 		source/parsing/expand/expand_var.c source/parsing/expand/valid_expand.c source/parsing/expand/split_expand.c \
+		source/parsing/delete_quote/del_q.c \
 		source/utils/utils.c source/utils/free.c source/utils/init_data.c source/utils/utils_lst1.c source/utils/utils_lst2.c \
 		source/built-in/ft_cd.c source/built-in/ft_echo.c source/built-in/ft_env.c source/built-in/ft_exit.c\
 		source/built-in/ft_export.c source/built-in/export_utils.c source/built-in/ft_pwd.c source/built-in/ft_unset.c\
