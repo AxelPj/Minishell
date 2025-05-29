@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_processor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:32:20 by axel              #+#    #+#             */
-/*   Updated: 2025/05/29 12:38:58 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/29 16:45:06 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,24 @@ char	*process_join(t_data *data, char *s2, int start, int end)
 	size_t	i;
 	char	*new_processed;
 	size_t	k;
-	char	prev;
-	char	curr;
-	
-	i = 0;
+
 	k = 0;
 	if (!data->processed)
-		new_processed = malloc ((end - start) + 3);
+		new_processed = malloc((end - start) + 3);
 	else
-		new_processed = malloc (ft_strlen(data->processed) + (end - start) + 3);
-	if (!new_processed)
-		return (NULL);
+		new_processed = malloc(ft_strlen(data->processed) + (end - start) + 3);
+	i = 0;
 	while (data->processed && data->processed[i])
 		new_processed[k++] = data->processed[i++];
-	prev = (start > 0) ? s2[start - 1] : '\0';
-	curr = s2[start];
-	if (in_space(prev) || is_one_delimiter(curr) || is_one_delimiter(prev))
+	if ((start > 0 && in_space(s2[start - 1]) == 1)
+		|| (start > 0 && is_one_delimiter(s2[start - 1]) == 1)
+		|| is_one_delimiter(s2[start]) == 1)
 		new_processed[k++] = ' ';
 	while (start < end)
 		new_processed[k++] = s2[start++];
 	new_processed[k++] = '\0';
 	if (data->processed)
-	{
-		free (data->processed);
-		data->processed = NULL;
-	}
+		free(data->processed);
 	data->index_input = end;
 	return (new_processed);
 }

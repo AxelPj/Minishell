@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:07:36 by axel              #+#    #+#             */
-/*   Updated: 2025/05/27 15:12:38 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:48:30 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,9 @@ char	*find_end_word_to_expand(char *processed, int *i)
 		end++;
 	while (processed[end] && processed[end] != '$')
 	{
-		if (in_sq(processed[end]))
-		{
-			skip_sq(processed, &end);
-			end++;
-		}
-		else if (in_dq(processed[end]))
-		{
-			skip_dq_for_expand(processed, &end);
-			end++;
-		}
-		else if (processed[end] == '$')
-		{
-			skip_after_dol_for_expand(processed, &end);
-		}
+		if (in_sq(processed[end]) || in_dq(processed[end])
+			|| processed[end] == '$')
+			find_end_word_to_expand_utils(processed, &end);
 		else
 			skip_to_space_or_q_for_expand(processed, &end);
 	}

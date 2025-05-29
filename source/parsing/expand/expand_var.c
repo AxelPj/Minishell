@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:00:49 by axel              #+#    #+#             */
-/*   Updated: 2025/05/27 15:09:05 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:48:12 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,28 @@ char	*join_expanded_tokens(char **tab)
 		i++;
 	}
 	return (result);
+}
+
+void	find_end_word_to_expand_utils(char *processed, int *pos)
+{
+	int	end;
+
+	end = *pos;
+	if (in_sq(processed[end]))
+	{
+		skip_sq(processed, &end);
+		end++;
+	}
+	else if (in_dq(processed[end]))
+	{
+		skip_dq_for_expand(processed, &end);
+		end++;
+	}
+	else if (processed[end] == '$')
+	{
+		skip_after_dol_for_expand(processed, &end);
+	}
+	else
+		skip_to_space_or_q_for_expand(processed, &end);
+	*pos = end;
 }
