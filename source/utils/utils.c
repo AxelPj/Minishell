@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 17:29:04 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/29 12:50:47 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/29 12:58:26 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	has_pipe_edges(char *s)
 		return (1);
 	return (0);
 }
-/* void	print_pars_lst(t_data *data)
+void	print_pars_lst(t_data *data)
 {
 	t_pars *current = data->parsing;
 	int i = 0;
@@ -111,4 +111,4 @@ int	has_pipe_edges(char *s)
 			printf("tab[%d] = %s\n", i, current->tab_tok[i]);
 			i++;
 		}
-} */
+}

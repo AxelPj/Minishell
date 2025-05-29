@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:43:05 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/29 12:47:38 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/29 12:59:46 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_pars	*clear_tab(t_data *data)
 
 	i = 0;
 	current = data->parsing;
-	while (current && current->next)
+	while (current)
 	{
 		while (current->tab_tok[i])
 		{
@@ -27,6 +27,8 @@ t_pars	*clear_tab(t_data *data)
 				current->tab_tok[i] = clean_q(current->tab_tok[i]);
 			i++;
 		}
+		if (!current->next)
+			break ;
 		current = current->next;
 	}
 	return (data->parsing);
