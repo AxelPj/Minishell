@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 17:29:04 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/27 14:55:40 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/05/29 12:50:47 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ char	**envp_cpy(t_data *data, char **envp)
 int	verif_built_in(char *str)
 {
 	if (!ft_strcmp(str, "echo"))
-		return(1);
+		return (1);
 	else if (!ft_strcmp(str, "cd"))
-		return(2);
+		return (2);
 	else if (!ft_strcmp(str, "pwd"))
-		return(3);
+		return (3);
 	else if (!ft_strcmp(str, "export"))
-		return(4);
+		return (4);
 	else if (!ft_strcmp(str, "unset"))
-		return(5);
+		return (5);
 	else if (!ft_strcmp(str, "env"))
-		return(6);
+		return (6);
 	else if (!ft_strcmp(str, "exit"))
-		return(7);
+		return (7);
 	return (0);
 }
 
@@ -84,7 +84,6 @@ int	has_pipe_edges(char *s)
 		i++;
 	if (s[i] == '|')
 		return (1);
-
 	i = ft_strlen(s);
 	i--;
 	while (i >= 0 && in_space(s[i]))
@@ -93,23 +92,23 @@ int	has_pipe_edges(char *s)
 		return (1);
 	return (0);
 }
-void    print_pars_lst(t_data *data)
+/* void	print_pars_lst(t_data *data)
 {
-    t_pars *current = data->parsing;
-    int i = 0;
-    while (current && current->next)
-    {
-        while (current->tab_tok[i])
-        {
-            printf("tab[i] = %s", current->tab_tok[i]);
-            i++;
-        }
-        i = 0;
-        current = current->next;
-    }
-    while (current->tab_tok[i])
-        {
-            printf("tab[%d] = %s\n", i, current->tab_tok[i]);
-            i++;
-        }
-}
+	t_pars *current = data->parsing;
+	int i = 0;
+	while (current && current->next)
+	{
+		while (current->tab_tok[i])
+		{
+			printf("tab[i] = %s", current->tab_tok[i]);
+			i++;
+		}
+		i = 0;
+		current = current->next;
+	}
+	while (current->tab_tok[i])
+		{
+			printf("tab[%d] = %s\n", i, current->tab_tok[i]);
+			i++;
+		}
+} */

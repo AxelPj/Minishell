@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+         #
+#    By: axel <axel@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/05/27 16:05:33 by axelpeti         ###   ########.fr        #
+#    Updated: 2025/05/29 12:43:51 by axel             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME = minishell
 SRCS =  source/main.c \
 		source/parsing/syntax_utils/delimiteur_utils.c source/parsing/syntax_utils/quote_utils.c source/parsing/syntax_utils/braces_utils.c source/parsing/syntax_utils/parens_utils.c source/parsing/syntax_utils/brackets_utils.c \
 		source/parsing/input/input_normalizer.c source/parsing/input/input_processor.c \
-		source/parsing/tokenisation/sort_token.c source/parsing/tokenisation/split_modif.c source/parsing/tokenisation/tokenisation.c \
+		source/parsing/tokenisation/sort_token.c source/parsing/tokenisation/split_modif.c source/parsing/tokenisation/tokenisation.c source/parsing/tokenisation/split_modif_utils.c \
 		source/parsing/expand/expand_var.c source/parsing/expand/valid_expand.c source/parsing/expand/split_expand.c \
 		source/parsing/delete_quote/del_q.c \
 		source/utils/utils.c source/utils/free.c source/utils/init_data.c source/utils/utils_lst1.c source/utils/utils_lst2.c \
@@ -38,7 +38,7 @@ OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 # Compilateur et options
 CC = cc
-CFLAGS   = -Wall -Wextra -Werror -g
+CFLAGS   = -Wall -Wextra -Werror -g -fPIE
 CPPFLAGS = -Iinclude/header -I$(LIBFT_DIR)
 LDFLAGS = -lreadline
 

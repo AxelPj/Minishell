@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:32:15 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/27 15:00:40 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/05/29 12:49:41 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ char	**free_tab(char **tab)
 		i++;
 	}
 	free(tab);
-    tab = NULL;
-    return (tab);
+	tab = NULL;
+	return (tab);
 }
 
 t_list	*free_token_lst(t_list *token_lst)

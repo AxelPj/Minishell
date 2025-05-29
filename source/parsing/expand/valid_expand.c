@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 20:33:14 by axel              #+#    #+#             */
-/*   Updated: 2025/05/24 21:00:25 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/29 12:44:17 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ int	count_dollars(char *s)
 			count_dol++;
 		i++;
 	}
-	return(count_dol);
+	return (count_dol);
 }

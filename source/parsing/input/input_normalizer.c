@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 14:02:22 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 23:09:59 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/29 12:39:26 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	count_len_input(char *input, int i, int len, int in_word)
 			len++;
 			in_word = 1;
 		}
-		else if ((input[i] == ' ' || input[i] == '\t' 
+		else if ((input[i] == ' ' || input[i] == '\t'
 				|| input[i] == '\n') && in_word)
 		{
 			len++;
 			in_word = 0;
-			while (input[i + 1] == ' ' || input[i + 1] == '\t' 
+			while (input[i + 1] == ' ' || input[i + 1] == '\t'
 				|| input[i + 1] == '\n')
 				i++;
 		}

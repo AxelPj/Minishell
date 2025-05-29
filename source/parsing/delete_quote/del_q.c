@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   del_q.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:43:05 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/27 16:11:44 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/05/29 12:47:38 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_pars  *clear_tab(t_data *data)
+t_pars	*clear_tab(t_data *data)
 {
-	t_pars  *current;
-	int     i;
-	int     j;
+	t_pars	*current;
+	int		i;
 
 	i = 0;
-	j = 0;
 	current = data->parsing;
 	while (current && current->next)
 	{
@@ -34,9 +32,9 @@ t_pars  *clear_tab(t_data *data)
 	return (data->parsing);
 }
 
-int verif_clean_q(char *tab)
+int	verif_clean_q(char *tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
@@ -46,19 +44,19 @@ int verif_clean_q(char *tab)
 		i++;
 	}
 	return (0);
-} 
+}
 
-char  *clean_q(char *tab)
+char	*clean_q(char *tab)
 {
 	int		i;
 	int		start;
 	char	*clean_tab;
-	
+
 	clean_tab = NULL;
 	i = 0;
 	while (tab[i])
 	{
-		if (tab[i] == '"')
+		if (tab[i] == '\"')
 		{
 			start = i + 1;
 			skip_dq(tab, &i);
