@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/29 16:26:10 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:21:08 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void	skip_after_dol(char *processed, int *i);
 t_pars	*clear_tab(t_data *data);
 int		verif_clean_q(char *tab);
 char	*clean_q(char *tab);
+int		find_end_q(char *tab, int *i, char c, char d);
 //-----------------------------------//
 				//--------------Utils--------------//
 int		verif_built_in(char *str);

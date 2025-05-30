@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:43:05 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/29 16:37:06 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:21:23 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,48 @@ char	*clean_q(char *tab)
 	i = 0;
 	while (tab[i])
 	{
-		if (tab[i] == '\"')
+		if (in_dq(tab[i]))
 		{
 			start = i + 1;
-			skip_dq(tab, &i);
-			clean_tab = ft_substr(tab, start, i - start);
+			find_end_q(tab, &i, '\"', '\'');
 		}
-		else if (tab[i] == '\'')
+		else if (in_sq(tab[i]))
 		{
 			start = i + 1;
-			skip_sq(tab, &i);
-			clean_tab = ft_substr(tab, start, i - start);
+			find_end_q(tab, &i, '\'', '\"');
 		}
+		clean_tab = ft_substr(tab, start, i - start);
 		i++;
 	}
 	if (tab)
 		free (tab);
 	return (clean_tab);
+}
+
+int	find_end_q(char *tab, int *i, char c, char d)
+{
+	int	start;
+
+	start = *i;
+	start++;
+	while (tab[start])
+	{
+		if (tab[start] == c)
+		{
+			*i = start;
+			return (1);
+		}
+		start++;
+	}
+	start--;
+	while (start > 0)
+	{
+		if (tab[start] == d)
+		{
+			*i = start;
+			return (1);
+		}
+		start--;
+	}
+	return (0);
 }
