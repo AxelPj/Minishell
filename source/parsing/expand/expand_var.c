@@ -53,6 +53,7 @@ char	**change_var_to_value(char **tab, int count_doll)
 		{
 			var_name = extract_var_name(tab[i]);
 			var_value = getenv(var_name);
+			printf ("var val = %s\n", var_value);
 			free(tab[i]);
 			if (var_value)
 				tab[i] = ft_strdup(var_value);

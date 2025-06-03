@@ -23,11 +23,10 @@ char ***import_tabs(t_data *data, t_pipex *pipex, int count, int i)
 	while (current)
 	{
 		pipex->tab_args[i] = extract_double_tab(current->tab_tok,
-			tablen(current->tab_tok));
+			tablen((void**)current->tab_tok));
 		i++;
 		if (!current->next)
 			break ;
-		free(current);
 		current = current->next;
 	}
 	pipex->tab_args[i] = NULL;
@@ -46,10 +45,8 @@ char **extract_double_tab(char **tab, int size)
 	while (i < size)
 	{
 		new_tab[i] = ft_strdup(tab[i]);
-		free(tab[i]);
 		i++;
 	}
-	free(tab);
 	new_tab[i] = NULL;
 	return (new_tab);
 }

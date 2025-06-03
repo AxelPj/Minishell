@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/02 17:34:55 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:38:33 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ void	set_shell(t_data *data)
 	}
 }
 
-void	a_out(t_data *data, t_pipex *pipex, char *command)
+void	a_out(t_data *data, char *command)
 {
+	t_pipex	*info;
+
+	info = malloc(sizeof(t_pipex));
 	if (command)
 	{
 		data->processed = space_to_input(data, command, 0);
@@ -38,9 +41,8 @@ void	a_out(t_data *data, t_pipex *pipex, char *command)
 		process_expand(data, data->parsing, 0, 0);
 		data->parsing = clear_tab(data);
 		print_pars_lst(data);
-        pipex->tab_args = import_tabs(data, pipex,
-            ft_lst_pars_size(data->parsing), 0);
-		pipex_setup(data, data->tab_token);
+		info->tab_args = import_tabs(data, info, ft_lst_pars_size(data->parsing), 0);
+		pipex_setup(data, data->tab_token, info);
 		free_all(data, command);
 	}
 }

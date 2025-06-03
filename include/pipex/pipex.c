@@ -115,27 +115,26 @@ int	pipex_mod(t_data *data, t_pipex *info)
 	return (0);
 }
 
-int	pipex_setup(t_data *data, char **tab)
+int	pipex_setup(t_data *data, char **tab, t_pipex *info)
 {
 	int		i;
-	t_pipex	info;
 
 	i = 0;
 	g_status = 0;
-	info.nb_args = 0;
-	info.nb_cmds = 1;
+	info->nb_args = 0;
+	info->nb_cmds = 1;
 	while (tab[i])
 	{
 		if (ft_strcmp(tab[i], "|") != 0)
-			info.nb_args++;
+			info->nb_args++;
 		else
-			info.nb_cmds++;
+			info->nb_cmds++;
 		i++;
 	}
-	info.tab_args = tab_args(tab);
-	if (!info.tab_args)
+	info->tab_args = tab_args(tab);
+	if (!info->tab_args)
 		return (0);
-	pipex_mod(data, &info);
-	free_tab_args(info.tab_args);
+	pipex_mod(data, info);
+	free_tab_args(info->tab_args);
 	return (0);
 }

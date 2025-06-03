@@ -149,14 +149,14 @@ char	*clean_q(char *tab);
 int		find_end_q(char *tab, int *i, char c, char d);
                 //-------export_tab-----//
 char    **extract_double_tab(char **tab, int size);
-char ***import_tabs(t_data *data, t_pipex *pipex, int count, int i);
+char	***import_tabs(t_data *data, t_pipex *pipex, int count, int i);
 //-----------------------------------//
 				//--------------Utils--------------//
 int		verif_built_in(char *str);
 void	print_lst(t_data *data);
 t_data	*init_data(t_data *data, int bool, char **envp);
 char	**envp_cpy(t_data *data, char **envp);
-void	print_pars_lst(t_data *data);			
+void	print_pars_lst(t_data *data);
 				//------------lst---------------//
 t_list	*ft_lstnw(int type_tok, char *tab_tok, int index);
 void	ft_lstadd_bck(t_list **lst, t_list *new);
@@ -172,7 +172,7 @@ char	**free_tab(char **tab);
 t_list	*free_token_lst(t_list *token_lst);
 t_pars	*free_lst_pars(t_pars *parsing);
 //----------------PIPEX----------------//
-int		pipex_setup(t_data *data, char **tab);
+int	pipex_setup(t_data *data, char **tab, t_pipex *info);
 int		pipex_mod(t_data *data, t_pipex *info);
 int		command(t_pipex *infos, char **envp, int i, t_data *data);
 //----------------PATH----------------//
