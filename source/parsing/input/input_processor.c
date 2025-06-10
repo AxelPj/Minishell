@@ -56,7 +56,7 @@ char	*process_join_quote(t_data *data, char *s2, int start, int end)
 	if ((in_space(s2[start - 1]) == 1 && in_dq(s2[start]))
 		|| (in_space(s2[start - 1]) == 1 && in_sq(s2[start])))
 		new_processed[k++] = ' ';
-	while (start < end)
+	while (start <= end)
 		new_processed[k++] = s2[start++];
 	new_processed[k++] = '\0';
 	if (data->processed)

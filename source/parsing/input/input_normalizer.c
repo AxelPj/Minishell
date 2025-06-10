@@ -70,7 +70,7 @@ void	multi_q_utils(t_data *data, char *input, int *pos, int *j)
 		while (in_dq(input[i]) == 0)
 			i++;
 		data->processed = process_join_quote(data, input, start, i);
-		start = i + 2;
+		start = i + 1;
 		i++;
 	}
 	else if (in_sq(input[i]))
@@ -79,7 +79,7 @@ void	multi_q_utils(t_data *data, char *input, int *pos, int *j)
 		while (in_sq(input[i]) == 0)
 			i++;
 		data->processed = process_join_quote(data, input, start, i);
-		start = i + 2;
+		start = i + 1;
 		i++;
 	}
 	*pos = start;

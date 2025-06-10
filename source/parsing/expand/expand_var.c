@@ -20,12 +20,11 @@ void	process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 	current = parsing;
 	while (current)
 	{
-		while (current->tab_tok[i])
+		while (current->tab_tok[i])  
 		{
-			count_dol = count_dollars(current->tab_tok[i]);
-			if (count_dol > 0)
+			count_dol = count_word_split_expand(current->tab_tok[i], 0, 0);          
 			{
-				tab = split_into_expand(current->tab_tok[i], data);
+				tab = split_into_expand(current->tab_tok[i], data, 0, 0);
 				if (tab)
 				{
 					tab = change_var_to_value(tab, count_dol);
@@ -51,7 +50,7 @@ char	**change_var_to_value(char **tab, int count_doll)
 	{
 		if (tab[i][0] == '$')
 		{
-			var_name = extract_var_name(tab[i]);
+			var_name = extract_var_name(tab[i], 0);
 			var_value = getenv(var_name);
 			printf ("var val = %s\n", var_value);
 			free(tab[i]);
@@ -67,13 +66,11 @@ char	**change_var_to_value(char **tab, int count_doll)
 	return (tab);
 }
 
-char	*extract_var_name(char *s)
+char	*extract_var_name(char *s, int start)
 {
 	char	*var_name;
-	int		start;
 	int		end;
 
-	start = 0;
 	end = 0;
 	start++;
 	if (s[start] == '{')
@@ -112,26 +109,3 @@ char	*join_expanded_tokens(char **tab)
 	return (result);
 }
 
-void	find_end_word_to_expand_utils(char *processed, int *pos)
-{
-	int	end;
-
-	end = *pos;
-	if (in_sq(processed[end]))
-	{
-		skip_sq(processed, &end);
-		end++;
-	}
-	else if (in_dq(processed[end]))
-	{
-		skip_dq_for_expand(processed, &end);
-		end++;
-	}
-	else if (processed[end] == '$')
-	{
-		skip_after_dol_for_expand(processed, &end);
-	}
-	else
-		skip_to_space_or_q_for_expand(processed, &end);
-	*pos = end;
-}

@@ -12,101 +12,62 @@
 
 #include "minishell.h"
 
-char	**split_into_expand(char *processed, t_data *data)
+char	**split_into_expand(char *processed, t_data *data, int i, int j)
 {
 	char	**tab;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
-	data->nb_token = count_token(processed, 0, 0);
+	data->nb_token = count_word_split_expand(processed, 0, 0);
 	tab = malloc((data->nb_token + 1) * sizeof(char *));
 	if (!tab || !processed)
 		return (NULL);
 	while (j < data->nb_token)
 	{
-		while (processed[i] && in_space(processed[i]))
-			i++;
-		if (!processed[i])
-			break ;
-		tab[j] = find_end_word_to_expand(processed, &i);
+		if (processed[i] != '$')
+			tab[j] = find_end_word_split_expand(processed, &i);
+		else
+			tab[j] = find_end_dol_expand(processed, &i);
+		printf("tab[%d] = %s", j, tab[j]);
 		j++;
 	}
 	tab[j] = NULL;
 	return (tab);
 }
 
-char	*find_end_word_to_expand(char *processed, int *i)
+char	*find_end_dol_expand(char *s, int *start)
 {
-	int		start;
-	int		end;
-	char	*s;
+	int	i;
+	int	j;
+	char *tab;
 
-	start = *i;
-	end = *i;
-	if (processed[end] == '$')
-		end++;
-	while (processed[end] && processed[end] != '$')
+	i = *start;
+	j = i;
+	if (s[j] == '{')
 	{
-		if (in_sq(processed[end]) || in_dq(processed[end])
-			|| processed[end] == '$')
-			find_end_word_to_expand_utils(processed, &end);
-		else
-			skip_to_space_or_q_for_expand(processed, &end);
-	}
-	s = place_token(processed, start, end);
-	*i = end;
-	return (s);
-}
-
-void	skip_dq_for_expand(char *processed, int *i)
-{
-	int	start;
-
-	start = *i;
-	start++;
-	while (processed[start] && (!in_dq(processed[start])))
-	{
-		start++;
-		if (processed[start] == '$')
-			break ;
-	}
-	*i = start;
-}
-
-void	skip_after_dol_for_expand(char *processed, int *i)
-{
-	int	start;
-
-	start = *i;
-	start++;
-	if (processed[start] == '{')
-	{
-		start++;
-		while (processed[start] && processed[start] != '}')
-			start++;
-		if (processed[start] == '}')
-			start++;
+		j++;
+		while (s[j] && s[j] != '}')
+			j++;
 	}
 	else
 	{
-		while (processed[start] && (ft_isalnum(processed[start])
-				|| processed[start] == '_'))
-			start++;
+		while (s[j] && (ft_isalnum(s[j]) || s[j] == '_'))
+			j++;
 	}
-	*i = start;
+	tab = ft_substr(s, i, i - j);
+	*start = j;
+	return(tab);
 }
 
-void	skip_to_space_or_q_for_expand(char *processed, int *i)
+char	*find_end_word_split_expand(char *s, int *start)
 {
-	int	start;
+	int	i;
+	int	j;
+	char *tab;
 
-	start = *i;
-	start++;
-	while ((processed[start] && !in_space(processed[start])
-			&& (!in_sq(processed[start])) && (!in_dq(processed[start]))
-			&& processed[start] != '$'))
-		start++;
-	*i = start;
+	i = *start;
+	j = i;
+	while (s[j] && s[j] != '$')
+		j++;
+	tab = ft_substr(s, i, i - j);
+	*start = j;
+	return(tab);
 }

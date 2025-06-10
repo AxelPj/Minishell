@@ -12,13 +12,8 @@
 
 #include "minishell.h"
 
-int	count_dollars(char *s)
+int	count_word_split_expand(char *s, int i, int count_dol)
 {
-	int	i;
-	int	count_dol;
-
-	count_dol = 0;
-	i = 0;
 	while (s[i])
 	{
 		if (in_sq(s[i]))
@@ -28,8 +23,35 @@ int	count_dollars(char *s)
 				i++;
 		}
 		if (s[i] == '$')
-			count_dol++;
+		{
+			if (s[0] == '$')
+				count_dol++;
+			else
+				count_dol += 2;
+			find_end_word_split_dol(s, &i);
+		}
 		i++;
+		if (s[i] && (!s[i + 1]))
+			count_dol++;
 	}
 	return (count_dol);
+}
+void	find_end_word_split_dol(char *s, int *i)
+{
+	int	start;
+
+	start = *i;
+	start++;
+	if (s[start] == '{')
+	{
+		start++;
+		while (s[start] && s[start] != '}')
+			start++;
+	}
+	else
+	{
+		while (s[start] && (ft_isalnum(s[start]) || s[start] == '_'))
+			start++;
+	}
+	*i = start;
 }

@@ -127,21 +127,15 @@ void	skip_dq(char *processed, int *i);
 void	skip_sq(char *processed, int *i);
 void	skip_to_space_or_q(char *processed, int *i);
 				//------expand------//
-char	**split_into_expand(char *processed, t_data *data);
-char	*find_end_word_to_expand(char *processed, int *i);
-void	find_end_word_to_expand_utils(char *processed, int *pos);
-void	skip_dq_for_expand(char *processed, int *i);
-void	skip_after_dol_for_expand(char *processed, int *i);
-void	skip_to_space_or_q_for_expand(char *processed, int *i);
-int		count_word_to_expand(char *s, int i, int word);
-char	*place_word_to_expand(const char *str, size_t start, size_t end);
+char	**split_into_expand(char *processed, t_data *data, int i, int j);
+char	*find_end_dol_expand(char *s, int *start);
+char	*find_end_word_split_expand(char *s, int *start);
+int		count_word_split_expand(char *s, int i, int count_dol);
+void	find_end_word_split_dol(char *s, int *i);
 void	process_expand(t_data *data, t_pars *parsing, int count_dol, int i);
 char	**change_var_to_value(char **tab, int count_doll);
-char	*extract_var_name(char *s);
-int		count_dollars(char *s);
+char	*extract_var_name(char *s, int start);
 char	*join_expanded_tokens(char **tab);
-void	skip_to_space_or_q_or_dol(char *processed, int *i);
-void	skip_after_dol(char *processed, int *i);
 				//------clean_quote------//
 t_pars	*clear_tab(t_data *data);
 int		verif_clean_q(char *tab);
