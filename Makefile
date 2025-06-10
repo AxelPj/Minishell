@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: axel <axel@student.42.fr>                  +#+  +:+       +#+         #
+#    By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/05/24 21:16:19 by axel             ###   ########.fr        #
+#    Updated: 2025/06/10 16:36:16 by lesalmon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = minishell
 # Sources
 SRCS =  source/main.c \
 		source/parsing/syntax_utils/delimiteur_utils.c source/parsing/syntax_utils/quote_utils.c source/parsing/syntax_utils/braces_utils.c source/parsing/syntax_utils/parens_utils.c source/parsing/syntax_utils/brackets_utils.c \
-		source/parsing/input/input_normalizer.c source/parsing/input/input_processor.c \
+		source/parsing/input/input_normalizer.c source/parsing/input/input_processor.c source/redirections/redirection.c\
 		source/parsing/tokenisation/sort_token.c source/parsing/tokenisation/split_modif.c source/parsing/tokenisation/tokenisation.c \
 		source/parsing/expand/expand_var.c source/parsing/expand/valid_expand.c source/parsing/expand/split_expand.c \
 		source/utils/utils.c source/utils/free.c source/utils/init_data.c source/utils/utils_lst1.c source/utils/utils_lst2.c \

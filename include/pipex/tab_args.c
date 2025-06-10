@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:37:23 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/24 22:53:51 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:15:48 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ static char	**extract_args(char **tab, int start, int end)
 	args = malloc(sizeof(char *) * (len + 1));
 	if (!args)
 		return (NULL);
-	if (len == 0) 
+	if (len == 0)
 	{
 		args[0] = NULL;
-    	return (args);
+		return (args);
 	}
 	while (i < len)
 	{
@@ -102,32 +102,28 @@ char	***tab_args(char **tab)
 	all_args[j] = NULL;
 	return (all_args);
 }
-void    free_tab_args(char ***cmds_args)
+
+void	free_tab_args(char ***cmds_args)
 {
-    int i, j;
+	int	i;
+	int	j;
 
-    if (!cmds_args)
-        return;
-    i = 0;
-    while (cmds_args[i])
-    {
-        j = 0;
-        if (cmds_args[i])
-        {
-            while (cmds_args[i][j])
-            {
-                if (!cmds_args[i][j])
-                {
-                    fprintf(stderr, "Dangling pointer or double free at [%d][%d]\n", i, j);
-                    exit(1);
-                }
-                free(cmds_args[i][j]);
-                j++;
-            }
-            free(cmds_args[i]);
-        }
-        i++;
-    }
-    free(cmds_args);
+	if (!cmds_args)
+		return ;
+	i = 0;
+	while (cmds_args[i])
+	{
+		j = 0;
+		if (cmds_args[i])
+		{
+			while (cmds_args[i][j])
+			{
+				free(cmds_args[i][j]);
+				j++;
+			}
+			free(cmds_args[i]);
+		}
+		i++;
+	}
+	free(cmds_args);
 }
-

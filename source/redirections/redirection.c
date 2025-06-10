@@ -6,39 +6,74 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:22:38 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/10 14:33:18 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:10:37 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "../include/header/minishell.h"
+#include "minishell.h"
+
+int	find_redir(char **args_orig, char **args, int idx, t_pipex *info)
+{
+	int	z;
+
+	z = 0;
+	if (!strcmp(args_orig[k], "<") && args_orig[k + 1])
+	{
+		info->infile[idx] = strdup(args_orig[k + 1]);
+	}
+	else if (!strcmp(args_orig[k], "<<") && args_orig[k + 1])
+	{
+		info->here_doc[idx] = 1;
+		info->heredoc_lim[idx] = strdup(args_orig[k + 1]);
+	}
+	else if (!strcmp(args_orig[k], ">") && args_orig[k + 1])
+	{
+		info->outfile[idx] = strdup(args_orig[k + 1]);
+		info->out_flags[idx] = O_CREAT | O_WRONLY | O_TRUNC;
+	}
+	else if (!strcmp(args_orig[k], ">>") && args_orig[k + 1])
+	{
+		info->outfile[idx] = strdup(args_orig[k + 1]);
+		info->out_flags[idx] = O_CREAT | O_WRONLY | O_APPEND;
+	}
+	else
+	{
+		args[m++] = strdup(args_orig[k]);
+		k++;
+		return (k);
+	}
+	z += 2;
+	return (z);
+}
 
 char	**parse_redirections_cmd(char **args_orig, t_pipex *info, int idx)
 {
-	int     k = 0;
-	int     m = 0;
-	int     count_good = 0;
-	char  **args_nettoye;
+	int		k;
+	int		m;
+	int		count;
+	char	**args;
 
+	k = 0;
+	m = 0;
+	count = 0;
 	while (args_orig[k])
 	{
-		if ((!strcmp(args_orig[k], "<")  && args_orig[k+1]) ||
-			(!strcmp(args_orig[k], "<<") && args_orig[k+1]) ||
-			(!strcmp(args_orig[k], ">")  && args_orig[k+1]) ||
-			(!strcmp(args_orig[k], ">>") && args_orig[k+1]))
-		{
+		if ((!strcmp(args_orig[k], "<") && args_orig[k + 1])
+			|| (!strcmp(args_orig[k], "<<") && args_orig[k + 1])
+			|| (!strcmp(args_orig[k], ">") && args_orig[k + 1])
+			|| (!strcmp(args_orig[k], ">>") && args_orig[k + 1]))
 			k += 2;
-		}
 		else
 		{
-			count_good++;
+			count++;
 			k++;
 		}
 	}
-	args_nettoye = malloc(sizeof(char*) * (count_good + 1));
-	if (!args_nettoye)
+	args = malloc(sizeof(char *) * (count + 1));
+	if (!args)
 	{
 		perror("malloc");
 		exit(EXIT_FAILURE);
@@ -46,44 +81,17 @@ char	**parse_redirections_cmd(char **args_orig, t_pipex *info, int idx)
 	k = 0;
 	while (args_orig[k])
 	{
-		if (!strcmp(args_orig[k], "<") && args_orig[k+1])
-		{
-			info->infile[idx] = strdup(args_orig[k+1]);
-			k += 2;
-		}
-		else if (!strcmp(args_orig[k], "<<") && args_orig[k+1])
-		{
-			info->here_doc[idx]    = 1;
-			info->heredoc_lim[idx] = strdup(args_orig[k+1]);
-			k += 2;
-		}
-		else if (!strcmp(args_orig[k], ">") && args_orig[k+1])
-		{
-			info->outfile[idx]   = strdup(args_orig[k+1]);
-			info->out_flags[idx] = O_CREAT | O_WRONLY | O_TRUNC;
-			k += 2;
-		}
-		else if (!strcmp(args_orig[k], ">>") && args_orig[k+1])
-		{
-			info->outfile[idx]   = strdup(args_orig[k+1]);
-			info->out_flags[idx] = O_CREAT | O_WRONLY | O_APPEND;
-			k += 2;
-		}
-		else
-		{
-			args_nettoye[m++] = strdup(args_orig[k]);
-			k++;
-		}
+		k += find_redir(args_orig, args, idx, info);
 	}
-	args_nettoye[m] = NULL;
-	return args_nettoye;
+	args[m] = NULL;
+	return (args);
 }
 
 void	parse_all_redirections(t_pipex *info)
 {
-	int i;
-	int j;
-	char **new_args;
+	int		i;
+	int		j;
+	char	**new_args;
 
 	i = 0;
 	while (i < info->nb_cmds)
@@ -96,7 +104,6 @@ void	parse_all_redirections(t_pipex *info)
 			j++;
 		}
 		free(info->tab_args[i]);
-
 		info->tab_args[i] = new_args;
 		i++;
 	}

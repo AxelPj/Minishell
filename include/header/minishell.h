@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/10 16:14:50 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:21:42 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,16 @@ typedef struct s_pipex
 
 //--------------parsing--------------//
 
-		//------check_error_input------//
+//------check_error_input------//
 int		quotes_are_closed(char *s);
 int		has_pipe_edges(char *s);
-				//------syntax_utils------//
-int     in_sq(char c);
-int     in_dq(char c);
+//------syntax_utils------//
+int		in_sq(char c);
+int		in_dq(char c);
 int		has_multi_q(char *input, int i);
 int		is_one_delimiter(char c);
 int		is_two_delimiter(char c, char c2);
-int     verif_quote(char *processed, int i);
+int		verif_quote(char *processed, int i);
 char	*process_syntax_symbol(t_data *data, char *input, int i);
 int		in_syntax_symbol(char *input, int i);
 int		in_open_braces(char c);
@@ -107,9 +107,9 @@ int		in_open_brackets(char c);
 int		in_close_brackets(char c);
 int		brackets_are_closed(char *s);
 char	*process_brackets(t_data *data, char *input, int i);
-int		syntax_are_closed (char *command);
-				
-				//-----input_to_process-----//
+int		syntax_are_closed(char *command);
+
+//-----input_to_process-----//
 int		count_len_input(char *input, int i, int len, int in_word);
 char	*space_to_input(t_data *data, char *input, int i);
 char	*process_q(t_data *data, char *input, int i, int start);
@@ -118,7 +118,7 @@ char	*process_del(t_data *data, char *input, int i);
 char	*process_join(t_data *data, char *s2, int start, int end);
 char	*process_join_quote(t_data *data, char *s2, int start, int end);
 
-				//------tokenisation------//
+//------tokenisation------//
 t_list	*token_lst(t_data *data);
 int		token_type(char *s_token, int i);
 int		count_non_delim(t_list *start);
@@ -128,7 +128,7 @@ t_list	*process_non_delim(t_list *cur, t_data *data, int j);
 t_list	*process_delim(t_list *cur, t_data *data, int j);
 t_pars	*sort_token(t_data *data, int j);
 char	*place_token(char *str, int start, int end);
-int     count_token(char *processed, int i, int word);
+int		count_token(char *processed, int i, int word);
 char	**split_into_tokens(char *processed, t_data *data);
 char	*find_end_token(char *processed, int *i);
 void	skip_dq(char *processed, int *i);
@@ -152,14 +152,14 @@ void	skip_to_space_or_q_or_dol(char *processed, int *i);
 void	skip_after_dol(char *processed, int *i);
 //-----------------------------------//
 
-				//--------------Utils--------------//
+//--------------Utils--------------//
 int		verif_built_in(char *str);
 void	print_lst(t_data *data);
 t_data	*init_data(t_data *data, int bool, char **envp);
 char	**envp_cpy(t_data *data, char **envp);
 void	print_pars_lst(t_data *data);
-			
-				//------------lst---------------//
+
+//------------lst---------------//
 t_list	*ft_lstnw(int type_tok, char *tab_tok, int index);
 void	ft_lstadd_bck(t_list **lst, t_list *new);
 t_list	*lstlast(t_list *lst);
@@ -168,8 +168,8 @@ t_pars	*ft_lst_parsnw(char *s_tok, int type_tok, int index, int size);
 void	ft_pars_lstadd_bck(t_pars **lst, t_pars *new);
 t_pars	*pars_lstlast(t_pars *lst);
 int		ft_lst_pars_size(t_pars *lst);
-		
-		//-----------free-----------//
+
+//-----------free-----------//
 void	free_all(t_data *data, char *cmd);
 void	free_tab(char **tab);
 t_list	*free_token_lst(t_list *token_lst);

@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:56:15 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/10 16:24:58 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:14:13 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,32 +33,19 @@ t_pipex	*init_infos(t_pipex *info, char **envp)
 	return (info);
 }
 
-char	**new_tab(char **tab, char **args, int i, int j)
+void	info_heredoc(t_pipex info)
 {
-	char	*tmp;
-	char	*joined;
-
-	tmp = NULL;
-	joined = NULL;
-	if (!tab || !args)
-		return (NULL);
-	while (tab[i] && ft_strncmp(tab[i], "|", 100) != 0)
+	info.infile = malloc(info.nb_cmds * sizeof(char *));
+	info.here_doc = malloc(info.nb_cmds * sizeof(int));
+	info.heredoc_lim = malloc(info.nb_cmds * sizeof(char *));
+	info.outfile = malloc(info.nb_cmds * sizeof(char *));
+	info.out_flags = malloc(info.nb_cmds * sizeof(int));
+	if (!info.infile || !info.here_doc || !info.heredoc_lim
+		|| !info.outfile || !info.out_flags)
 	{
-		if (!joined)
-			joined = ft_strdup(tab[i]);
-		else
-		{
-			tmp = ft_strjoin(joined, " ");
-			free(joined);
-			joined = ft_strjoin(tmp, tab[i]);
-			free(tmp);
-		}
-		i++;
+		perror("malloc");
+		exit(EXIT_FAILURE);
 	}
-	if (joined)
-		args[j++] = joined;
-	args[j] = NULL;
-	return (args);
 }
 
 int	command(t_pipex *info, char **envp, int i, t_data *data)
@@ -131,22 +118,9 @@ int	pipex_setup(t_data *data, char **tab)
 			info.nb_args++;
 		i++;
 	}
-	info.tab_args = tab_args(tab);
-	if (!info.tab_args)
-		return 0;
-	info.infile      = malloc(info.nb_cmds * sizeof(char*));
-	info.here_doc    = malloc(info.nb_cmds * sizeof(int));
-	info.heredoc_lim = malloc(info.nb_cmds * sizeof(char*));
-	info.outfile     = malloc(info.nb_cmds * sizeof(char*));
-	info.out_flags   = malloc(info.nb_cmds * sizeof(int));
-	if (!info.infile || !info.here_doc || !info.heredoc_lim
-	|| !info.outfile || !info.out_flags)
-	{
-		perror("calloc");
-		exit(EXIT_FAILURE);
-	}
+	info_heredoc(info);
 	parse_all_redirections(&info);
 	pipex_mod(data, &info);
-	free_infos(&info);
-	return 0;
+	free_info(info);
+	return (0);
 }
