@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:56:15 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/24 18:53:37 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:24:58 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,22 +120,33 @@ int	pipex_setup(t_data *data, char **tab)
 	int		i;
 	t_pipex	info;
 
-	i = 0;
-	g_status = 0;
 	info.nb_args = 0;
 	info.nb_cmds = 1;
+	i = 0;
 	while (tab[i])
 	{
-		if (ft_strcmp(tab[i], "|") != 0)
-			info.nb_args++;
-		else
+		if (!strcmp(tab[i], "|"))
 			info.nb_cmds++;
+		else
+			info.nb_args++;
 		i++;
 	}
 	info.tab_args = tab_args(tab);
 	if (!info.tab_args)
-		return (0);
+		return 0;
+	info.infile      = malloc(info.nb_cmds * sizeof(char*));
+	info.here_doc    = malloc(info.nb_cmds * sizeof(int));
+	info.heredoc_lim = malloc(info.nb_cmds * sizeof(char*));
+	info.outfile     = malloc(info.nb_cmds * sizeof(char*));
+	info.out_flags   = malloc(info.nb_cmds * sizeof(int));
+	if (!info.infile || !info.here_doc || !info.heredoc_lim
+	|| !info.outfile || !info.out_flags)
+	{
+		perror("calloc");
+		exit(EXIT_FAILURE);
+	}
+	parse_all_redirections(&info);
 	pipex_mod(data, &info);
-	free_tab_args(info.tab_args);
-	return (0);
+	free_infos(&info);
+	return 0;
 }

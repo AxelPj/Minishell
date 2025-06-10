@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/24 21:21:48 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/03 16:41:49 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/header/minishell.h"
 
 long	g_status = 0;
+
+static void	sigint_parent(int sig)
+{
+	(void)sig;
+	write(STDOUT_FILENO, "\n", 1);
+}
 
 void	set_shell(t_data *data)
 {
@@ -49,6 +55,8 @@ int main (int argc, char **argv, char **envp)
 	(void) argv;
 	data = NULL;
 	command = NULL;
+	signal(SIGINT, sigint_parent);
+	signal(SIGQUIT, SIG_IGN);
 	if (!envp)
 		data = init_data(data, 1, envp);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_modif.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:06:44 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/24 21:15:03 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/24 23:02:06 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ char **split_into_tokens(char *processed, t_data *data)
         tab[j] = find_end_token(processed, &i);
         j++;
     }
-
     tab[j] = NULL;
     return (tab);
 }
@@ -106,7 +105,7 @@ char *find_end_token(char *processed, int *i)
         else
             skip_to_space_or_q(processed, &end);
     }
-    s = place_token(processed, start, end);
+    s = place_token(processed, start, end - 1);
     *i = end;
     return (s);
 }

@@ -6,11 +6,21 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:03:33 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/24 16:59:51 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:14:32 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+void	free_info(t_pipex info)
+{
+	free_tab_args(info.tab_args);
+	free(info.infile);
+	free(info.here_doc);
+	free(info.heredoc_lim);
+	free(info.outfile);
+	free(info.out_flags);
+}
 
 int	execute_builtin(char *cmd, char **args, t_pipex *info, t_data *data)
 {
