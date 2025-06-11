@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/02 17:32:55 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:32:53 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 extern long	g_status;
 
@@ -73,6 +74,11 @@ typedef struct s_pipex
 	char	**envp;
 	char	***tab_args;
 	int		*fd;
+	char	**infile;
+	int		*here_doc;
+	char	**heredoc_lim;
+	char	**outfile;
+	int		*out_flags;
 }	t_pipex;
 
 //--------------parsing--------------//
@@ -167,7 +173,7 @@ char	**free_tab(char **tab);
 t_list	*free_token_lst(t_list *token_lst);
 t_pars	*free_lst_pars(t_pars *parsing);
 //----------------PIPEX----------------//
-int	pipex_setup(t_data *data, char **tab, t_pipex *info);
+int		pipex_setup(t_data *data, char **tab, t_pipex *info);
 int		pipex_mod(t_data *data, t_pipex *info);
 int		command(t_pipex *infos, char **envp, int i, t_data *data);
 //----------------PATH----------------//
@@ -187,6 +193,7 @@ int		execute_builtin(char *cmd, char **args, t_pipex *info, t_data *data);
 void	ft_tabfree(char **tab);
 int		is_builtin_child(char *cmd);
 int		is_builtin(char *cmd);
+void	free_info(t_pipex *info);
 //----------------SPLIT_PIPEX(UTILS2)-------//
 char	**ft_split_pipex(char const *s, char c);
 //----------------UTILS3--------------//
@@ -215,5 +222,10 @@ void	set_shell(t_data *data);
 //--------------TAB_ARGS---------------//
 void	free_tab_args(char ***cmds_args);
 char	***tab_args(char **tab);
+
+//----------------REDIR----------------//
+int		setup_here_doc(const char *lim);
+void	parse_all_redirections(t_pipex *info);
+char	**parse_redirections_cmd(char **args_orig, t_pipex *info, int idx);
 
 #endif
