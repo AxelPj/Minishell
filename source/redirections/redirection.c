@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:22:38 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/10 17:10:37 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:42:31 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,30 @@ int	find_redir(char **args_orig, char **args, int idx, t_pipex *info)
 	int	z;
 
 	z = 0;
-	if (!strcmp(args_orig[k], "<") && args_orig[k + 1])
+	if (!strcmp(args_orig[z], "<") && args_orig[z + 1])
 	{
-		info->infile[idx] = strdup(args_orig[k + 1]);
+		info->infile[idx] = strdup(args_orig[z + 1]);
 	}
-	else if (!strcmp(args_orig[k], "<<") && args_orig[k + 1])
+	else if (!strcmp(args_orig[z], "<<") && args_orig[z + 1])
 	{
 		info->here_doc[idx] = 1;
-		info->heredoc_lim[idx] = strdup(args_orig[k + 1]);
+		info->heredoc_lim[idx] = strdup(args_orig[z + 1]);
 	}
-	else if (!strcmp(args_orig[k], ">") && args_orig[k + 1])
+	else if (!strcmp(args_orig[z], ">") && args_orig[z + 1])
 	{
-		info->outfile[idx] = strdup(args_orig[k + 1]);
+		info->outfile[idx] = strdup(args_orig[z + 1]);
 		info->out_flags[idx] = O_CREAT | O_WRONLY | O_TRUNC;
 	}
-	else if (!strcmp(args_orig[k], ">>") && args_orig[k + 1])
+	else if (!strcmp(args_orig[z], ">>") && args_orig[z + 1])
 	{
-		info->outfile[idx] = strdup(args_orig[k + 1]);
+		info->outfile[idx] = strdup(args_orig[z + 1]);
 		info->out_flags[idx] = O_CREAT | O_WRONLY | O_APPEND;
 	}
 	else
 	{
-		args[m++] = strdup(args_orig[k]);
-		k++;
-		return (k);
+		args[z++] = strdup(args_orig[z]);
+		z++;
+		return (z);
 	}
 	z += 2;
 	return (z);
