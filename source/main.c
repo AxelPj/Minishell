@@ -32,11 +32,10 @@ void	set_shell(t_data *data)
 		i++;
 	}
 }
-
 void	a_out(t_data *data, char *command)
 {
 	t_pipex	*info;
-
+	
 	info = malloc(sizeof(t_pipex));
 	if (command)
 	{
@@ -45,8 +44,8 @@ void	a_out(t_data *data, char *command)
 		data->token_lst = token_lst(data);
 		data->parsing = sort_token(data, 1);
 		data->parsing = process_expand(data, data->parsing, 0, 0);
-		print_pars_lst(data);
 		data->parsing = clear_tab(data);
+		print_pars_lst(data);
 		info->tab_args = import_tabs(data, info, ft_lst_pars_size(data->parsing), 0);
 		pipex_setup(data, data->tab_token, info);
 		free_all(data, command);
@@ -57,7 +56,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*command;
 	t_data	*data;
-
+	
 	data = malloc(sizeof(t_data));
 	(void) argc;
 	(void) argv;
@@ -66,7 +65,7 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGINT, sigint_parent);
 	signal(SIGQUIT, SIG_IGN);
 	if (!envp)
-		data = init_data(data, 1, envp);
+	data = init_data(data, 1, envp);
 	else
 		data = init_data(data, 0, envp);
 	while (1)
@@ -82,3 +81,14 @@ int	main(int argc, char **argv, char **envp)
 		}
 	}
 }
+
+/* void	printtabb(char **tab)
+{
+	int i;
+	i = 0;
+	while (tab[i])
+	{
+		printf ("tab = %s", tab[i]);
+		i++;
+	}
+} */

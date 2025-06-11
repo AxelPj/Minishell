@@ -15,21 +15,29 @@
 t_pars	*ft_lst_parsnw(char *s_tok, int type_tok, int index, int size)
 {
 	t_pars	*newelem;
+	int		i;
 
-	newelem = (t_pars *) malloc (sizeof(t_pars));
+	i = 0;
+	newelem = (t_pars *)malloc(sizeof(t_pars));
 	if (!newelem)
 		return (NULL);
-	if (size == 0)
-		newelem->tab_tok = (char **)malloc(2);
-	else
-		newelem->tab_tok = (char **)malloc(size + 1);
-	newelem->tab_tok[0] = ft_strdup(s_tok);
+	newelem->tab_tok = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!newelem->tab_tok)
+		return (NULL);
+	while (i < size + 1)
+	{
+		newelem->tab_tok[i] = NULL;
+		i++;
+	}
+	if (s_tok)
+		newelem->tab_tok[0] = ft_strdup(s_tok);
 	newelem->token = type_tok;
 	newelem->index = index;
 	newelem->index_expand = 0;
 	newelem->next = NULL;
 	return (newelem);
 }
+
 
 void	ft_pars_lstadd_bck(t_pars **lst, t_pars *new)
 {
