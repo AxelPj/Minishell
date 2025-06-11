@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 18:22:02 by axel              #+#    #+#             */
-/*   Updated: 2025/05/22 23:10:22 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/30 15:39:39 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,10 @@ char	*process_parens(t_data *data, char *input, int i)
 
 int	syntax_are_closed(char *command)
 {
-	if (quotes_are_closed(command) || has_pipe_edges(command) || parens_are_closed(command)
-		|| braces_are_closed(command) || brackets_are_closed(command))
+	if (quotes_are_closed(command) || has_pipe_edges(command)
+		|| parens_are_closed(command) || braces_are_closed(command)
+		|| brackets_are_closed(command))
 		return (1);
 	else
-		return (0);		
+		return (0);
 }

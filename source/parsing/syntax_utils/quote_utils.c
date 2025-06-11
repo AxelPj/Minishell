@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:12:13 by axel              #+#    #+#             */
-/*   Updated: 2025/05/22 23:10:24 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/29 12:52:40 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	has_multi_q(char *input, int i)
 		while (in_sq(input[i]) == 0)
 			i++;
 	}
-	if ((in_dq(input[i]) && in_dq(input[i + 1])) 
+	if ((in_dq(input[i]) && in_dq(input[i + 1]))
 		|| (in_dq(input[i]) && in_sq(input[i + 1]))
 		|| (in_sq(input[i]) && in_sq(input[i + 1]))
 		|| (in_sq(input[i]) && in_dq(input[i + 1])))
@@ -45,7 +45,7 @@ int	verif_quote(char *processed, int i)
 			{
 				if (processed[i] == '\0')
 					return (1);
-				i++; 
+				i++;
 			}
 		}
 		else if (processed[i] == '\'')
@@ -55,7 +55,7 @@ int	verif_quote(char *processed, int i)
 			{
 				if (processed[i] == '\0')
 					return (1);
-				i++; 
+				i++;
 			}
 		}
 		i++;

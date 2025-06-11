@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 18:22:08 by axel              #+#    #+#             */
-/*   Updated: 2025/05/22 23:10:12 by axel             ###   ########.fr       */
+/*   Updated: 2025/05/29 12:51:13 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	in_close_braces(char c)
 		return (1);
 	return (0);
 }
+
 int	braces_are_closed(char *s)
 {
 	int		i;

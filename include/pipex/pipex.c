@@ -33,15 +33,15 @@ t_pipex	*init_infos(t_pipex *info, char **envp)
 	return (info);
 }
 
-void	info_heredoc(t_pipex info)
+void	info_heredoc(t_pipex *info)
 {
-	info.infile = malloc(info.nb_cmds * sizeof(char *));
-	info.here_doc = malloc(info.nb_cmds * sizeof(int));
-	info.heredoc_lim = malloc(info.nb_cmds * sizeof(char *));
-	info.outfile = malloc(info.nb_cmds * sizeof(char *));
-	info.out_flags = malloc(info.nb_cmds * sizeof(int));
-	if (!info.infile || !info.here_doc || !info.heredoc_lim
-		|| !info.outfile || !info.out_flags)
+	info->infile = malloc(info->nb_cmds * sizeof(char *));
+	info->here_doc = malloc(info->nb_cmds * sizeof(int));
+	info->heredoc_lim = malloc(info->nb_cmds * sizeof(char *));
+	info->outfile = malloc(info->nb_cmds * sizeof(char *));
+	info->out_flags = malloc(info->nb_cmds * sizeof(int));
+	if (!info->infile || !info->here_doc || !info->heredoc_lim
+		|| !info->outfile || !info->out_flags)
 	{
 		perror("malloc");
 		exit(EXIT_FAILURE);
@@ -102,20 +102,20 @@ int	pipex_mod(t_data *data, t_pipex *info)
 	return (0);
 }
 
-int	pipex_setup(t_data *data, char **tab)
+int	pipex_setup(t_data *data, char **tab, t_pipex *info)
 {
 	int		i;
-	t_pipex	info;
 
-	info.nb_args = 0;
-	info.nb_cmds = 1;
+	g_status = 0;
+	info->nb_args = 0;
+	info->nb_cmds = 1;
 	i = 0;
 	while (tab[i])
 	{
 		if (!strcmp(tab[i], "|"))
-			info.nb_cmds++;
+			info->nb_cmds++;
 		else
-			info.nb_args++;
+			info->nb_args++;
 		i++;
 	}
 	info_heredoc(info);

@@ -28,11 +28,10 @@ int	count_token(char *s, int i, int word)
 			else if (in_dq(s[i]))
 			{
 				skip_dq(s, &i);
-				i++;			
+				i++;
 			}
 			else
 				skip_to_space_or_q(s, &i);
-			
 		}
 		word++;
 	}
@@ -41,7 +40,7 @@ int	count_token(char *s, int i, int word)
 
 char	*place_token(char *str, int start, int end)
 {
-	int	i;
+	int		i;
 	char	*tab;
 
 	i = 0;
@@ -58,88 +57,27 @@ char	*place_token(char *str, int start, int end)
 	return (tab);
 }
 
-char **split_into_tokens(char *processed, t_data *data)
+char	**split_into_tokens(char *processed, t_data *data)
 {
-    char **tab;
-    int i = 0;
-    int j = 0;
+	char	**tab;
+	int		i;
+	int		j;
 
-    data->nb_token = count_token(processed, 0, 0);
-    tab = malloc((data->nb_token + 1) * sizeof(char *));
-    if (!tab || !processed)
-        return (NULL);
-
-    while (j < data->nb_token)
-    {
-        while (processed[i] && in_space(processed[i]))
-            i++;
-        if (!processed[i])
-            break;
-        tab[j] = find_end_token(processed, &i);
-        j++;
-    }
-    tab[j] = NULL;
-    return (tab);
-}
-
-char *find_end_token(char *processed, int *i)
-{
-    int start;
-    int end;
-	char *s;
-
-	start = *i;
-	end = *i;
-    while (processed[end] && !in_space(processed[end]))
-    {
-        if (in_sq(processed[end]))
-		{
-            skip_sq(processed, &end);
-			end++;
-		}
-        else if (in_dq(processed[end]))
-		{
-            skip_dq(processed, &end);
-			end++;			
-		}
-        else
-            skip_to_space_or_q(processed, &end);
-    }
-    s = place_token(processed, start, end - 1);
-    *i = end;
-    return (s);
-}
-
-void	skip_dq(char *processed, int *i)
-{
-	int	start;
-
-	start = *i;
-	start++;
-	while (processed[start] && (!in_dq(processed[start])))
-		start++;
-	*i = start;
-}
-
-void	skip_sq(char *processed, int *i)
-{
-	int	start;
-
-	start = *i;
-	start++;
-	while (processed[start] && (!in_sq(processed[start])))
-		start++;
-	*i = start;
-}
-
-void	skip_to_space_or_q(char *processed, int *i)
-{
-	int	start;
-
-	start = *i;
-	start++;
-	while (processed[start] && !in_space(processed[start]) &&
-		!in_sq(processed[start]) && !in_dq(processed[start]))
-		start++;
-	*i = start;
+	i = 0;
+	j = 0;
+	data->nb_token = count_token(processed, 0, 0);
+	tab = malloc((data->nb_token + 1) * sizeof(char *));
+	if (!tab || !processed)
+		return (NULL);
+	while (j < data->nb_token)
+	{
+		while (processed[i] && in_space(processed[i]))
+			i++;
+		if (!processed[i])
+			break ;
+		tab[j] = find_end_token(processed, &i);
+		j++;
+	}
+	tab[j] = NULL;
+	return (tab);
 }
