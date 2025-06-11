@@ -20,7 +20,7 @@ t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 	current = parsing;
 	while (current)
 	{
-		while (current->tab_tok[i])  
+		while (current->tab_tok[i])
 		{
 			if (is_there_a_dol(current->tab_tok[i]))
 			{
@@ -31,8 +31,7 @@ t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 					{
 						tab = change_var_to_value(tab, count_dol);
 						free(current->tab_tok[i]);
-						current->tab_tok[i] = join_expanded_tokens(tab, count_dol);
-						printf("expand = %s\n", current->tab_tok[i]);
+						current->tab_tok[i] = join_expand(tab, count_dol);
 						free_tab(tab);
 					}
 				}
@@ -57,7 +56,6 @@ char	**change_var_to_value(char **tab, int count_doll)
 		{
 			var_name = extract_var_name(tab[i], 0);
 			var_value = getenv(var_name);
-			printf ("var val = %s\n", var_value);
 			free(tab[i]);
 			if (var_value)
 				tab[i] = ft_strdup(var_value);
@@ -96,7 +94,7 @@ char	*extract_var_name(char *s, int start)
 	return (var_name);
 }
 
-char	*join_expanded_tokens(char **tab, int size)
+char	*join_expand(char **tab, int size)
 {
 	char	*result;
 	int		i;
@@ -106,14 +104,8 @@ char	*join_expanded_tokens(char **tab, int size)
 	while (i < size)
 	{
 		if (tab[i])
-		{
 			result = ft_strjoin(result, tab[i]);
-			printf("tab %s | result %s\n", tab[i], result);
-		}
 		i++;
 	}
-	printf("\n\n");
-	printf("result %s\n", result);
 	return (result);
 }
-
