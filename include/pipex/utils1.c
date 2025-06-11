@@ -12,14 +12,14 @@
 
 #include "../header/minishell.h"
 
-void	free_info(t_pipex info)
+void	free_info(t_pipex *info)
 {
-	free_tab_args(info.tab_args);
-	free(info.infile);
-	free(info.here_doc);
-	free(info.heredoc_lim);
-	free(info.outfile);
-	free(info.out_flags);
+	free_tab_args(info->tab_args);
+	free(info->infile);
+	free(info->here_doc);
+	free(info->heredoc_lim);
+	free(info->outfile);
+	free(info->out_flags);
 }
 
 int	execute_builtin(char *cmd, char **args, t_pipex *info, t_data *data)
