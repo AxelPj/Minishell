@@ -112,6 +112,8 @@ char	*join_expanded_tokens(char **tab, int size)
 		}
 		i++;
 	}
+	printf("\n\n");
+	printf("result %s\n", result);
 	return (result);
 }
 
