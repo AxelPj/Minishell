@@ -17,14 +17,14 @@ t_pars	*clear_tab(t_data *data)
 	t_pars	*current;
 	int		i;
 
-	i = 0;
 	current = data->parsing;
 	while (current)
 	{
+		i = 0;
 		while (current->tab_tok[i])
 		{
 			if (verif_clean_q(current->tab_tok[i]))
-				current->tab_tok[i] = clean_q(current->tab_tok[i]);
+				current->tab_tok[i] = clean_q(current->tab_tok[i], 0, 0);
 			i++;
 		}
 		if (!current->next)
@@ -48,31 +48,29 @@ int	verif_clean_q(char *tab)
 	return (0);
 }
 
-char	*clean_q(char *tab)
+char	*clean_q(char *tab, int i, int j)
 {
-	int		i;
-	int		start;
 	char	*clean_tab;
+	char	quote;
 
-	clean_tab = NULL;
-	i = 0;
+	clean_tab = malloc(ft_strlen(tab) + 1);
+	if (!clean_tab)
+		return (NULL);
 	while (tab[i])
 	{
-		if (in_dq(tab[i]))
+		if (tab[i] == '\'' || tab[i] == '\"')
 		{
-			start = i + 1;
-			find_end_q(tab, &i, '\"', '\'');
+			quote = tab[i++];
+			while (tab[i] && tab[i] != quote)
+				clean_tab[j++] = tab[i++];
+			if (tab[i] == quote)
+				i++;
 		}
-		else if (in_sq(tab[i]))
-		{
-			start = i + 1;
-			find_end_q(tab, &i, '\'', '\"');
-		}
-		clean_tab = ft_substr(tab, start, i - start);
-		i++;
+		else
+			clean_tab[j++] = tab[i++];
 	}
-	if (tab)
-		free (tab);
+	clean_tab[j] = '\0';
+	free(tab);
 	return (clean_tab);
 }
 

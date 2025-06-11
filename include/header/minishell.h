@@ -82,6 +82,8 @@ typedef struct s_pipex
 }	t_pipex;
 
 //--------------parsing--------------//
+void	printtabb(char **tab);
+void	print_data_lst(t_data *data);
 
 		//------check_error_input------//
 int		quotes_are_closed(char *s);
@@ -146,10 +148,10 @@ int		is_there_a_dol(char *s);
 				//------clean_quote------//
 t_pars	*clear_tab(t_data *data);
 int		verif_clean_q(char *tab);
-char	*clean_q(char *tab);
+char	*clean_q(char *tab, int i, int j);
 int		find_end_q(char *tab, int *i, char c, char d);
-                //-------export_tab-----//
-char    **extract_double_tab(char **tab, int size);
+				//-------export_tab-----//
+char	**extract_double_tab(char **tab, int size);
 char	***import_tabs(t_data *data, t_pipex *pipex, int count, int i);
 //-----------------------------------//
 				//--------------Utils--------------//
