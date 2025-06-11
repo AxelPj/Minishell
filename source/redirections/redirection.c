@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:22:38 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/11 16:42:31 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:34:19 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	find_redir(char **args_orig, char **args, int idx, t_pipex *info)
 	}
 	else
 	{
-		args[z++] = strdup(args_orig[z]);
+		args[z] = strdup(args_orig[z]);
 		z++;
 		return (z);
 	}

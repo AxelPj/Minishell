@@ -6,7 +6,7 @@
 #    By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/06/10 16:36:16 by lesalmon         ###   ########.fr        #
+#    Updated: 2025/06/11 17:36:34 by lesalmon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS =  source/main.c \
 		source/parsing/input/input_normalizer.c source/parsing/input/input_processor.c source/redirections/redirection.c\
 		source/parsing/tokenisation/sort_token.c source/parsing/tokenisation/split_modif.c source/parsing/tokenisation/tokenisation.c \
 		source/parsing/expand/expand_var.c source/parsing/expand/valid_expand.c source/parsing/expand/split_expand.c \
-		source/parsing/delete_quote/del_q.c \
+		source/parsing/delete_quote/del_q.c source/parsing/tokenisation/split_modif_utils.c\
 		source/parsing/export_in_tab/export_in_tab.c \
 		source/utils/utils.c source/utils/free.c source/utils/init_data.c source/utils/utils_lst1.c source/utils/utils_lst2.c \
 		source/built-in/ft_cd.c source/built-in/ft_echo.c source/built-in/ft_env.c source/built-in/ft_exit.c\

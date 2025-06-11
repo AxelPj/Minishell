@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:56:15 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/11 17:32:20 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:34:53 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ int	pipex_setup(t_data *data, char **tab, t_pipex *info)
 		i++;
 	}
 	info_heredoc(info);
-	parse_all_redirections(&info);
-	pipex_mod(data, &info);
+	parse_all_redirections(info);
+	pipex_mod(data, info);
 	free_info(info);
 	return (0);
 }
