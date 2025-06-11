@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
+t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 {
 	t_pars	*current;
 	char	**tab;
@@ -22,21 +22,26 @@ void	process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 	{
 		while (current->tab_tok[i])  
 		{
-			count_dol = count_word_split_expand(current->tab_tok[i], 0, 0);          
+			if (is_there_a_dol(current->tab_tok[i]))
 			{
-				tab = split_into_expand(current->tab_tok[i], data, 0, 0);
-				if (tab)
+				count_dol = count_word_split_expand(current->tab_tok[i], 0, 0);
 				{
-					tab = change_var_to_value(tab, count_dol);
-					free(current->tab_tok[i]);
-					current->tab_tok[i] = join_expanded_tokens(tab);
-					free_tab(tab);
+					tab = split_into_expand(current->tab_tok[i], data, 0, 0);
+					if (tab)
+					{
+						tab = change_var_to_value(tab, count_dol);
+						free(current->tab_tok[i]);
+						current->tab_tok[i] = join_expanded_tokens(tab, count_dol);
+						printf("expand = %s\n", current->tab_tok[i]);
+						free_tab(tab);
+					}
 				}
 			}
 			i++;
 		}
 		current = current->next;
 	}
+	return (data->parsing);
 }
 
 char	**change_var_to_value(char **tab, int count_doll)
@@ -91,19 +96,20 @@ char	*extract_var_name(char *s, int start)
 	return (var_name);
 }
 
-char	*join_expanded_tokens(char **tab)
+char	*join_expanded_tokens(char **tab, int size)
 {
 	char	*result;
-	char	*temp;
 	int		i;
 
 	i = 0;
 	result = ft_strdup("");
-	while (tab[i])
+	while (i < size)
 	{
-		temp = result;
-		result = ft_strjoin(result, tab[i]);
-		free(temp);
+		if (tab[i])
+		{
+			result = ft_strjoin(result, tab[i]);
+			printf("tab %s | result %s\n", tab[i], result);
+		}
 		i++;
 	}
 	return (result);
