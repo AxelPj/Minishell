@@ -33,3 +33,4 @@ int	count_dollars(char *s)
 	}
 	return(count_dol);
 }
+qwed
