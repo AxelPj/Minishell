@@ -18,7 +18,6 @@ char	**split_into_expand(char *processed, t_data *data, int i, int j)
 
 	data->nb_token = count_word_split_expand(processed, 0, 0);
 	tab = malloc((data->nb_token + 1) * sizeof(char *));
-		printf("%d\n", data->nb_token);
 	if (!tab || !processed)
 		return (NULL);
 	while (j < data->nb_token)
@@ -27,7 +26,6 @@ char	**split_into_expand(char *processed, t_data *data, int i, int j)
 			tab[j] = find_end_word_split_expand(processed, &i);
 		else
 			tab[j] = find_end_dol_expand(processed, &i);
-		printf("tab[%d] = %s\n", j, tab[j]);
 		j++;
 	}
 	tab[j] = NULL;
@@ -36,9 +34,9 @@ char	**split_into_expand(char *processed, t_data *data, int i, int j)
 
 char	*find_end_dol_expand(char *s, int *start)
 {
-	int	i;
-	int	j;
-	char *tab;
+	int		i;
+	int		j;
+	char	*tab;
 
 	i = *start;
 	j = i;
@@ -56,20 +54,20 @@ char	*find_end_dol_expand(char *s, int *start)
 	}
 	tab = ft_substr(s, i, j - i);
 	*start = j;
-	return(tab);
+	return (tab);
 }
 
 char	*find_end_word_split_expand(char *s, int *start)
 {
-	int	i;
-	int	j;
-	char *tab;
+	int		i;
+	int		j;
+	char	*tab;
 
 	i = *start;
 	j = *start;
 	while (s[j] && s[j] != '$')
 	{
-		if(in_sq(s[j]))
+		if (in_sq(s[j]))
 		{
 			j++;
 			while (in_sq(s[j]))
@@ -79,5 +77,5 @@ char	*find_end_word_split_expand(char *s, int *start)
 	}
 	tab = ft_substr(s, i, (j - i));
 	*start = j;
-	return(tab);
+	return (tab);
 }

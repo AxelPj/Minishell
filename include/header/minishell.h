@@ -141,7 +141,7 @@ void	find_end_word_split_dol(char *s, int *i);
 t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i);
 char	**change_var_to_value(char **tab, int count_doll);
 char	*extract_var_name(char *s, int start);
-char	*join_expanded_tokens(char **tab, int size);
+char	*join_expand(char **tab, int size);
 int		is_there_a_dol(char *s);
 				//------clean_quote------//
 t_pars	*clear_tab(t_data *data);

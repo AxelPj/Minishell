@@ -22,6 +22,8 @@ char ***import_tabs(t_data *data, t_pipex *pipex, int count, int i)
 		return (NULL);
 	while (current)
 	{
+		if (current->tab_tok[0][0] == '|')
+			current = current->next;
 		pipex->tab_args[i] = extract_double_tab(current->tab_tok,
 			tablen((void**)current->tab_tok));
 		i++;
