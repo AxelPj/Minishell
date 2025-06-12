@@ -12,39 +12,6 @@
 
 #include "minishell.h"
 
-int	is_valid_command(t_exec *info, char *cmd)
-{
-	char	*path;
-
-	if (!cmd || !*cmd)
-		return (0);
-	if (is_builtin(cmd))
-		return (1);
-	path = cmd_path(cmd, info->envp);
-	if (path)
-	{
-		free(path);
-		return (0);
-	}
-	return (1);
-}
-
-int	count_valid_commands(char **args, t_exec *info)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (args[i])
-	{
-		if (!is_valid_command(info, args[i]) || !is_valid_builtin(args[i]))
-			count++;
-		i++;
-	}
-	return (count);
-}
-
 int	command(t_exec *info, char **envp, int i, t_data *data)
 {
 	char	*path;

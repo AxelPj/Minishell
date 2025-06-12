@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/12 18:19:27 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:33:19 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,12 +183,11 @@ int		is_valid_builtin(char *cmd);
 int		is_builtin_parent(char *cmd);
 int		execute_builtin(char *cmd, char **args, t_exec *info, t_data *data);
 //---------------COMMANDS---------//
-int		is_valid_command(t_exec *info, char *cmd);
-int		count_valid_commands(char **args, t_exec *info);
 int		command(t_exec *infos, char **envp, int i, t_data *data);
 //---------------FREE_EXEC--------------//
 void	free_split(char **tab);
 void	free_info(t_exec *info);
+void	free_tab_args(char ***cmds_args);
 //---------------INIT_EXEC---------------//
 t_exec	*init_infos(t_exec *info, char **envp);
 void	info_heredoc(t_exec *info);
@@ -202,15 +201,9 @@ char	*find_executable(char **paths, char *cmd);
 char	*get_path_env(char **envp);
 char	*cmd_path(char *cmd, char **envp);
 //---------------PIPES---------------//
-void	check_pipes(char **tab, int i, t_exec *info);
 void	close_all_pipes(int *fd, int nb_pipes);
 void	wait_all_children(int nb_cmds);
 int		create_pipes(int *fd, int nb_pipes);
-//---------------SPLIT_EXEC-------//
-char	**ft_split_exec(char const *s, char c);
-//---------------TAB_ARGS---------------//
-void	free_tab_args(char ***cmds_args);
-char	***tab_args(char **tab);
 //---------------REDIRECTION----------------//
 void	check_here_doc(t_exec *info, int idx);
 char	**parse_redirections_cmd(char **args_orig, t_exec *info, int cmd_idx);

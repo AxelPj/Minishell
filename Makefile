@@ -6,7 +6,7 @@
 #    By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/06/12 18:05:02 by lesalmon         ###   ########.fr        #
+#    Updated: 2025/06/12 22:28:16 by lesalmon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS =  source/main.c \
 		source/built-in/ft_cd.c source/built-in/ft_echo.c source/built-in/ft_env.c source/built-in/ft_exit.c\
 		source/built-in/ft_export.c source/built-in/export_utils.c source/built-in/ft_pwd.c source/built-in/ft_unset.c\
 		source/exec/check_builtins.c source/exec/commands.c source/exec/free_exec.c source/exec/init_exec.c source/exec/main_exec.c source/exec/path.c \
-		source/exec/pipes.c source/exec/split_exec.c source/exec/tab_args.c \
+		source/exec/pipes.c  \
 		source/redirections/redirection.c source/redirections/setup_redir.c \
 		
 # Répertoire et archive de la libft

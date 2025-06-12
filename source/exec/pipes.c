@@ -6,20 +6,11 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:55:24 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:35:19 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	check_pipes(char **tab, int i, t_exec *info)
-{
-	if (ft_strcmp(tab[i], "|") != 0)
-		info->nb_args++;
-	else
-		info->nb_cmds++;
-}
-
 
 void	close_all_pipes(int *fd, int n)
 {
@@ -43,7 +34,8 @@ void	wait_all_children(int n)
 	i = 0;
 	while (i < n)
 	{
-		wait(&status);
+		if (wait(&status) > 0)
+			set_last_status(status);
 		i++;
 	}
 }
