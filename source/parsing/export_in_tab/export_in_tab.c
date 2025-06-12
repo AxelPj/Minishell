@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:45:06 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/13 00:18:36 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ char ***import_tabs(t_data *data, t_exec *pipex, int count, int i)
 	while (current)
 	{
 		if (current->tab_tok[0][0] == '|')
-		{
 			current = current->next;
-			i++;
-		}
 		pipex->tab_args[i] = extract_double_tab(current->tab_tok,
 			tablen((void**)current->tab_tok));
 		i++;
