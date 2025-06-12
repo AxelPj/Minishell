@@ -36,10 +36,14 @@ int	braces_are_closed(char *s)
 		if (in_open_braces(s[i]))
 		{
 			i++;
-			while (s[i] && in_close_braces(s[i]))
-				i++;
 			if (!s[i])
 				return (0);
+			while (s[i] && in_close_braces(s[i]))
+			{
+				i++;
+				if (!s[i])
+					return (0);
+			}
 		}
 		if (s[i])
 			i++;

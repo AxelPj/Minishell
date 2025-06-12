@@ -29,7 +29,6 @@ extern long	g_status;
 enum e_token_type
 {
 	TOKEN_WORD,
-	TOKEN_BUILT_IN,
 	TOKEN_PIPE,
 	TOKEN_REDIRECT_IN,
 	TOKEN_REDIRECT_OUT,
@@ -141,7 +140,7 @@ char	*find_end_word_split_expand(char *s, int *start);
 int		count_word_split_expand(char *s, int i, int count_dol);
 void	find_end_word_split_dol(char *s, int *i);
 t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i);
-char	**change_var_to_value(char **tab, int count_doll);
+char	**change_var_to_value(char **tab, int count_doll, int i);
 char	*extract_var_name(char *s, int start);
 char	*join_expand(char **tab, int size);
 int		is_there_a_dol(char *s);

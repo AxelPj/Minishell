@@ -27,13 +27,10 @@ t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 				count_dol = count_word_split_expand(current->tab_tok[i], 0, 0);
 				{
 					tab = split_into_expand(current->tab_tok[i], data, 0, 0);
-					if (tab)
-					{
-						tab = change_var_to_value(tab, count_dol);
-						free(current->tab_tok[i]);
-						current->tab_tok[i] = join_expand(tab, count_dol);
-						free_tab(tab);
-					}
+					tab = change_var_to_value(tab, count_dol, 0);
+					free(current->tab_tok[i]);
+					current->tab_tok[i] = join_expand(tab, count_dol);
+					free_tab(tab);
 				}
 			}
 			i++;
@@ -43,13 +40,11 @@ t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 	return (data->parsing);
 }
 
-char	**change_var_to_value(char **tab, int count_doll)
+char	**change_var_to_value(char **tab, int count_doll, int i)
 {
-	int		i;
 	char	*var_name;
 	char	*var_value;
 
-	i = 0;
 	while (tab[i] && count_doll > 0)
 	{
 		if (tab[i][0] == '$')

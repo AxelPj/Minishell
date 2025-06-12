@@ -60,9 +60,9 @@ int	is_two_delimiter(char c1, char c2)
 	int			i;
 
 	i = 0;
-	while (i < 2)
+	while (c2 && i < 2)
 	{
-		if (c1 == pairs[i][0] && c2 == pairs[i][1])
+		if (c2 && c1 == pairs[i][0] && c2 == pairs[i][1])
 			return (1);
 		i++;
 	}

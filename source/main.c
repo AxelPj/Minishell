@@ -45,9 +45,9 @@ void	a_out(t_data *data, char *command)
 		data->parsing = sort_token(data, 1);
 		data->parsing = process_expand(data, data->parsing, 0, 0);
 		data->parsing = clear_tab(data);
-		print_pars_lst(data);
+		/* print_pars_lst(data);
 		info->tab_args = import_tabs(data, info, ft_lst_pars_size(data->parsing), 0);
-		pipex_setup(data, data->tab_token, info);
+		pipex_setup(data, data->tab_token, info); */
 		free_all(data, command);
 	}
 }
@@ -56,8 +56,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*command;
 	t_data	*data;
-	
-	data = malloc(sizeof(t_data));
+
 	(void) argc;
 	(void) argv;
 	data = NULL;
@@ -65,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGINT, sigint_parent);
 	signal(SIGQUIT, SIG_IGN);
 	if (!envp)
-	data = init_data(data, 1, envp);
+		data = init_data(data, 1, envp);
 	else
 		data = init_data(data, 0, envp);
 	while (1)
@@ -78,8 +77,11 @@ int	main(int argc, char **argv, char **envp)
 				add_history(command);
 				a_out(data, command);
 			}
+			else
+			free (command);
 		}
 	}
+	free (data);
 }
 
 /* void	printtabb(char **tab)

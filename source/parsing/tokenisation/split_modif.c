@@ -40,20 +40,17 @@ int	count_token(char *s, int i, int word)
 
 char	*place_token(char *str, int start, int end)
 {
-	int		i;
+	int		len;
 	char	*tab;
 
-	i = 0;
-	tab = malloc(((end - start) + 2) * sizeof(char));
+	if (end <= start)
+		return (ft_strdup(""));
+	len = end - start + 1;
+	tab = malloc((len + 1) * sizeof(char));
 	if (!tab)
 		return (NULL);
-	while (start <= end)
-	{
-		tab[i] = str[start];
-		start++;
-		i++;
-	}
-	tab[i] = '\0';
+	ft_memcpy(tab, str + start, len);
+	tab[len] = '\0';
 	return (tab);
 }
 
@@ -80,4 +77,32 @@ char	**split_into_tokens(char *processed, t_data *data)
 	}
 	tab[j] = NULL;
 	return (tab);
+}
+
+char	*find_end_token(char *processed, int *i)
+{
+	int		start;
+	int		end;
+	char	*s;
+
+	start = *i;
+	end = *i;
+	while (processed[end] && !in_space(processed[end]))
+	{
+		if (in_sq(processed[end]))
+		{
+			skip_sq(processed, &end);
+			end++;
+		}
+		else if (in_dq(processed[end]))
+		{
+			skip_dq(processed, &end);
+			end++;
+		}
+		else
+			skip_to_space_or_q(processed, &end);
+	}
+	s = place_token(processed, start, end - 1);
+	*i = end;
+	return (s);
 }

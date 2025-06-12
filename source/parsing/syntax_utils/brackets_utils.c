@@ -36,10 +36,14 @@ int	brackets_are_closed(char *s)
 		if (in_open_brackets(s[i]))
 		{
 			i++;
-			while (s[i] && in_close_brackets(s[i]))
-				i++;
 			if (!s[i])
 				return (0);
+			while (s[i] && in_close_brackets(s[i]))
+			{
+				i++;
+				if (!s[i])
+					return (0);
+			}
 		}
 		if (s[i])
 			i++;

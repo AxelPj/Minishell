@@ -16,10 +16,16 @@ void	free_all(t_data *data, char *cmd)
 {
 	free(cmd);
 	free (data->processed);
-	data->processed = NULL;
 	data->tab_token = free_tab(data->tab_token);
 	data->token_lst = free_token_lst(data->token_lst);
 	data->parsing = free_lst_pars(data->parsing);
+	data->parsing = NULL;
+	data->processed = NULL;
+	data->tab_token = NULL;
+	data->token_lst = NULL;
+	data->index_input = 0;
+	data->nb_token = 0;
+	data->nb_pipe = 0;
 }
 
 char	**free_tab(char **tab)
