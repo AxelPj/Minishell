@@ -42,9 +42,10 @@ void	a_out(t_data *data, char *command)
 		data->processed = space_to_input(data, command, 0);
 		data->tab_token = split_into_tokens(data->processed, data);
 		data->token_lst = token_lst(data);
+		print_data_lst(data);
 		data->parsing = sort_token(data, 1);
 		data->parsing = process_expand(data, data->parsing, 0, 0);
-		//print_pars_lst(data);
+		/* print_pars_lst(data); */
 		data->parsing = clear_tab(data);
 		info->tab_args = import_tabs(data, info,
 				ft_lst_pars_size(data->parsing), 0);

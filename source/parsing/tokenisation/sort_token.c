@@ -29,11 +29,9 @@ t_pars	*non_delim_node(t_list *start, int idx)
 		i++;
 		tmp = tmp->next;
 	}
-	if (i < size)
-		node->tab_tok[i] = NULL;
+	node->tab_tok[i] = NULL;
 	return (node);
 }
-
 
 t_pars	*delim_node(t_list *cur, int idx)
 {

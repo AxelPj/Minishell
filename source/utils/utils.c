@@ -113,7 +113,7 @@ void	print_pars_lst(t_data *data)
 		}
 }
 
-/* void	print_data_lst(t_data *data)
+void	print_data_lst(t_data *data)
 {
 	t_list *current = data->token_lst;
 	while (current && current->next)
@@ -121,4 +121,4 @@ void	print_pars_lst(t_data *data)
 		printf("s = %s token = %d\n", current->s, current->token);
 		current = current->next;
 	}
-} */
+}
