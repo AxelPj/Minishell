@@ -16,14 +16,14 @@ int	count_word_split_expand(char *s, int i, int count_dol)
 {
 	while (s[i])
 	{
-		if (in_sq(s[i]))
+		if (s[i] && in_sq(s[i]))
 		{
 			i++;
 			count_dol++;
 			while (s[i] && !in_sq(s[i]))
 				i++;
 		}
-		else if (s[i] == '$')
+		else if (s[i] && s[i] == '$')
 		{
 			if (s[0] == '$')
 				count_dol++;
@@ -31,7 +31,7 @@ int	count_word_split_expand(char *s, int i, int count_dol)
 				count_dol += 2;
 			find_end_word_split_dol(s, &i);
 		}
-		else if (s[i + 1] == '\0' && s[i])
+		else if (s[i+ 1] && s[i] && s[i + 1] == '\0' && s[i])
 			count_dol++;
 		i++;
 	}

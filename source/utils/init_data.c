@@ -15,6 +15,7 @@
 t_data	*init_data(t_data *data, int bool, char **envp)
 {
 	data = malloc (sizeof(t_data));
+	data->parsing = NULL;
 	data->processed = NULL;
 	data->tab_token = NULL;
 	data->token_lst = NULL;

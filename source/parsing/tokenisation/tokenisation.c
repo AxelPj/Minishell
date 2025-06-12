@@ -39,18 +39,16 @@ int	token_type(char *s_token, int i)
 {
 	while (s_token[i])
 	{
-		if (verif_built_in(s_token))
+		if (s_token[0] == '|')
 			return (1);
-		else if (s_token[0] == '|')
-			return (2);
 		else if (s_token[0] == '>')
-			return (3);
+			return (2);
 		else if (s_token[0] == '<')
-			return (4);
+			return (3);
 		else if (s_token[0] == '<' && s_token[1] == '<')
-			return (5);
+			return (4);
 		else if (s_token[0] == '>' && s_token[1] == '>')
-			return (6);
+			return (5);
 		if (s_token[2])
 			break ;
 		i++;

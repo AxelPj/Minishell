@@ -25,12 +25,17 @@ t_pars	*ft_lst_parsnw(char *s_tok, int type_tok, int index, int size)
 	if (!newelem->tab_tok)
 		return (NULL);
 	while (i < size + 1)
-	{
-		newelem->tab_tok[i] = NULL;
-		i++;
-	}
+		newelem->tab_tok[i++] = NULL;
 	if (s_tok)
+	{
 		newelem->tab_tok[0] = ft_strdup(s_tok);
+		if (!newelem->tab_tok[0])
+		{
+			free(newelem->tab_tok);
+			free(newelem);
+			return (NULL);
+		}
+	}
 	newelem->token = type_tok;
 	newelem->index = index;
 	newelem->index_expand = 0;
