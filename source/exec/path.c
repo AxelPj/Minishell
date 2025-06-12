@@ -5,24 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 12:27:52 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/24 18:06:33 by lesalmon         ###   ########.fr       */
+/*   Created: 2025/06/12 16:44:16 by lesalmon          #+#    #+#             */
+/*   Updated: 2025/06/12 17:31:45 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
-
-void	free_split(char **tab)
-{
-	int	i;
-
-	i = 0;
-	if (!tab)
-		return ;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab);
-}
+#include "minishell.h"
 
 char	*find_executable(char **paths, char *cmd)
 {

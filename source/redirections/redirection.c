@@ -6,70 +6,106 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:22:38 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/11 17:34:19 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 #include "minishell.h"
 
-int	find_redir(char **args_orig, char **args, int idx, t_pipex *info)
+void	check_here_doc(t_exec *info, int idx)
 {
-	int	z;
+	int	fd;
 
-	z = 0;
-	if (!strcmp(args_orig[z], "<") && args_orig[z + 1])
+	if (info->here_doc[idx])
 	{
-		info->infile[idx] = strdup(args_orig[z + 1]);
+		fd = setup_here_doc(info->heredoc_lim[idx]);
+		dup2(fd, STDIN_FILENO);
+		close(fd);
 	}
-	else if (!strcmp(args_orig[z], "<<") && args_orig[z + 1])
+	else if (info->infile[idx])
 	{
-		info->here_doc[idx] = 1;
-		info->heredoc_lim[idx] = strdup(args_orig[z + 1]);
+		fd = open(info->infile[idx], O_RDONLY);
+		if (fd < 0)
+		{
+			perror("open infile");
+			exit(EXIT_FAILURE);
+		}
+		dup2(fd, STDIN_FILENO);
+		close(fd);
 	}
-	else if (!strcmp(args_orig[z], ">") && args_orig[z + 1])
+	if (info->outfile[idx])
 	{
-		info->outfile[idx] = strdup(args_orig[z + 1]);
-		info->out_flags[idx] = O_CREAT | O_WRONLY | O_TRUNC;
+		fd = open(info->outfile[idx], info->out_flags[idx], 0644);
+		if (fd < 0)
+		{
+			perror("open outfile");
+			exit(EXIT_FAILURE);
+		}
+		dup2(fd, STDOUT_FILENO);
+		close(fd);
 	}
-	else if (!strcmp(args_orig[z], ">>") && args_orig[z + 1])
+}
+
+static int	find_redir(char **args_orig, char **args, int read_idx,
+						int *write_idx, t_exec *info, int cmd_idx)
+{
+	int	consumed;
+
+	consumed = 0;
+	if (!strcmp(args_orig[read_idx], "<") && args_orig[read_idx + 1])
 	{
-		info->outfile[idx] = strdup(args_orig[z + 1]);
-		info->out_flags[idx] = O_CREAT | O_WRONLY | O_APPEND;
+		info->infile[cmd_idx] = strdup(args_orig[read_idx + 1]);
+		consumed = 2;
+	}
+	else if (!strcmp(args_orig[read_idx], "<<") && args_orig[read_idx + 1])
+	{
+		info->here_doc[cmd_idx] = 1;
+		info->heredoc_lim[cmd_idx] = strdup(args_orig[read_idx + 1]);
+		consumed = 2;
+	}
+	else if (!strcmp(args_orig[read_idx], ">") && args_orig[read_idx + 1])
+	{
+		info->outfile[cmd_idx] = strdup(args_orig[read_idx + 1]);
+		info->out_flags[cmd_idx] = O_CREAT | O_WRONLY | O_TRUNC;
+		consumed = 2;
+	}
+	else if (!strcmp(args_orig[read_idx], ">>") && args_orig[read_idx + 1])
+	{
+		info->outfile[cmd_idx] = strdup(args_orig[read_idx + 1]);
+		info->out_flags[cmd_idx] = O_CREAT | O_WRONLY | O_APPEND;
+		consumed = 2;
 	}
 	else
 	{
-		args[z] = strdup(args_orig[z]);
-		z++;
-		return (z);
+		args[*write_idx] = strdup(args_orig[read_idx]);
+		(*write_idx)++;
+		consumed = 1;
 	}
-	z += 2;
-	return (z);
+	return (consumed);
 }
 
-char	**parse_redirections_cmd(char **args_orig, t_pipex *info, int idx)
+char	**parse_redirections_cmd(char **args_orig, t_exec *info, int cmd_idx)
 {
-	int		k;
-	int		m;
+	int		read_idx;
+	int		write_idx;
 	int		count;
 	char	**args;
 
-	k = 0;
-	m = 0;
+	read_idx = 0;
 	count = 0;
-	while (args_orig[k])
+	while (args_orig[read_idx])
 	{
-		if ((!strcmp(args_orig[k], "<") && args_orig[k + 1])
-			|| (!strcmp(args_orig[k], "<<") && args_orig[k + 1])
-			|| (!strcmp(args_orig[k], ">") && args_orig[k + 1])
-			|| (!strcmp(args_orig[k], ">>") && args_orig[k + 1]))
-			k += 2;
+		if ((!strcmp(args_orig[read_idx], "<") && args_orig[read_idx + 1])
+			|| (!strcmp(args_orig[read_idx], "<<") && args_orig[read_idx + 1])
+			|| (!strcmp(args_orig[read_idx], ">") && args_orig[read_idx + 1])
+			|| (!strcmp(args_orig[read_idx], ">>") && args_orig[read_idx + 1]))
+		{
+			read_idx += 2;
+		}
 		else
 		{
 			count++;
-			k++;
+			read_idx++;
 		}
 	}
 	args = malloc(sizeof(char *) * (count + 1));
@@ -78,16 +114,16 @@ char	**parse_redirections_cmd(char **args_orig, t_pipex *info, int idx)
 		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
-	k = 0;
-	while (args_orig[k])
-	{
-		k += find_redir(args_orig, args, idx, info);
-	}
-	args[m] = NULL;
+	read_idx = 0;
+	write_idx = 0;
+	while (args_orig[read_idx])
+		read_idx += find_redir(args_orig, args, read_idx,
+				&write_idx, info, cmd_idx);
+	args[write_idx] = NULL;
 	return (args);
 }
 
-void	parse_all_redirections(t_pipex *info)
+void	parse_all_redirections(t_exec *info)
 {
 	int		i;
 	int		j;
@@ -96,13 +132,10 @@ void	parse_all_redirections(t_pipex *info)
 	i = 0;
 	while (i < info->nb_cmds)
 	{
-		j = 0;
 		new_args = parse_redirections_cmd(info->tab_args[i], info, i);
+		j = 0;
 		while (info->tab_args[i][j])
-		{
-			free(info->tab_args[i][j]);
-			j++;
-		}
+			free(info->tab_args[i][j++]);
 		free(info->tab_args[i]);
 		info->tab_args[i] = new_args;
 		i++;

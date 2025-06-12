@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export_in_tab.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:45:06 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/02 17:32:40 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char ***import_tabs(t_data *data, t_pipex *pipex, int count, int i)
+char ***import_tabs(t_data *data, t_exec *pipex, int count, int i)
 {
 	t_pars	*current;
 

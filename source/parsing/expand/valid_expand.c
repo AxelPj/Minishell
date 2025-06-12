@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 20:33:14 by axel              #+#    #+#             */
-/*   Updated: 2025/05/29 12:44:17 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/12 18:09:17 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	is_there_a_dol(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (in_sq(s[i]))
+		if (s[i] && in_sq(s[i]))
 		{
 			i++;
 			while (s[i] && !in_sq(s[i]))
@@ -72,7 +72,8 @@ int	is_there_a_dol(char *s)
 		}
 		else if (s[i] == '$')
 			return (1);
-		i++;
+		if (s[i])
+			i++;
 	}
 	return (0);
 }

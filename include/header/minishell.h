@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/11 17:32:53 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:13:40 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_data
 	int		index_input;
 }	t_data;
 
-typedef struct s_pipex
+typedef struct s_exec
 {
 	int		nb_cmds;
 	int		nb_args;
@@ -79,14 +79,17 @@ typedef struct s_pipex
 	char	**heredoc_lim;
 	char	**outfile;
 	int		*out_flags;
-}	t_pipex;
+}	t_exec;
 
+
+//---------------MAIN----------------//
+void	set_shell(t_data *data);
 //--------------parsing--------------//
 
-		//------check_error_input------//
+//------check_error_input------//
 int		quotes_are_closed(char *s);
 int		has_pipe_edges(char *s);
-				//------syntax_utils------//
+//------syntax_utils------//
 int		in_sq(char c);
 int		in_dq(char c);
 int		has_multi_q(char *input, int i);
@@ -150,7 +153,7 @@ char	*clean_q(char *tab);
 int		find_end_q(char *tab, int *i, char c, char d);
                 //-------export_tab-----//
 char    **extract_double_tab(char **tab, int size);
-char	***import_tabs(t_data *data, t_pipex *pipex, int count, int i);
+char	***import_tabs(t_data *data, t_exec *pipex, int count, int i);
 //-----------------------------------//
 				//--------------Utils--------------//
 int		verif_built_in(char *str);
@@ -172,60 +175,61 @@ void	free_all(t_data *data, char *cmd);
 char	**free_tab(char **tab);
 t_list	*free_token_lst(t_list *token_lst);
 t_pars	*free_lst_pars(t_pars *parsing);
-//----------------PIPEX----------------//
-int		pipex_setup(t_data *data, char **tab, t_pipex *info);
-int		pipex_mod(t_data *data, t_pipex *info);
-int		command(t_pipex *infos, char **envp, int i, t_data *data);
-//----------------PATH----------------//
-char	*cmd_path(char *cmd, char **envp);
-char	*find_path(char *path_env, char *cmd);
-char	*copy_path(char *start, int len, char *cmd);
-void	free_args(char **args);
-//----------------PIPEX_UTILS---------//
-int		create_pipes(int *fd, int nb_pipes);
-void	dup_pipe(int i, t_pipex *info);
-void	launch_child(int i, t_pipex *info, t_data *data);
-void	close_all_pipes(int *fd, int nb_pipes);
-void	wait_all_children(int nb_cmds);
-
-//----------------UTILS1--------------//
-int		execute_builtin(char *cmd, char **args, t_pipex *info, t_data *data);
-void	ft_tabfree(char **tab);
+//---------------CHECK_BUILTINS--------------//
 int		is_builtin_child(char *cmd);
 int		is_builtin(char *cmd);
-void	free_info(t_pipex *info);
-//----------------SPLIT_PIPEX(UTILS2)-------//
-char	**ft_split_pipex(char const *s, char c);
-//----------------UTILS3--------------//
-int		is_valid_command(t_pipex *info, char *cmd);
 int		is_valid_builtin(char *cmd);
-void	is_valid(t_pipex *info, char **args);
 int		is_builtin_parent(char *cmd);
+int		execute_builtin(char *cmd, char **args, t_exec *info, t_data *data);
+//---------------COMMANDS---------//
+int		is_valid_command(t_exec *info, char *cmd);
+int		count_valid_commands(char **args, t_exec *info);
+int		command(t_exec *infos, char **envp, int i, t_data *data);
+//---------------FREE_EXEC--------------//
+void	free_split(char **tab);
+void	free_info(t_exec *info);
+//---------------INIT_EXEC---------------//
+t_exec	*init_infos(t_exec *info, char **envp);
+void	info_heredoc(t_exec *info);
+//---------------MAIN_EXEC----------------//
 void	set_last_status(int status);
+void	launch_child(int i, t_exec *info, t_data *data);
+int		exec_main(t_data *data, t_exec *info);
+int		exec_setup(t_data *data, char **tab, t_exec *info);
+//---------------PATH----------------//
+char	*find_executable(char **paths, char *cmd);
+char	*get_path_env(char **envp);
+char	*cmd_path(char *cmd, char **envp);
+//---------------PIPES---------------//
+void	check_pipes(char **tab, int i, t_exec *info);
+void	close_all_pipes(int *fd, int nb_pipes);
+void	wait_all_children(int nb_cmds);
+int		create_pipes(int *fd, int nb_pipes);
+//---------------SPLIT_EXEC-------//
+char	**ft_split_exec(char const *s, char c);
+//---------------TAB_ARGS---------------//
+void	free_tab_args(char ***cmds_args);
+char	***tab_args(char **tab);
+//---------------REDIRECTION----------------//
+void	check_here_doc(t_exec *info, int idx);
+char	**parse_redirections_cmd(char **args_orig, t_exec *info, int cmd_idx);
+void	parse_all_redirections(t_exec *info);
+//--------------SETUP_REDIR-------------//
+int		setup_here_doc(const char *lim);
 //--------------BUILT-IN--------------//
-int		ft_cd(char **input, t_pipex *info);
+int		ft_cd(char **input, t_exec *info);
 int		ft_echo(char **input, int fd);
 int		check_n(char **input);
 int		is_all_n(char *s);
 int		ft_exit(char **args);
 int		ft_env(t_data *data);
-int		ft_export(t_pipex *info, t_data *data);
+int		ft_export(t_exec *info, t_data *data);
 int		ft_pwd(void);
-int		ft_unset(t_pipex *info, char *str);
+int		ft_unset(t_exec *info, char *str);
 //--------------EXPORT_UTILS--------------//
 int		is_valid_varname(char *str);
 int		var_exists(char **env, char *name);
 void	update_var(char **env, int idx, char *str);
 int		add_var(t_data *data, char *str);
-//--------------------MAIN---------------//
-void	set_shell(t_data *data);
-//--------------TAB_ARGS---------------//
-void	free_tab_args(char ***cmds_args);
-char	***tab_args(char **tab);
-
-//----------------REDIR----------------//
-int		setup_here_doc(const char *lim);
-void	parse_all_redirections(t_pipex *info);
-char	**parse_redirections_cmd(char **args_orig, t_pipex *info, int idx);
 
 #endif

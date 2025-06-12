@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:59:35 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/24 16:09:31 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*find_env(const char *name, char **envp)
 	return (NULL);
 }
 
-int	ft_cd(char **input, t_pipex *info)
+int	ft_cd(char **input, t_exec *info)
 {
 	char	*path;
 	int		result;

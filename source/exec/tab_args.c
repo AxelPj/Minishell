@@ -6,11 +6,11 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:37:23 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/10 17:15:48 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:48:45 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "minishell.h"
 
 static char	*ft_strdup_mini(const char *s)
 {

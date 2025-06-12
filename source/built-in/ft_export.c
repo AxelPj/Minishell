@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 11:20:14 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/24 16:45:51 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	free_tab_export(char **tab)
 	free(tab);
 }
 
-int	handle_export_arg(t_pipex *info, t_data *data, int i)
+int	handle_export_arg(t_exec *info, t_data *data, int i)
 {
 	char	*equal;
 	int		idx;
@@ -103,7 +103,7 @@ static void	print_export(char **envp)
 	free_tab_export(tab);
 }
 
-int	ft_export(t_pipex *info, t_data *data)
+int	ft_export(t_exec *info, t_data *data)
 {
 	int		i;
 
