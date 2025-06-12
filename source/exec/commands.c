@@ -1,0 +1,71 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   commands.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/12 16:50:18 by lesalmon          #+#    #+#             */
+/*   Updated: 2025/06/12 16:53:06 by lesalmon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+int	is_valid_command(t_exec *info, char *cmd)
+{
+	char	*path;
+
+	if (!cmd || !*cmd)
+		return (0);
+	if (is_builtin(cmd))
+		return (1);
+	path = cmd_path(cmd, info->envp);
+	if (path)
+	{
+		free(path);
+		return (0);
+	}
+	return (1);
+}
+
+int	count_valid_commands(char **args, t_exec *info)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (args[i])
+	{
+		if (!is_valid_command(info, args[i]) || !is_valid_builtin(args[i]))
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+int	command(t_exec *info, char **envp, int i, t_data *data)
+{
+	char	*path;
+	char	**args;
+
+	args = info->tab_args[i];
+	if (!args || !args[0])
+	{
+		perror("invalid args");
+		return (-1);
+	}
+	if (!is_builtin(args[0]))
+	{
+		path = cmd_path(args[0], envp);
+		if (!path)
+			return (-1);
+		execve(path, args, envp);
+		perror("execve échoué");
+		free(path);
+	}
+	else
+		execute_builtin(info->tab_args[i][0], info->tab_args[i], info, data);
+	return (-1);
+}

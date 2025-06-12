@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   check_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 18:00:31 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/24 16:58:42 by lesalmon         ###   ########.fr       */
+/*   Created: 2025/06/12 16:53:23 by lesalmon          #+#    #+#             */
+/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "minishell.h"
 
-int	is_valid_command(t_pipex *info, char *cmd)
+int	is_builtin_child(char *cmd)
 {
-	char	*path;
-
-	if (!cmd || !*cmd)
+	if (!cmd)
 		return (0);
-	if (is_builtin(cmd))
+	if (!ft_strcmp(cmd, "echo") || !ft_strcmp(cmd, "env") \
+		|| !ft_strcmp(cmd, "pwd"))
 		return (1);
-	path = cmd_path(cmd, info->envp);
-	if (path)
-	{
-		free(path);
+	return (0);
+}
+
+int	is_builtin(char *cmd)
+{
+	if (!cmd)
 		return (0);
-	}
-	return (1);
+	return (!ft_strcmp(cmd, "echo")
+		|| !ft_strcmp(cmd, "cd")
+		|| !ft_strcmp(cmd, "pwd")
+		|| !ft_strcmp(cmd, "export")
+		|| !ft_strcmp(cmd, "unset")
+		|| !ft_strcmp(cmd, "env")
+		|| !ft_strcmp(cmd, "exit"));
 }
 
 int	is_valid_builtin(char *cmd)
@@ -48,22 +54,6 @@ int	is_valid_builtin(char *cmd)
 	return (1);
 }
 
-int	count_valid_commands(char **args, t_pipex *info)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (args[i])
-	{
-		if (!is_valid_command(info, args[i]) || !is_valid_builtin(args[i]))
-			count++;
-		i++;
-	}
-	return (count);
-}
-
 int	is_builtin_parent(char *cmd)
 {
 	if (!cmd)
@@ -79,12 +69,23 @@ int	is_builtin_parent(char *cmd)
 	return (0);
 }
 
-void	set_last_status(int status)
+int	execute_builtin(char *cmd, char **args, t_exec *info, t_data *data)
 {
-	if ((status >> 8) != 0)
-		g_status = status >> 8;
-	else if ((status & 0x7F) > 0)
-		g_status = 128 + (status & 0x7F);
-	else
-		g_status = 1;
+	if (!cmd)
+		return (1);
+	if (!ft_strncmp(cmd, "cd", 2))
+		return (ft_cd(args, info));
+	if (!ft_strncmp(cmd, "echo", 4))
+		return (ft_echo(args, STDOUT_FILENO));
+	if (!ft_strncmp(cmd, "pwd", 3))
+		return (ft_pwd());
+	if (!ft_strncmp(cmd, "env", 3))
+		return (ft_env(data));
+	if (!ft_strncmp(cmd, "export", 6))
+		return (ft_export(info, data));
+	if (!ft_strncmp(cmd, "unset", 5))
+		return (ft_unset(info, args[1]));
+	if (!ft_strncmp(cmd, "exit", 4))
+		return (ft_exit(args));
+	return (1);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   split_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 14:13:23 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/22 00:14:06 by lesalmon         ###   ########.fr       */
+/*   Created: 2025/06/12 16:47:32 by lesalmon          #+#    #+#             */
+/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "minishell.h"
 
-static void	free_split_pipex(char **result, size_t i)
+static void	free_split_exec(char **result, size_t i)
 {
 	while (i > 0)
 		free(result[--i]);
@@ -77,7 +77,7 @@ static char	*get_word_pipex(char const *s, char c)
 	return (ft_substr_pipex(s, 0, len));
 }
 
-char	**ft_split_pipex(char const *s, char c)
+char	**ft_split_exec(char const *s, char c)
 {
 	char	**result;
 	size_t	word_count;
@@ -96,7 +96,7 @@ char	**ft_split_pipex(char const *s, char c)
 			s++;
 		result[i] = get_word_pipex(s, c);
 		if (!result[i])
-			free_split_pipex(result, i);
+			free_split_exec(result, i);
 		s += ft_strlen(result[i]);
 		i++;
 	}

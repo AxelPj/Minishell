@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 18:06:46 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/24 16:04:48 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	prefix_match(const char *var, const char *name)
 	return (!ft_strncmp(var, name, len) && var[len] == '=');
 }
 
-int	ft_unset(t_pipex *info, char *name)
+int	ft_unset(t_exec *info, char *name)
 {
 	char	**env;
 	int		i;
