@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 20:33:14 by axel              #+#    #+#             */
-/*   Updated: 2025/06/12 18:09:17 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:15:56 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,14 @@ void	find_end_word_split_dol(char *s, int *i)
 	}
 	*i = start - 1;
 }
+
 int	is_there_a_dol(char *s)
 {
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i])
 	{
 		if (s[i] && in_sq(s[i]))

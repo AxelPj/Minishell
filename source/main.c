@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/12 18:20:05 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:40:07 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@ void	a_out(t_data *data, char *command)
 		data->parsing = clear_tab(data);
 		info->tab_args = import_tabs(data, info,
 				ft_lst_pars_size(data->parsing), 0);
+		int i = 0, j = 0;
+		while (info->tab_args[i])
+		{
+			j = 0;
+			while (info->tab_args[i][j])
+			{
+				printf ("chaine = %s; i = %d, j = %d;\n", info->tab_args[i][j], i, j);
+				j++;
+			}
+			i++;
+		}
 		exec_setup(data, data->tab_token, info);
 		free_all(data, command);
 	}
