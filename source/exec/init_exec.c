@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:48:08 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:00:33 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,27 @@ t_exec	*init_infos(t_exec *info, char **envp)
 
 void	info_heredoc(t_exec *info)
 {
-	info->infile = malloc(info->nb_cmds * sizeof(char *));
+	int	i = 0;
+
+	info->infile = malloc(info->nb_cmds * sizeof(int));
 	info->here_doc = malloc(info->nb_cmds * sizeof(int));
 	info->heredoc_lim = malloc(info->nb_cmds * sizeof(char *));
 	info->outfile = malloc(info->nb_cmds * sizeof(char *));
 	info->out_flags = malloc(info->nb_cmds * sizeof(int));
+
 	if (!info->infile || !info->here_doc || !info->heredoc_lim
 		|| !info->outfile || !info->out_flags)
 	{
 		perror("malloc");
 		exit(EXIT_FAILURE);
+	}
+	while (i < info->nb_cmds)
+	{
+		info->infile[i] = -1;
+		info->here_doc[i] = 0;
+		info->heredoc_lim[i] = NULL;
+		info->outfile[i] = NULL;
+		info->out_flags[i] = 0;
+		i++;
 	}
 }

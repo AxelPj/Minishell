@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:00:49 by axel              #+#    #+#             */
-/*   Updated: 2025/06/12 22:22:18 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:20:57 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 	current = parsing;
 	while (current)
 	{
+		i = 0;
 		while (current->tab_tok[i])
 		{
-			printf("verif = %s\n", current->tab_tok[i]);
 			if (is_there_a_dol(current->tab_tok[i]))
 			{
 				count_dol = count_word_split_expand(current->tab_tok[i], 0, 0);

@@ -63,7 +63,7 @@ int	is_there_a_dol(char *s)
 	int	i;
 
 	i = 0;
-	if (!s)
+	if (!s || s[0] == '\0')
 		return (0);
 	while (s[i])
 	{
