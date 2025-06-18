@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_normalizer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 14:02:22 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/29 15:56:00 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/18 12:13:20 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ char	*space_to_input(t_data *data, char *input, int i)
 	{
 		while (in_space(input[i]) == 1)
 			i++;
+		if (!input[i])
+			break ;
 		if (in_syntax_symbol(input, i))
 			data->processed = process_syntax_symbol(data, input, i);
 		else

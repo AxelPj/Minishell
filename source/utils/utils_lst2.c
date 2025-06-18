@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:19:44 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/23 20:57:50 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/18 11:52:49 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ t_pars	*ft_lst_parsnw(char *s_tok, int type_tok, int index, int size)
 	if (!newelem)
 		return (NULL);
 	newelem->tab_tok = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!newelem->tab_tok)
-		return (NULL);
 	while (i < size + 1)
 		newelem->tab_tok[i++] = NULL;
 	if (s_tok)
@@ -42,7 +40,6 @@ t_pars	*ft_lst_parsnw(char *s_tok, int type_tok, int index, int size)
 	newelem->next = NULL;
 	return (newelem);
 }
-
 
 void	ft_pars_lstadd_bck(t_pars **lst, t_pars *new)
 {

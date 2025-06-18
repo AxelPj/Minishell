@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 20:33:14 by axel              #+#    #+#             */
-/*   Updated: 2025/06/17 16:34:57 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/18 10:33:45 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	count_word_split_expand(char *s, int i, int count_dol)
 				count_dol += 2;
 			find_end_word_split_dol(s, &i);
 		}
-		else if (s[i+ 1] && s[i] && s[i + 1] == '\0' && s[i])
+		else if (s[i + 1] && s[i] && s[i + 1] == '\0' && s[i])
 			count_dol++;
 		i++;
 	}
