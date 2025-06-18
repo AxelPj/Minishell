@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/12 22:33:19 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/18 19:20:32 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,12 @@ typedef struct s_exec
 	char	**envp;
 	char	***tab_args;
 	int		*fd;
-	char	**infile;
-	int		*here_doc;
-	char	**heredoc_lim;
-	char	**outfile;
-	int		*out_flags;
+	int		*infile; // <
+	int		*here_doc; // <<
+	char	**heredoc_lim; // >>
+	char	**outfile; // >
+	int		*out_flags; // 0_???
 }	t_exec;
-
 
 //---------------MAIN----------------//
 void	set_shell(t_data *data);
@@ -152,7 +151,7 @@ t_pars	*clear_tab(t_data *data);
 int		verif_clean_q(char *tab);
 char	*clean_q(char *tab, int i, int j);
 int		find_end_q(char *tab, int *i, char c, char d);
-                //-------export_tab-----//
+				//-------export_tab-----//
 char    **extract_double_tab(char **tab, int size);
 char	***import_tabs(t_data *data, t_exec *pipex, int count, int i);
 //-----------------------------------//
@@ -205,11 +204,9 @@ void	close_all_pipes(int *fd, int nb_pipes);
 void	wait_all_children(int nb_cmds);
 int		create_pipes(int *fd, int nb_pipes);
 //---------------REDIRECTION----------------//
-void	check_here_doc(t_exec *info, int idx);
-char	**parse_redirections_cmd(char **args_orig, t_exec *info, int cmd_idx);
-void	parse_all_redirections(t_exec *info);
+char	**rm_redir(char **args);
 //--------------SETUP_REDIR-------------//
-int		setup_here_doc(const char *lim);
+void	setup_redir(t_exec *info, char **arg);
 //--------------BUILT-IN--------------//
 int		ft_cd(char **input, t_exec *info);
 int		ft_echo(char **input, int fd);

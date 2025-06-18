@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/12 22:40:07 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:27:26 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,13 @@ void	a_out(t_data *data, char *command)
 		data->processed = space_to_input(data, command, 0);
 		data->tab_token = split_into_tokens(data->processed, data);
 		data->token_lst = token_lst(data);
-		print_data_lst(data);
+		//print_data_lst(data);
 		data->parsing = sort_token(data, 1);
 		data->parsing = process_expand(data, data->parsing, 0, 0);
 		/* print_pars_lst(data); */
 		data->parsing = clear_tab(data);
 		info->tab_args = import_tabs(data, info,
 				ft_lst_pars_size(data->parsing), 0);
-		int i = 0, j = 0;
-		while (info->tab_args[i])
-		{
-			j = 0;
-			while (info->tab_args[i][j])
-			{
-				printf ("chaine = %s; i = %d, j = %d;\n", info->tab_args[i][j], i, j);
-				j++;
-			}
-			i++;
-		}
 		exec_setup(data, data->tab_token, info);
 		free_all(data, command);
 	}

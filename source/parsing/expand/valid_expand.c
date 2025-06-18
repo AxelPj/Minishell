@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 20:33:14 by axel              #+#    #+#             */
-/*   Updated: 2025/06/12 22:15:56 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:34:57 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	is_there_a_dol(char *s)
 	int	i;
 
 	i = 0;
-	if (!s)
+	if (!s || s[0] == '\0')
 		return (0);
 	while (s[i])
 	{
