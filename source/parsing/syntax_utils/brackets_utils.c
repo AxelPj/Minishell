@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 18:48:05 by axel              #+#    #+#             */
-/*   Updated: 2025/05/29 12:52:24 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/18 10:55:34 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,24 @@ int	brackets_are_closed(char *s)
 	i = 0;
 	while (s[i])
 	{
+		if (in_close_brackets(s[i]))
+			return (1);
 		if (in_open_brackets(s[i]))
 		{
 			i++;
 			if (!s[i])
-				return (0);
-			while (s[i] && in_close_brackets(s[i]))
+				return (1);
+			while (s[i] && !in_close_brackets(s[i]))
 			{
 				i++;
 				if (!s[i])
-					return (0);
+					return (1);
 			}
 		}
 		if (s[i])
 			i++;
 	}
-	return (1);
+	return (0);
 }
 
 char	*process_brackets(t_data *data, char *input, int i)

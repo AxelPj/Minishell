@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/12 22:40:07 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:43:15 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,8 @@ void	set_shell(t_data *data)
 		i++;
 	}
 }
-void	a_out(t_data *data, char *command)
+void	a_out(t_data *data, char *command, t_exec *info)
 {
-	t_exec	*info;
-
-	info = malloc(sizeof(t_exec));
 	if (command)
 	{
 		data->processed = space_to_input(data, command, 0);
@@ -45,10 +42,12 @@ void	a_out(t_data *data, char *command)
 		print_data_lst(data);
 		data->parsing = sort_token(data, 1);
 		data->parsing = process_expand(data, data->parsing, 0, 0);
-		/* print_pars_lst(data); */
 		data->parsing = clear_tab(data);
 		info->tab_args = import_tabs(data, info,
-				ft_lst_pars_size(data->parsing), 0);
+			ft_lst_pars_size(data->parsing), 0);
+		exec_setup(data, data->tab_token, info);
+		free_all(data, command);
+		/* print_pars_lst(data);
 		int i = 0, j = 0;
 		while (info->tab_args[i])
 		{
@@ -59,9 +58,7 @@ void	a_out(t_data *data, char *command)
 				j++;
 			}
 			i++;
-		}
-		exec_setup(data, data->tab_token, info);
-		free_all(data, command);
+		}*/
 	}
 }
 
@@ -69,7 +66,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*command;
 	t_data	*data;
+	t_exec	*info;
 
+	info = malloc(sizeof(t_exec));
 	(void) argc;
 	(void) argv;
 	data = NULL;
@@ -83,18 +82,17 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		command = readline("minishell> ");
-		if (ft_strlen(command) >= 1)
+		if (ft_strlen(command) >= 1 && !syntax_are_closed(command))
 		{
-			if (syntax_are_closed(command))
-			{
-				add_history(command);
-				a_out(data, command);
-			}
-			else
-			free (command);
+			add_history(command);
+			a_out(data, command, info);
 		}
+		else
+			free (command);
 	}
+	data->envp_cpy = free_tab (data->envp_cpy);
 	free (data);
+	free (info);
 }
 
 /* void	printtabb(char **tab)

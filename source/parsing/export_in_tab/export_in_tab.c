@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export_in_tab.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:45:06 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/13 00:18:36 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/18 10:34:24 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char ***import_tabs(t_data *data, t_exec *pipex, int count, int i)
+char	***import_tabs(t_data *data, t_exec *pipex, int count, int i)
 {
 	t_pars	*current;
 
@@ -25,7 +25,7 @@ char ***import_tabs(t_data *data, t_exec *pipex, int count, int i)
 		if (current->tab_tok[0][0] == '|')
 			current = current->next;
 		pipex->tab_args[i] = extract_double_tab(current->tab_tok,
-			tablen((void**)current->tab_tok));
+				tablen((void**)current->tab_tok));
 		i++;
 		if (!current->next)
 			break ;
@@ -35,7 +35,7 @@ char ***import_tabs(t_data *data, t_exec *pipex, int count, int i)
 	return (pipex->tab_args);
 }
 
-char **extract_double_tab(char **tab, int size)
+char	**extract_double_tab(char **tab, int size)
 {
 	char	**new_tab;
 	int		i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 18:22:02 by axel              #+#    #+#             */
-/*   Updated: 2025/05/30 15:39:39 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/18 10:54:56 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,24 @@ int	parens_are_closed(char *s)
 	i = 0;
 	while (s[i])
 	{
+		if (in_close_parens(s[i]))
+			return (1);
 		if (in_open_parens(s[i]))
 		{
 			i++;
 			if (!s[i])
-				return (0);
-			while (s[i] && in_close_parens(s[i]))
+				return (1);
+			while (s[i] && !in_close_parens(s[i]))
 			{
 				i++;
 				if (!s[i])
-					return (0);
+					return (1);
 			}
 		}
 		if (s[i])
 			i++;
 	}
-	return (1);
+	return (0);
 }
 
 char	*process_parens(t_data *data, char *input, int i)

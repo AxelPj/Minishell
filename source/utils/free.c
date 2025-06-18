@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:32:15 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/29 12:49:41 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/18 11:49:55 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,38 +39,45 @@ char	**free_tab(char **tab)
 		i++;
 	}
 	free(tab);
-	tab = NULL;
-	return (tab);
+	return (NULL);
 }
 
-t_list	*free_token_lst(t_list *token_lst)
+t_list *free_token_lst(t_list *token_lst)
 {
-	t_list	*current;
+	t_list *current;
+	t_list *next;
 
 	current = token_lst;
-	while (current)
+	while (current != NULL)
 	{
-		current = current->next;
-		free(token_lst);
-		token_lst = current;
+		next = current->next;
+		free(current->s);
+		free(current);
+		current = next;
 	}
-	free(token_lst);
-	token_lst = NULL;
-	return (token_lst);
+	return (NULL);
 }
 
-t_pars	*free_lst_pars(t_pars *parsing)
+
+t_pars *free_lst_pars(t_pars *parsing)
 {
 	t_pars	*current;
+	t_pars	*next;
+	int		i;
 
 	current = parsing;
-	while (current)
+	while (current != NULL)
 	{
-		current = current->next;
-		free(parsing);
-		parsing = current;
+		next = current->next;
+		i = 0;
+		while (current->tab_tok[i] != NULL)
+		{
+			free(current->tab_tok[i]);
+			i++;
+		}
+		free(current->tab_tok);
+		free(current);
+		current = next;
 	}
-	free(parsing);
-	parsing = NULL;
-	return (parsing);
+	return (NULL);
 }

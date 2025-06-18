@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 17:29:04 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/30 15:05:25 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:45:27 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**envp_cpy(t_data *data, char **envp)
 		data->envp_cpy[i] = ft_strdup(envp[i]);
 		if (!data->envp_cpy[i])
 		{
-			free(data->envp_cpy);
+			free_tab(data->envp_cpy);
 			return (NULL);
 		}
 		i++;
@@ -66,13 +66,18 @@ int	quotes_are_closed(char *s)
 	{
 		if ((!current_quote && (in_sq(s[i]) || in_dq(s[i]))))
 			current_quote = s[i];
-		i++;
+		if (s[i])
+			i++;
 		if (current_quote == s[i])
+		{
 			current_quote = '\0';
+			i++;
+		}
 	}
 	if (current_quote)
 		return (1);
-	return (0);
+	else
+		return (0);
 }
 
 int	has_pipe_edges(char *s)
@@ -92,6 +97,7 @@ int	has_pipe_edges(char *s)
 		return (1);
 	return (0);
 }
+
 void	print_pars_lst(t_data *data)
 {
 	t_pars *current = data->parsing;
