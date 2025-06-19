@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_modif.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:06:44 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/18 12:08:12 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/18 20:29:18 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	**split_into_tokens(char *processed, t_data *data)
 	tab = malloc((data->nb_token + 1) * sizeof(char *));
 	if (!tab || !processed)
 		return (NULL);
-	printf ("nb token = %d\n\n", data->nb_token);
+	//printf ("nb token = %d\n\n", data->nb_token);
 	while (j < data->nb_token)
 	{
 		while (processed[i] && in_space(processed[i]))
