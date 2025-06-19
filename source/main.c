@@ -20,18 +20,6 @@ static void	sigint_parent(int sig)
 	write(STDOUT_FILENO, "\n", 1);
 }
 
-void	set_shell(t_data *data)
-{
-	int		i;
-
-	i = 0;
-	while (data->envp_cpy[i])
-	{
-		if (ft_strncmp(data->envp_cpy[i], "SHELL=", 6) == 0)
-			data->envp_cpy[i] = ft_strdup("SHELL=minishell");
-		i++;
-	}
-}
 void	a_out(t_data *data, char *command, t_exec *info)
 {
 	if (command)

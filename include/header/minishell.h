@@ -83,8 +83,9 @@ typedef struct s_exec
 //---------------MAIN----------------//
 //---------------SHELL_UTILS-------------//
 void	set_shell(t_data *data);
-int		sh_lvl(int i, char **envp);
+void	sh_lvl(char **envp);
 void	minishell(char *command, t_data	*data);
+char	*search_sh_lvl(char **envp, int k, int start);
 //--------------parsing--------------//
 void	printtabb(char **tab);
 void	print_data_lst(t_data *data);

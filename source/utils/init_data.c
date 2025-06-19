@@ -23,7 +23,10 @@ t_data	*init_data(t_data *data, int bool, char **envp)
 	data->nb_token = 0;
 	data->nb_pipe = 0;
 	if (bool == 0)
+	{
 		data->envp_cpy = envp_cpy(data, envp);
+		sh_lvl(data->envp_cpy);
+	}
 	else
 		(void) envp;
 	set_shell(data);

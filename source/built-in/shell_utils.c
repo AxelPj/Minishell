@@ -12,26 +12,43 @@
 
 #include "minishell.h"
 
-int	sh_lvl(int i, char **envp)
+void	sh_lvl(char **envp)
 {
 	int		j;
 	char	*new_shlvl;
+	char	*lvl;
 
 	j = 0;
 	new_shlvl = NULL;
-	i +=1;
 	while (envp[j])
 	{
 		if (strncmp (envp[j], "SHLVL=", 6) == 0)
 		{
-			new_shlvl = ft_strjoin("SHLVL=", itoa(i));
-			envp[j] = new_shlvl;
+			lvl = search_sh_lvl(envp, 0, j);
+			new_shlvl = ft_strjoin("SHLVL=", lvl);
+			free (lvl);
+			envp[j] = ft_strdup(new_shlvl);
 		}
 		j++;
 	}
-	return (i);
 }
 
+char *search_sh_lvl(char **envp, int k, int start)
+{
+	char	*new_shlvl;
+	int		sh_lvl;
+	int		i;
+
+	sh_lvl = 0;
+	k = 0;
+	i = 6;
+	new_shlvl = malloc (ft_strlen(&envp[start][i]) * sizeof (char *));
+	while (envp[start][i] != '\0')
+		new_shlvl[k++] = envp[start][i++];
+	sh_lvl = ft_atoi(new_shlvl);
+	new_shlvl = ft_itoa(sh_lvl + 1);
+	return (new_shlvl);
+}
 
 void	set_shell(t_data *data)
 {
