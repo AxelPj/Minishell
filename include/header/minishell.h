@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/18 11:41:22 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/19 13:21:56 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_exec
 
 //---------------MAIN----------------//
 void	set_shell(t_data *data);
+void	minishell(char *command, t_data	*data);
 //--------------parsing--------------//
 void	printtabb(char **tab);
 void	print_data_lst(t_data *data);
