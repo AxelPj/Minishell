@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/18 11:43:15 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/19 13:22:19 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	a_out(t_data *data, char *command, t_exec *info)
 		data->processed = space_to_input(data, command, 0);
 		data->tab_token = split_into_tokens(data->processed, data);
 		data->token_lst = token_lst(data);
-		//print_data_lst(data);
 		data->parsing = sort_token(data, 1);
 		data->parsing = process_expand(data, data->parsing, 0, 0);
 		data->parsing = clear_tab(data);
@@ -66,9 +65,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*command;
 	t_data	*data;
-	t_exec	*info;
 
-	info = malloc(sizeof(t_exec));
 	(void) argc;
 	(void) argv;
 	data = NULL;
@@ -79,6 +76,16 @@ int	main(int argc, char **argv, char **envp)
 		data = init_data(data, 1, envp);
 	else
 		data = init_data(data, 0, envp);
+	minishell(command, data);
+	data->envp_cpy = free_tab(data->envp_cpy);
+	free (data);
+}
+
+void	minishell(char *command, t_data	*data)
+{
+	t_exec	*info;
+
+	info = malloc(sizeof(t_exec));
 	while (1)
 	{
 		command = readline("minishell> ");
@@ -90,18 +97,5 @@ int	main(int argc, char **argv, char **envp)
 		else
 			free (command);
 	}
-	data->envp_cpy = free_tab (data->envp_cpy);
-	free (data);
 	free (info);
 }
-
-/* void	printtabb(char **tab)
-{
-	int i;
-	i = 0;
-	while (tab[i])
-	{
-		printf ("tab = %s", tab[i]);
-		i++;
-	}
-} */

@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:32:15 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/18 11:49:55 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/19 13:24:23 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ char	**free_tab(char **tab)
 	return (NULL);
 }
 
-t_list *free_token_lst(t_list *token_lst)
+t_list	*free_token_lst(t_list *token_lst)
 {
-	t_list *current;
-	t_list *next;
+	t_list	*current;
+	t_list	*next;
 
 	current = token_lst;
 	while (current != NULL)
@@ -58,8 +58,7 @@ t_list *free_token_lst(t_list *token_lst)
 	return (NULL);
 }
 
-
-t_pars *free_lst_pars(t_pars *parsing)
+t_pars	*free_lst_pars(t_pars *parsing)
 {
 	t_pars	*current;
 	t_pars	*next;
