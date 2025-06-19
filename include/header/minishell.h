@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/19 13:24:57 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/19 18:26:14 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ typedef struct s_exec
 }	t_exec;
 
 //---------------MAIN----------------//
+//---------------SHELL_UTILS-------------//
 void	set_shell(t_data *data);
-void	minishell(char *command, t_data	*data);
+int		sh_lvl(int i, char **envp);
 //--------------parsing--------------//
 void	printtabb(char **tab);
 void	print_data_lst(t_data *data);

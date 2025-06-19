@@ -23,7 +23,9 @@ int	command(t_exec *info, char **envp, int i, t_data *data)
 		perror("invalid args");
 		return (-1);
 	}
-	if (!is_builtin(args[0]))
+	if (strncmp(args[0], "./", 2) == 0 || args[0][0] == '/')
+		execve(args[0], args, envp);
+	else if (!is_builtin(args[0]))
 	{
 		path = cmd_path(args[0], envp);
 		if (!path)
