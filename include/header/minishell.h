@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/19 13:21:56 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/19 13:24:57 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int		verif_clean_q(char *tab);
 char	*clean_q(char *tab, int i, int j);
 int		find_end_q(char *tab, int *i, char c, char d);
 				//-------export_tab-----//
-char    **extract_double_tab(char **tab, int size);
+char	**extract_double_tab(char **tab, int size);
 char	***import_tabs(t_data *data, t_exec *pipex, int count, int i);
 //-----------------------------------//
 				//--------------Utils--------------//
