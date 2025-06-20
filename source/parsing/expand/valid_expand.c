@@ -23,6 +23,8 @@ int	count_word_split_expand(char *s, int i, int count_dol)
 			while (s[i] && !in_sq(s[i]))
 				i++;
 		}
+		else if (in_dq(s[i]))
+			count_dol = find_end_dq_to_expand (&i, s, count_dol);
 		else if (s[i] && s[i] == '$')
 		{
 			if (s[0] == '$')
@@ -58,6 +60,20 @@ void	find_end_word_split_dol(char *s, int *i)
 	*i = start - 1;
 }
 
+
+int	find_end_dq_to_expand(int *i, char *s, int count_dol)
+{
+	int	start;
+
+	start = 0;
+	start = *i;
+	start++;
+	while (in_dq(s[start]) == 0)
+			start++;
+	*i = start;
+	return (count_dol + 1);
+}
+
 int	is_there_a_dol(char *s)
 {
 	int	i;
@@ -73,10 +89,22 @@ int	is_there_a_dol(char *s)
 			while (s[i] && !in_sq(s[i]))
 				i++;
 		}
-		else if (s[i] == '$')
+		else if (s[i] == '$' && (!invalid_car_expand(s, &i)))
 			return (1);
 		if (s[i])
 			i++;
 	}
+	return (0);
+}
+
+int	invalid_car_expand(char *s, int *i)
+{
+	int	start;
+
+	start = 0;
+	start = *i;
+	start++;
+	if (s[start] == '.' || s[start] == ',' ||s[start] == '%' ||s[start] == '+' || s[start] == ':')
+		return (1);
 	return (0);
 }
