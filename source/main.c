@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/19 13:22:19 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/19 18:59:08 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@ static void	sigint_parent(int sig)
 	write(STDOUT_FILENO, "\n", 1);
 }
 
-void	set_shell(t_data *data)
-{
-	int		i;
-
-	i = 0;
-	while (data->envp_cpy[i])
-	{
-		if (ft_strncmp(data->envp_cpy[i], "SHELL=", 6) == 0)
-			data->envp_cpy[i] = ft_strdup("SHELL=minishell");
-		i++;
-	}
-}
 void	a_out(t_data *data, char *command, t_exec *info)
 {
 	if (command)
@@ -60,27 +48,6 @@ void	a_out(t_data *data, char *command, t_exec *info)
 		}*/
 	}
 }
-
-int	main(int argc, char **argv, char **envp)
-{
-	char	*command;
-	t_data	*data;
-
-	(void) argc;
-	(void) argv;
-	data = NULL;
-	command = NULL;
-	signal(SIGINT, sigint_parent);
-	signal(SIGQUIT, SIG_IGN);
-	if (!envp)
-		data = init_data(data, 1, envp);
-	else
-		data = init_data(data, 0, envp);
-	minishell(command, data);
-	data->envp_cpy = free_tab(data->envp_cpy);
-	free (data);
-}
-
 void	minishell(char *command, t_data	*data)
 {
 	t_exec	*info;
@@ -98,4 +65,25 @@ void	minishell(char *command, t_data	*data)
 			free (command);
 	}
 	free (info);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	char	*command;
+	t_data	*data;
+
+	(void) argc;
+	(void) argv;
+	data = NULL;
+	command = NULL;
+	signal(SIGINT, sigint_parent);
+	signal(SIGQUIT, SIG_IGN);
+	if (!envp)
+		data = init_data(data, 1, envp);
+	else
+		data = init_data(data, 0, envp);
+	sh_lvl(data->envp_cpy);
+	minishell(command, data);
+	data->envp_cpy = free_tab(data->envp_cpy);
+	free (data);
 }

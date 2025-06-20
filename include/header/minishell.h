@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/19 18:26:14 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/19 18:50:16 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ typedef struct s_exec
 //---------------MAIN----------------//
 //---------------SHELL_UTILS-------------//
 void	set_shell(t_data *data);
-int		sh_lvl(int i, char **envp);
+void	sh_lvl(char **envp);
+char	*find_lvl(char **envp);
 //--------------parsing--------------//
 void	printtabb(char **tab);
 void	print_data_lst(t_data *data);
