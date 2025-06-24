@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 17:34:00 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/19 17:43:49 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:18:59 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	sh_lvl(char **envp)
 	}
 }
 
-char *search_sh_lvl(char **envp, int k, int start)
+char	*search_sh_lvl(char **envp, int k, int start)
 {
 	char	*new_shlvl;
 	int		sh_lvl;

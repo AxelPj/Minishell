@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/23 16:00:56 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:11:07 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	a_out(t_data *data, char *command, t_exec *info)
 		data->parsing = process_expand(data, data->parsing, 0, 0);
 		data->parsing = clear_tab(data);
 		info->tab_args = import_tabs(data, info,
-			ft_lst_pars_size(data->parsing), 0);
+				ft_lst_pars_size(data->parsing), 0);
 		info->nb_args = 0;
 		info->nb_cmds = 1;
 		exec_setup(data, data->tab_token, info);

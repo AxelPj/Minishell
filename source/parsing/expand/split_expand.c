@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:07:36 by axel              #+#    #+#             */
-/*   Updated: 2025/05/29 15:48:30 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:11:48 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ char	*find_end_dol_expand(char *s, int *start)
 	else
 	{
 		j++;
-		while (s[j] && (ft_isalnum(s[j]) || s[j] == '_' || s[j] == '?' || s[j] == '!'))
+		while (s[j] && (ft_isalnum(s[j]) || s[j] == '_'
+				|| s[j] == '?' || s[j] == '!'))
 			j++;
 	}
 	tab = ft_substr(s, i, j - i);

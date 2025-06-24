@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/24 16:57:45 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:18:23 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,13 +161,15 @@ int		find_end_q(char *tab, int *i, char c, char d);
 char	**extract_double_tab(char **tab, int size);
 char	***import_tabs(t_data *data, t_exec *pipex, int count, int i);
 //-----------------------------------//
-				//--------------Utils--------------//
+//--------------Utils--------------//
 int		verif_built_in(char *str);
 void	print_lst(t_data *data);
 t_data	*init_data(t_data *data, int bool, char **envp);
 char	**envp_cpy(t_data *data, char **envp);
+//--------------PRINTF_UTILS--------------//
 void	print_pars_lst(t_data *data);
-				//------------lst---------------//
+void	print_data_lst(t_data *data);
+//------------lst---------------//
 t_list	*ft_lstnw(int type_tok, char *tab_tok, int index);
 void	ft_lstadd_bck(t_list **lst, t_list *new);
 t_list	*lstlast(t_list *lst);
@@ -223,10 +225,10 @@ void	close_pipes(t_exec *info);
 int		setup_here_doc(char *lim);
 void	setup_redir(t_exec *info, char **arg);
 //--------------REDIR_UTILS-------------//
-void	heredoc(t_exec *info, char **args, int cmd, int	i);
-void	heredoc_limit(t_exec *info, char **args, int cmd, int	i);
-void	infile(t_exec *info, char **args, int cmd, int	i);
-void	outfile(t_exec *info, char **args, int cmd, int	i);
+void	heredoc(t_exec *info, char **args, int cmd, int i);
+void	heredoc_limit(t_exec *info, char **args, int cmd, int i);
+void	infile(t_exec *info, char **args, int cmd, int i);
+void	outfile(t_exec *info, char **args, int cmd, int i);
 //--------------BUILT-IN--------------//
 int		ft_cd(char **input, t_exec *info);
 int		ft_echo(char **input, int fd);

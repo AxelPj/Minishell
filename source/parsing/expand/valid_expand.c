@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 20:33:14 by axel              #+#    #+#             */
-/*   Updated: 2025/06/18 10:33:45 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/24 17:19:36 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	find_end_word_split_dol(char *s, int *i)
 	*i = start - 1;
 }
 
-
 int	find_end_dq_to_expand(int *i, char *s, int count_dol)
 {
 	int	start;
@@ -69,7 +68,7 @@ int	find_end_dq_to_expand(int *i, char *s, int count_dol)
 	start = *i;
 	start++;
 	while (in_dq(s[start]) == 0)
-			start++;
+		start++;
 	*i = start;
 	return (count_dol + 1);
 }
@@ -104,7 +103,8 @@ int	invalid_car_expand(char *s, int *i)
 	start = 0;
 	start = *i;
 	start++;
-	if (s[start] == '.' || s[start] == ',' ||s[start] == '%' ||s[start] == '+' || s[start] == ':')
+	if (s[start] == '.' || s[start] == ',' || s[start] == '%'
+		|| s[start] == '+' || s[start] == ':')
 		return (1);
 	return (0);
 }
