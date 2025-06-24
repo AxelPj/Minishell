@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/19 13:22:19 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/23 16:00:56 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,10 @@ void	a_out(t_data *data, char *command, t_exec *info)
 		data->parsing = clear_tab(data);
 		info->tab_args = import_tabs(data, info,
 			ft_lst_pars_size(data->parsing), 0);
+		info->nb_args = 0;
+		info->nb_cmds = 1;
 		exec_setup(data, data->tab_token, info);
 		free_all(data, command);
-		/* print_pars_lst(data);
-		int i = 0, j = 0;
-		while (info->tab_args[i])
-		{
-			j = 0;
-			while (info->tab_args[i][j])
-			{
-				printf ("chaine = %s; i = %d, j = %d;\n", info->tab_args[i][j], i, j);
-				j++;
-			}
-			i++;
-		}*/
 	}
 }
 
