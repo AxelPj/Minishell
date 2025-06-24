@@ -68,7 +68,7 @@ int	quotes_are_closed(char *s)
 			current_quote = s[i];
 		if (s[i])
 			i++;
-		if (current_quote == s[i])
+		if (s[i] && current_quote == s[i])
 		{
 			current_quote = '\0';
 			i++;

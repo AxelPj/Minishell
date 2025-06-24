@@ -44,10 +44,11 @@ char	*place_token(char *str, int start, int end)
 	char	*tab;
 
 	i = 0;
-	tab = malloc(((end - start) + 2) * sizeof(char));
+	tab = NULL;
+	tab = (char *) malloc(((end - start) + 2) * sizeof(char));
 	if (!tab)
 		return (NULL);
-	while (start <= end)
+	while (str[start] && start <= end)
 	{
 		tab[i] = str[start];
 		start++;
@@ -66,11 +67,11 @@ char	**split_into_tokens(char *processed, t_data *data)
 	i = 0;
 	j = 0;
 	data->nb_token = count_token(processed, 0, 0);
-	tab = malloc((data->nb_token + 1) * sizeof(char *));
+	tab = malloc((data->nb_token + 1) * sizeof(char **));
 	if (!tab || !processed)
 		return (NULL);
-	//printf ("nb token = %d\n\n", data->nb_token);
-	while (j < data->nb_token)
+	printf ("nb token = %d\n\n", data->nb_token);
+	while (processed[i] && j < data->nb_token)
 	{
 		while (processed[i] && in_space(processed[i]))
 			i++;
