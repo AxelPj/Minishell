@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 16:56:37 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/18 19:17:28 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:04:40 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 int	count_clean_args(char **args)
 {
-	int	i = 0;
-	int	count = 0;
+	int	i;
+	int	count;
 
+	i = 0;
+	count = 0;
 	while (args[i])
 	{
 		if (args[i + 1] && (
-			!ft_strcmp(args[i], "<") ||
-			!ft_strcmp(args[i], ">") ||
-			!ft_strcmp(args[i], ">>") ||
-			!ft_strcmp(args[i], "<<")))
+				!ft_strcmp(args[i], "<")
+				|| !ft_strcmp(args[i], ">")
+				|| !ft_strcmp(args[i], ">>")
+				|| !ft_strcmp(args[i], "<<")))
 			i += 2;
 		else
 		{
@@ -50,10 +52,10 @@ char	**rm_redir(char **args)
 	while (args[i])
 	{
 		if (args[i + 1] && (
-			!ft_strcmp(args[i], "<") ||
-			!ft_strcmp(args[i], ">") ||
-			!ft_strcmp(args[i], ">>") ||
-			!ft_strcmp(args[i], "<<")))
+				!ft_strcmp(args[i], "<")
+				|| !ft_strcmp(args[i], ">")
+				|| !ft_strcmp(args[i], ">>")
+				|| !ft_strcmp(args[i], "<<")))
 			i += 2;
 		else
 			clean[j++] = ft_strdup(args[i++]);
@@ -61,4 +63,3 @@ char	**rm_redir(char **args)
 	clean[j] = NULL;
 	return (clean);
 }
-

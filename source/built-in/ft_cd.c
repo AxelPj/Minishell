@@ -6,18 +6,11 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:59:35 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:38:46 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header/minishell.h"
-
-static int	free_path(char *path)
-{
-	if (path)
-		free(path);
-	return (1);
-}
 
 char	*find_env(const char *name, char **envp)
 {
@@ -53,12 +46,9 @@ int	ft_cd(char **input, t_exec *info)
 	else
 		path = input[1];
 	result = chdir(path);
-	if (result != 0)
-	{
-		perror("cd");
-		return (free_path(path));
-	}
 	if (to_free)
 		free(path);
+	if (result != 0)
+		return (1);
 	return (0);
 }

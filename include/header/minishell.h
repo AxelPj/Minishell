@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/19 17:35:58 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/24 16:57:45 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,10 @@ void	set_last_status(int status);
 void	launch_child(int i, t_exec *info, t_data *data);
 int		exec_main(t_data *data, t_exec *info);
 int		exec_setup(t_data *data, char **tab, t_exec *info);
+//---------------EXEC_UTILS----------------//
+void	count_nb(t_exec *info, char **tab, int i);
+void	set_last_status(int status);
+void	builtin_exec(t_exec *info, int idx, t_data *data);
 //---------------PATH----------------//
 char	*find_executable(char **paths, char *cmd);
 char	*get_path_env(char **envp);
@@ -209,10 +213,20 @@ char	*cmd_path(char *cmd, char **envp);
 void	close_all_pipes(int *fd, int nb_pipes);
 void	wait_all_children(int nb_cmds);
 int		create_pipes(int *fd, int nb_pipes);
+//---------------SETUP_FD----------------//
+void	setup_input(int idx, t_exec *info);
 //---------------REDIRECTION----------------//
 char	**rm_redir(char **args);
+void	setup_output(int idx, t_exec *info);
+void	close_pipes(t_exec *info);
 //--------------SETUP_REDIR-------------//
+int		setup_here_doc(char *lim);
 void	setup_redir(t_exec *info, char **arg);
+//--------------REDIR_UTILS-------------//
+void	heredoc(t_exec *info, char **args, int cmd, int	i);
+void	heredoc_limit(t_exec *info, char **args, int cmd, int	i);
+void	infile(t_exec *info, char **args, int cmd, int	i);
+void	outfile(t_exec *info, char **args, int cmd, int	i);
 //--------------BUILT-IN--------------//
 int		ft_cd(char **input, t_exec *info);
 int		ft_echo(char **input, int fd);

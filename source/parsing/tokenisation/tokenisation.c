@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenisation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:31 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/22 23:10:39 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/20 16:28:49 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ int	token_type(char *s_token, int i)
 			return (4);
 		else if (s_token[0] == '<')
 			return (5);
+		else if (s_token[0] == '>')
+			return (2);
+		else if (s_token[0] == '<')
+			return (3);
 		if (s_token[2])
 			break ;
 		i++;
