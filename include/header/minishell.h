@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/24 17:18:23 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:32:34 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
+# include "../GNL/get_next_line.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <readline/readline.h>
@@ -244,5 +245,10 @@ int		is_valid_varname(char *str);
 int		var_exists(char **env, char *name);
 void	update_var(char **env, int idx, char *str);
 int		add_var(t_data *data, char *str);
+//--------------GNL--------------//
+char	*ft_readline(int fd, char *stach);
+char	*recoveraftern(char *stach);
+char	*recoverbeforen(char *line);
+char	*get_next_line(int fd);
 
 #endif

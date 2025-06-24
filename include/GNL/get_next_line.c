@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 10:16:37 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/01/21 16:38:39 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:33:55 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "minishell.h"
 
-char	*readline(int fd, char *stash)
+char	*ft_readline(int fd, char *stash)
 {
 	char	*buf;
 	int		bytes;
@@ -90,7 +90,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stash = readline(fd, stash);
+	stash = ft_readline(fd, stash);
 	if (!stash)
 		return (NULL);
 	if (stash[0] == '\0')

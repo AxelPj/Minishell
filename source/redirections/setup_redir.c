@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 17:24:57 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/24 17:01:21 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:30:19 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,12 @@ static void	trim_eol(char *s)
 
 void	heredoc_while(char *line, char *lim, int *p)
 {
-	size_t	len;
-
-	len = 0;
 	while (1)
 	{
 		write(1, "> ", 2);
-		if (getline(&line, &len, stdin) <= 0)
-			break ;
+		line = get_next_line(STDIN_FILENO);
+		if (!line)
+			break;
 		trim_eol(line);
 		if (ft_strcmp(line, lim) == 0)
 			break ;

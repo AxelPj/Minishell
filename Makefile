@@ -6,7 +6,7 @@
 #    By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/06/24 17:02:23 by lesalmon         ###   ########.fr        #
+#    Updated: 2025/06/24 17:28:16 by lesalmon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRCS =  source/main.c \
 		source/exec/pipes.c  source/exec/exec_utils.c source/exec/setup_fd.c\
 		source/redirections/redirection.c source/redirections/setup_redir.c \
 		source/redirections/redir_utils.c \
-		
+		include/GNL/get_next_line.c \
+
 # Répertoire et archive de la libft
 LIBFT_DIR = ./include/libft
 LIBFT = $(LIBFT_DIR)/libft.a
