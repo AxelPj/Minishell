@@ -215,7 +215,7 @@ int		ft_cd(char **input, t_exec *info);
 int		ft_echo(char **input, int fd);
 int		check_n(char **input);
 int		is_all_n(char *s);
-int		ft_exit(char **args, t_exec *info, t_data *data);
+int		ft_exit(char **args, t_exec *info, t_data *data, int bool);
 int		ft_env(t_data *data);
 int		ft_export(t_exec *info, t_data *data);
 int		ft_pwd(void);
