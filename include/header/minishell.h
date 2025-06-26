@@ -161,7 +161,7 @@ void	ft_pars_lstadd_bck(t_pars **lst, t_pars *new);
 t_pars	*pars_lstlast(t_pars *lst);
 int		ft_lst_pars_size(t_pars *lst);	
 		//-----------free-----------//
-void	free_all(t_data *data, char *cmd);
+void	free_all(t_data *data);
 char	**free_tab(char **tab);
 t_pars	*free_lst_pars(t_pars *parsing);
 //---------------CHECK_BUILTINS--------------//
@@ -215,7 +215,7 @@ int		ft_cd(char **input, t_exec *info);
 int		ft_echo(char **input, int fd);
 int		check_n(char **input);
 int		is_all_n(char *s);
-int		ft_exit(char **args);
+int		ft_exit(char **args, t_exec *info, t_data *data);
 int		ft_env(t_data *data);
 int		ft_export(t_exec *info, t_data *data);
 int		ft_pwd(void);

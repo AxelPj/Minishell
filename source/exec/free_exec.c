@@ -52,22 +52,15 @@ void	free_info(t_exec *info)
 void	free_tab_args(char ***cmds_args)
 {
 	int	i;
-	int	j;
 
 	if (!cmds_args)
 		return ;
 	i = 0;
 	while (cmds_args[i])
 	{
-		j = 0;
 		if (cmds_args[i])
 		{
-			while (cmds_args[i][j])
-			{
-				free(cmds_args[i][j]);
-				j++;
-			}
-			free(cmds_args[i]);
+			free_tab(cmds_args[i]);
 		}
 		i++;
 	}

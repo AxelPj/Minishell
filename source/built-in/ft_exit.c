@@ -30,13 +30,18 @@ static int	is_numeric(char *str)
 	return (1);
 }
 
-int	ft_exit(char **args)
+int	ft_exit(char **args, t_exec *info, t_data *data)
 {
 	long	code;
 
-	ft_putstr_fd("exit\n", 1);
 	if (!args[1])
+	{
+		ft_putstr_fd("exit\n", 1);
+		free_info(info);
+		free_all(data);
+		free_tab(data->envp_cpy);
 		exit((unsigned char)g_status);
+	}
 	if (!is_numeric(args[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", 2);

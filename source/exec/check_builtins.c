@@ -86,6 +86,6 @@ int	execute_builtin(char *cmd, char **args, t_exec *info, t_data *data)
 	if (!ft_strncmp(cmd, "unset", 5))
 		return (ft_unset(info, args[1]));
 	if (!ft_strncmp(cmd, "exit", 4))
-		return (ft_exit(args));
+		return (ft_exit(args, info, data));
 	return (1);
 }

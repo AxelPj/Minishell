@@ -12,9 +12,8 @@
 
 #include "../../include/header/minishell.h"
 
-void	free_all(t_data *data, char *cmd)
+void	free_all(t_data *data)
 {
-	free(cmd);
 	free (data->processed);
 	data->tab_token = free_tab(data->tab_token);
 	data->parsing = free_lst_pars(data->parsing);

@@ -27,6 +27,7 @@ void	a_out(t_data *data, char *command, t_exec *info)
 	if (command)
 	{
 		data->processed = space_to_input(data, command, 0);
+		free(command);
 		data->tab_token = split_into_tokens(data->processed, data);
 		size = tablen((void**)data->tab_token);
 		data->parsing = sort_token(data, 0, size);
