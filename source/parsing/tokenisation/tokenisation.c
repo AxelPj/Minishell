@@ -12,28 +12,6 @@
 
 #include "minishell.h"
 
-t_list	*token_lst(t_data *data)
-{
-	int		i;
-	int		j;
-	t_list	*new_node;
-
-	i = -1;
-	j = 0;
-	while (data->tab_token[j])
-	{
-		i = token_type(data->tab_token[j], 0);
-		new_node = ft_lstnw(i, data->tab_token[j], j);
-		if (!new_node)
-		{
-			printf("Error\n");
-			return (NULL);
-		}
-		ft_lstadd_bck(&data->token_lst, new_node);
-		j++;
-	}
-	return (data->token_lst);
-}
 
 int	token_type(char *s_token, int i)
 {
@@ -60,15 +38,45 @@ int	token_type(char *s_token, int i)
 	return (0);
 }
 
-int	count_non_delim(t_list *start)
+t_pars *sort_token(t_data *data, int i, int size)
+{
+	int	count;
+	t_pars *node;
+
+	while (i < size)
+	{
+		if (token_type(data->tab_token[i], 0) == 0)
+		{
+			count = count_token_word(i, data->tab_token, size);
+				node = ft_lst_parsnw(data->tab_token, 0, &i, count);
+		}
+		else
+		{
+			count = count_token_word(i, data->tab_token, size);
+				node = ft_lst_parsnw(data->tab_token,
+					token_type(data->tab_token[i], 0), &i, count);
+		}
+		if (!data->parsing)
+			data->parsing = node;
+		else
+			ft_pars_lstadd_bck(&data->parsing, node);
+		i++;
+	}
+	return (data->parsing);
+}
+
+int	count_token_word(int i, char **tab_token, int size)
 {
 	int	count;
 
 	count = 0;
-	while (start && start->token == 0)
+	while (i < size)
 	{
-		count++;
-		start = start->next;
+		if (token_type(tab_token[i], 0) != 0)
+			return (1);
+		else
+			count++;
+		i++;
 	}
-	return (count);
+	return(count);
 }

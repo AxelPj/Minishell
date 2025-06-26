@@ -62,7 +62,10 @@ void	set_shell(t_data *data)
 	while (data->envp_cpy[i])
 	{
 		if (ft_strncmp(data->envp_cpy[i], "SHELL=", 6) == 0)
+		{
+			free(data->envp_cpy[i]);
 			data->envp_cpy[i] = ft_strdup("SHELL=minishell");
+		}
 		i++;
 	}
 }

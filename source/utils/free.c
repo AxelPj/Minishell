@@ -17,15 +17,12 @@ void	free_all(t_data *data, char *cmd)
 	free(cmd);
 	free (data->processed);
 	data->tab_token = free_tab(data->tab_token);
-	data->token_lst = free_token_lst(data->token_lst);
 	data->parsing = free_lst_pars(data->parsing);
 	data->parsing = NULL;
 	data->processed = NULL;
 	data->tab_token = NULL;
-	data->token_lst = NULL;
-	data->index_input = 0;
 	data->nb_token = 0;
-	data->nb_pipe = 0;
+	data->index_input = 0;
 }
 
 char	**free_tab(char **tab)
@@ -39,22 +36,6 @@ char	**free_tab(char **tab)
 		i++;
 	}
 	free(tab);
-	return (NULL);
-}
-
-t_list	*free_token_lst(t_list *token_lst)
-{
-	t_list	*current;
-	t_list	*next;
-
-	current = token_lst;
-	while (current != NULL)
-	{
-		next = current->next;
-		free(current->s);
-		free(current);
-		current = next;
-	}
 	return (NULL);
 }
 

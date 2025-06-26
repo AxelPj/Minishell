@@ -18,10 +18,8 @@ t_data	*init_data(t_data *data, int bool, char **envp)
 	data->parsing = NULL;
 	data->processed = NULL;
 	data->tab_token = NULL;
-	data->token_lst = NULL;
-	data->index_input = 0;
 	data->nb_token = 0;
-	data->nb_pipe = 0;
+	data->index_input = 0;
 	if (bool == 0)
 	{
 		data->envp_cpy = envp_cpy(data, envp);

@@ -37,14 +37,6 @@ enum e_token_type
 	TOKEN_HEREDOC,
 };
 
-typedef struct t_list
-{
-	char				*s;
-	enum e_token_type	token;
-	int					index;
-	struct t_list		*next;
-}	t_list;
-
 typedef struct t_pars
 {
 	char				**tab_tok;
@@ -56,12 +48,10 @@ typedef struct t_pars
 
 typedef struct s_data
 {
-	t_list	*token_lst;
 	t_pars	*parsing;
 	char	**envp_cpy;
 	char	**tab_token;
 	int		nb_token;
-	int		nb_pipe;
 	char	*processed;
 	int		index_input;
 }	t_data;
@@ -125,14 +115,9 @@ char	*process_del(t_data *data, char *input, int i);
 char	*process_join(t_data *data, char *s2, int start, int end);
 char	*process_join_quote(t_data *data, char *s2, int start, int end);
 				//------tokenisation------//
-t_list	*token_lst(t_data *data);
 int		token_type(char *s_token, int i);
-int		count_non_delim(t_list *start);
-t_pars	*non_delim_node(t_list *start, int idx);
-t_pars	*delim_node(t_list *cur, int idx);
-t_list	*process_non_delim(t_list *cur, t_data *data, int j);
-t_list	*process_delim(t_list *cur, t_data *data, int j);
-t_pars	*sort_token(t_data *data, int j);
+t_pars	*sort_token(t_data *data, int i, int size);
+int	count_token_word(int i, char **tab_token, int size);
 char	*place_token(char *str, int start, int end);
 int		count_token(char *processed, int i, int word);
 char	**split_into_tokens(char *processed, t_data *data);
@@ -171,18 +156,13 @@ char	**envp_cpy(t_data *data, char **envp);
 void	print_pars_lst(t_data *data);
 void	print_data_lst(t_data *data);
 //------------lst---------------//
-t_list	*ft_lstnw(int type_tok, char *tab_tok, int index);
-void	ft_lstadd_bck(t_list **lst, t_list *new);
-t_list	*lstlast(t_list *lst);
-int		ft_lstsize(t_list *lst);
-t_pars	*ft_lst_parsnw(char *s_tok, int type_tok, int index, int size);
+t_pars	*ft_lst_parsnw(char **s_tok, int type_tok, int *index, int size);
 void	ft_pars_lstadd_bck(t_pars **lst, t_pars *new);
 t_pars	*pars_lstlast(t_pars *lst);
 int		ft_lst_pars_size(t_pars *lst);	
 		//-----------free-----------//
 void	free_all(t_data *data, char *cmd);
 char	**free_tab(char **tab);
-t_list	*free_token_lst(t_list *token_lst);
 t_pars	*free_lst_pars(t_pars *parsing);
 //---------------CHECK_BUILTINS--------------//
 int		is_builtin_child(char *cmd);

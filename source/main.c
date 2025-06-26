@@ -22,12 +22,14 @@ static void	sigint_parent(int sig)
 
 void	a_out(t_data *data, char *command, t_exec *info)
 {
+	int	size;
+
 	if (command)
 	{
 		data->processed = space_to_input(data, command, 0);
 		data->tab_token = split_into_tokens(data->processed, data);
-		data->token_lst = token_lst(data);
-		data->parsing = sort_token(data, 1);
+		size = tablen((void**)data->tab_token);
+		data->parsing = sort_token(data, 0, size);
 		data->parsing = process_expand(data, data->parsing, 0, 0);
 		data->parsing = clear_tab(data);
 		info->tab_args = import_tabs(data, info,
