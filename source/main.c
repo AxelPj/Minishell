@@ -24,21 +24,26 @@ void	a_out(t_data *data, char *command, t_exec *info)
 {
 	int	size;
 
+	size = 0;
 	if (command)
 	{
 		data->processed = space_to_input(data, command, 0);
 		free(command);
+		command = NULL;
 		data->tab_token = split_into_tokens(data->processed, data);
+		free(data->processed);
+		data->processed = NULL;
 		size = tablen((void**)data->tab_token);
 		data->parsing = sort_token(data, 0, size);
 		data->parsing = process_expand(data, data->parsing, 0, 0);
 		data->parsing = clear_tab(data);
 		info->tab_args = import_tabs(data, info,
 				ft_lst_pars_size(data->parsing), 0);
+		data->parsing = free_lst_pars(data->parsing);
 		info->nb_args = 0;
 		info->nb_cmds = 1;
 		exec_setup(data, data->tab_token, info);
-		free_all(data, command);
+		free_all(data);
 	}
 }
 
@@ -59,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 		data = init_data(data, 0, envp);
 	minishell(command, data);
 	data->envp_cpy = free_tab(data->envp_cpy);
-	free (data);
+	free(data);
 }
 
 void	minishell(char *command, t_data	*data)
@@ -78,5 +83,5 @@ void	minishell(char *command, t_data	*data)
 		else
 			free (command);
 	}
-	free (info);
+	free(info);
 }

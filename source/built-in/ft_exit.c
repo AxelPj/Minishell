@@ -40,6 +40,8 @@ int	ft_exit(char **args, t_exec *info, t_data *data)
 		free_info(info);
 		free_all(data);
 		free_tab(data->envp_cpy);
+		free(data);
+		free(info);
 		exit((unsigned char)g_status);
 	}
 	if (!is_numeric(args[1]))

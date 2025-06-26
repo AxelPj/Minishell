@@ -25,7 +25,7 @@ void	sh_lvl(char **envp)
 	{
 		if (strncmp (envp[j], "SHLVL=", 6) == 0)
 		{
-			lvl = search_sh_lvl(envp, 0, j);
+			lvl = search_sh_lvl(envp, &j);
 			new_shlvl = ft_strjoin("SHLVL=", lvl);
 			free (lvl);
 			free (envp[j]);
@@ -36,18 +36,23 @@ void	sh_lvl(char **envp)
 	}
 }
 
-char	*search_sh_lvl(char **envp, int k, int start)
+char	*search_sh_lvl(char **envp, int *j)
 {
 	char	*new_shlvl;
 	int		sh_lvl;
 	int		i;
+	int		start;
+	int		k;
 
+	k = 0;
 	start = 0;
+	start = *j;
 	sh_lvl = 0;
 	i = 6;
 	new_shlvl = malloc ((ft_strlen(&envp[start][i]) + 1) * sizeof (char *));
 	while (envp[start][i] != '\0')
 		new_shlvl[k++] = envp[start][i++];
+	new_shlvl[k] = '\0';
 	sh_lvl = ft_atoi(new_shlvl);
 	free (new_shlvl);
 	new_shlvl = ft_itoa(sh_lvl + 1);

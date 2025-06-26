@@ -76,7 +76,7 @@ typedef struct s_exec
 void	set_shell(t_data *data);
 void	sh_lvl(char **envp);
 void	minishell(char *command, t_data	*data);
-char	*search_sh_lvl(char **envp, int k, int start);
+char	*search_sh_lvl(char **envp, int *j);
 //--------------parsing--------------//
 void	printtabb(char **tab);
 void	print_data_lst(t_data *data);
@@ -138,6 +138,8 @@ char	*extract_var_name(char *s, int start);
 char	*join_expand(char **tab, int size);
 int		is_there_a_dol(char *s);
 int		invalid_car_expand(char *s, int *i);
+int		char_valid_dol(char s);
+char	*dol_interog(char *s);
 				//------clean_quote------//
 t_pars	*clear_tab(t_data *data);
 int		verif_clean_q(char *tab);

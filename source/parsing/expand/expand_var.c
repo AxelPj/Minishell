@@ -48,7 +48,9 @@ char	**change_var_to_value(char **tab, int count_doll, int i)
 
 	while (tab[i] && count_doll > 0)
 	{
-		if (tab[i][0] == '$')
+		if (tab[i][1] && tab[i][0] == '$' && tab[i][1] == '?')
+			dol_interog(tab[i]);
+		else if (tab[i][0] == '$' && tab[i][1])
 		{
 			var_name = extract_var_name(tab[i], 0);
 			var_value = getenv(var_name);
@@ -83,7 +85,7 @@ char	*extract_var_name(char *s, int start)
 	else
 	{
 		end = start;
-		while (s[end] && (ft_isalnum(s[end]) || s[end] == '_'))
+		while (s[end] && (ft_isalnum(s[end])))
 			end++;
 		var_name = ft_substr(s, start, end - start);
 	}
@@ -106,4 +108,11 @@ char	*join_expand(char **tab, int size)
 	printf("\n\n");
 	printf("result %s\n", result);
 	return (result);
+}
+
+char	*dol_interog(char *s)
+{
+	free(s);
+	s = ft_itoa(g_status);
+	return (s);
 }
