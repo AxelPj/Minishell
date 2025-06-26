@@ -20,6 +20,14 @@ static void	sigint_parent(int sig)
 	write(STDOUT_FILENO, "\n", 1);
 }
 
+void	ctrl_d(t_data *data, t_exec *info)
+{
+	info->nb_args = 3;
+	info->nb_cmds = 3;
+	init_infos(info, data->envp_cpy);
+	ft_exit(NULL, info, data, 0);
+}
+
 void	a_out(t_data *data, char *command, t_exec *info)
 {
 	int	size;
@@ -75,6 +83,8 @@ void	minishell(char *command, t_data	*data)
 	while (1)
 	{
 		command = readline("minishell> ");
+		if (command == NULL)
+			ctrl_d(data, info);
 		if (ft_strlen(command) >= 1 && !syntax_are_closed(command))
 		{
 			add_history(command);

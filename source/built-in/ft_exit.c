@@ -30,15 +30,16 @@ static int	is_numeric(char *str)
 	return (1);
 }
 
-int	ft_exit(char **args, t_exec *info, t_data *data)
+int	ft_exit(char **args, t_exec *info, t_data *data, int bool)
 {
 	long	code;
 
-	if (!args[1])
+	if (args == NULL || !args[1])
 	{
 		ft_putstr_fd("exit\n", 1);
 		free_info(info);
-		free_all(data);
+		if (bool == 1)
+			free_all(data);
 		free_tab(data->envp_cpy);
 		free(data);
 		free(info);
@@ -49,6 +50,9 @@ int	ft_exit(char **args, t_exec *info, t_data *data)
 		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(args[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
+		free_info(info);
+		free_all(data);
+		free_tab(data->envp_cpy);
 		exit(2);
 	}
 	if (args[2])

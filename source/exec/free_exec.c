@@ -31,8 +31,11 @@ void	free_info(t_exec *info)
 	i = 0;
 	while (i < info->nb_cmds)
 	{
-		if (info->heredoc_lim[i])
+		if (info->heredoc_lim && info->heredoc_lim[i])
+		{
 			free(info->heredoc_lim[i]);
+			info->heredoc_lim[i] = NULL;
+		}
 		i++;
 	}
 	if (info->infile)
