@@ -181,7 +181,7 @@ void	free_split(char **tab);
 void	free_info(t_exec *info);
 void	free_tab_args(char ***cmds_args);
 //---------------INIT_EXEC---------------//
-t_exec	*init_infos(t_exec *info, char **envp);
+t_exec	*init_infos(t_exec *info);
 void	info_heredoc(t_exec *info);
 //---------------MAIN_EXEC----------------//
 void	set_last_status(int status);
