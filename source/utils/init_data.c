@@ -24,9 +24,24 @@ t_data	*init_data(t_data *data, int bool, char **envp)
 	{
 		data->envp_cpy = envp_cpy(data, envp);
 		sh_lvl(data->envp_cpy);
+		set_shell(data);
 	}
 	else
-		(void) envp;
-	set_shell(data);
+		init_env(data);
 	return (data);
+}
+
+void	init_env (t_data *data)
+{
+	int i;
+	char *pwd;
+
+	i = 0;
+	data->envp_cpy = (char **) malloc(4 * sizeof(char *));
+	data->envp_cpy[i++] = ft_strdup("SHELL=minishell");
+	pwd = ft_strdup(getcwd(NULL, 0));
+	data->envp_cpy[i++] = ft_strjoin("PWD=", pwd);
+	free(pwd);
+	data->envp_cpy[i++] = ft_strdup("SHLVL=1");
+	data->envp_cpy[i] = NULL;
 }
