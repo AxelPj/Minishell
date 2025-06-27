@@ -153,6 +153,7 @@ char	***import_tabs(t_data *data, t_exec *pipex, int count, int i);
 int		verif_built_in(char *str);
 void	print_lst(t_data *data);
 t_data	*init_data(t_data *data, int bool, char **envp);
+void	init_env (t_data *data);
 char	**envp_cpy(t_data *data, char **envp);
 //--------------PRINTF_UTILS--------------//
 void	print_pars_lst(t_data *data);

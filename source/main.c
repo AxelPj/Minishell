@@ -60,13 +60,11 @@ int	main(int argc, char **argv, char **envp)
 	char	*command;
 	t_data	*data;
 
-	(void) argc;
-	(void) argv;
 	data = NULL;
 	command = NULL;
 	signal(SIGINT, sigint_parent);
 	signal(SIGQUIT, SIG_IGN);
-	if (!envp)
+	if (argc > 1 && !ft_strcmp(argv[1], "env") && !ft_strcmp(argv[2], "-i"))
 		data = init_data(data, 1, envp);
 	else
 		data = init_data(data, 0, envp);
