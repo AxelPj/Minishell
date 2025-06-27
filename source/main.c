@@ -41,7 +41,7 @@ void	a_out(t_data *data, char *command, t_exec *info)
 		data->tab_token = split_into_tokens(data->processed, data);
 		free(data->processed);
 		data->processed = NULL;
-		size = tablen((void**)data->tab_token);
+		size = tablen((void **)data->tab_token);
 		data->parsing = sort_token(data, 0, size);
 		data->parsing = process_expand(data, data->parsing, 0, 0);
 		data->parsing = clear_tab(data);
@@ -82,7 +82,7 @@ void	minishell(char *command, t_data	*data)
 	info = malloc(sizeof(t_exec));
 	while (1)
 	{
-		command = readline("minishell> ");
+		command = readline("oh mishell> ");
 		if (command == NULL)
 			ctrl_d(data, info);
 		if (ft_strlen(command) >= 1 && !syntax_are_closed(command))
@@ -91,7 +91,10 @@ void	minishell(char *command, t_data	*data)
 			a_out(data, command, info);
 		}
 		else
-			free (command);
+		{
+			free(command);
+			ft_putstr_fd("minishell : syntax error.\n", 2);
+		}
 	}
 	free(info);
 }

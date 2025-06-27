@@ -117,7 +117,7 @@ char	*process_join_quote(t_data *data, char *s2, int start, int end);
 				//------tokenisation------//
 int		token_type(char *s_token, int i);
 t_pars	*sort_token(t_data *data, int i, int size);
-int	count_token_word(int i, char **tab_token, int size);
+int		count_token_word(int i, char **tab_token, int size);
 char	*place_token(char *str, int start, int end);
 int		count_token(char *processed, int i, int word);
 char	**split_into_tokens(char *processed, t_data *data);
@@ -166,6 +166,8 @@ int		ft_lst_pars_size(t_pars *lst);
 void	free_all(t_data *data);
 char	**free_tab(char **tab);
 t_pars	*free_lst_pars(t_pars *parsing);
+void	free_and_exit(t_data *data, t_exec *info, int bool);
+void	free_partially(t_data *data, t_exec *info);
 //---------------CHECK_BUILTINS--------------//
 int		is_builtin_child(char *cmd);
 int		is_builtin(char *cmd);

@@ -32,34 +32,44 @@ static int	is_numeric(char *str)
 
 int	ft_exit(char **args, t_exec *info, t_data *data, int bool)
 {
-	long	code;
-
 	if (args == NULL || !args[1])
 	{
 		ft_putstr_fd("exit\n", 1);
-		free_info(info);
 		if (bool == 1)
-			free_all(data);
-		free_tab(data->envp_cpy);
-		free(data);
-		free(info);
-		exit((unsigned char)g_status);
+			free_partially(data, info);
+		else
+			free(info->fd);
+		free_and_exit(data, info, 1);
 	}
 	if (!is_numeric(args[1]))
 	{
-		ft_putstr_fd("minishell: exit: ", 2);
+		ft_putstr_fd("minishell: exit: \n", 2);
 		ft_putstr_fd(args[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
-		free_info(info);
-		free_all(data);
-		free_tab(data->envp_cpy);
-		exit(2);
+		free_partially(data, info);
+		free_and_exit(data, info, 0);
 	}
 	if (args[2])
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		return (1);
 	}
-	code = atol(args[1]);
-	exit((unsigned char)code);
+	exit((unsigned char)atol(args[1]));
+}
+
+void	free_partially(t_data *data, t_exec *info)
+{
+	free_all(data);
+	free_info(info);
+}
+
+void	free_and_exit(t_data *data, t_exec *info, int bool)
+{
+	data->envp_cpy = free_tab(data->envp_cpy);
+	free(data);
+	free(info);
+	if (bool == 1)
+		exit((unsigned char)g_status);
+	else
+		exit(2);
 }

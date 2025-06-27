@@ -87,7 +87,7 @@ char	*find_end_word_split_expand(char *s, int *start)
 int	char_valid_dol(char s)
 {
 	if (s == '_' || s == '?' || s == '%' || s == '+'
-			|| s == '.' || s == ',' || s == '!' || s == ':')
+		|| s == '.' || s == ',' || s == '!' || s == ':')
 		return (1);
 	else
 		return (0);

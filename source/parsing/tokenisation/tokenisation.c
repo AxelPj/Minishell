@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-
 int	token_type(char *s_token, int i)
 {
 	while (s_token[i])
@@ -38,22 +37,22 @@ int	token_type(char *s_token, int i)
 	return (0);
 }
 
-t_pars *sort_token(t_data *data, int i, int size)
+t_pars	*sort_token(t_data *data, int i, int size)
 {
-	int	count;
-	t_pars *node;
+	int		count;
+	t_pars	*node;
 
 	while (i < size)
 	{
 		if (token_type(data->tab_token[i], 0) == 0)
 		{
 			count = count_token_word(i, data->tab_token, size);
-				node = ft_lst_parsnw(data->tab_token, 0, &i, count);
+			node = ft_lst_parsnw(data->tab_token, 0, &i, count);
 		}
 		else
 		{
 			count = count_token_word(i, data->tab_token, size);
-				node = ft_lst_parsnw(data->tab_token,
+			node = ft_lst_parsnw(data->tab_token,
 					token_type(data->tab_token[i], 0), &i, count);
 		}
 		if (!data->parsing)
@@ -78,5 +77,5 @@ int	count_token_word(int i, char **tab_token, int size)
 			count++;
 		i++;
 	}
-	return(count);
+	return (count);
 }
