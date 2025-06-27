@@ -68,7 +68,10 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGINT, sigint_parent);
 	signal(SIGQUIT, SIG_IGN);
 	if (argc > 1 && !ft_strcmp(argv[1], "env") && !ft_strcmp(argv[2], "-i"))
+	{
+		envp = NULL;
 		data = init_data(data, 1, envp);
+	}
 	else
 		data = init_data(data, 0, envp);
 	minishell(command, data);
@@ -96,7 +99,7 @@ void	minishell(char *command, t_data	*data)
 			free(command);
 			ft_putstr_fd("minishell : syntax error.\n", 2);
 		}
-		
+
 	}
 	free(info);
 }
