@@ -70,7 +70,6 @@ char	**split_into_tokens(char *processed, t_data *data)
 	tab = malloc((data->nb_token + 1) * sizeof(char **));
 	if (!tab || !processed)
 		return (NULL);
-	printf ("nb token = %d\n\n", data->nb_token);
 	while (processed[i] && j < data->nb_token)
 	{
 		while (processed[i] && in_space(processed[i]))

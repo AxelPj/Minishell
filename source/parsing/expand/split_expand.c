@@ -49,7 +49,7 @@ char	*find_end_dol_expand(char *s, int *start)
 	else
 	{
 		j++;
-		while (s[j] && (ft_isalnum(s[j]) || char_valid_dol(s[j])))
+		while (s[j] && (ft_isalnum(s[j]) || s[j] == '_'))
 		{
 			if (char_valid_dol(s[j - 1]))
 				break ;
@@ -86,7 +86,7 @@ char	*find_end_word_split_expand(char *s, int *start)
 
 int	char_valid_dol(char s)
 {
-	if (s == '_' || s == '?' || s == '%' || s == '+'
+	if (s == '?' || s == '%' || s == '+'
 		|| s == '.' || s == ',' || s == '!' || s == ':')
 		return (1);
 	else

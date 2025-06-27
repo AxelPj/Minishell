@@ -85,7 +85,7 @@ char	*extract_var_name(char *s, int start)
 	else
 	{
 		end = start;
-		while (s[end] && (ft_isalnum(s[end])))
+		while (s[end] && ((ft_isalnum(s[end])) || s[end] == '_'))
 			end++;
 		var_name = ft_substr(s, start, end - start);
 	}
@@ -105,8 +105,6 @@ char	*join_expand(char **tab, int size)
 			result = ft_strjoin(result, tab[i]);
 		i++;
 	}
-	printf("\n\n");
-	printf("result %s\n", result);
 	return (result);
 }
 

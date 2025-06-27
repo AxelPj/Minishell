@@ -64,12 +64,14 @@ int	find_end_dq_to_expand(int *i, char *s, int count_dol)
 {
 	int	start;
 
-	start = 0;
 	start = *i;
 	start++;
-	while (in_dq(s[start]) == 0)
+	while (s[start] && in_dq(s[start]) == 0 && s[start] != '$' && s[start] != '\0')
 		start++;
-	*i = start;
+	if (s[start] == '\"')
+		*i = start;
+	else
+		*i = start - 1;
 	return (count_dol + 1);
 }
 
