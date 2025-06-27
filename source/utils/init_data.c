@@ -39,7 +39,7 @@ void	init_env (t_data *data)
 	i = 0;
 	data->envp_cpy = (char **) malloc(4 * sizeof(char *));
 	data->envp_cpy[i++] = ft_strdup("SHELL=minishell");
-	pwd = ft_strdup(getcwd(NULL, 0));
+	pwd = getcwd(NULL, 0);
 	data->envp_cpy[i++] = ft_strjoin("PWD=", pwd);
 	free(pwd);
 	data->envp_cpy[i++] = ft_strdup("SHLVL=1");

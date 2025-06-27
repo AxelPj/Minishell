@@ -55,6 +55,7 @@ char	*place_token(char *str, int start, int end)
 		i++;
 	}
 	tab[i] = '\0';
+
 	return (tab);
 }
 
@@ -74,7 +75,7 @@ char	**split_into_tokens(char *processed, t_data *data)
 	{
 		while (processed[i] && in_space(processed[i]))
 			i++;
-		if (!processed[i])
+		if ((!processed[i]))
 			break ;
 		tab[j] = find_end_token(processed, &i);
 		j++;
