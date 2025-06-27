@@ -37,7 +37,7 @@ int	handle_export_arg(t_exec *info, t_data *data, int i)
 		ft_putstr_fd("': not a valid identifier\n", 2);
 		return (1);
 	}
-	equal = strchr(info->tab_args[0][i], '=');
+	equal = info->tab_args[0][i];
 	if (equal)
 	{
 		idx = var_exists(data->envp_cpy, info->tab_args[0][i]);

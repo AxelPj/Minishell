@@ -20,13 +20,13 @@ static int	prefix_match(const char *var, const char *name)
 	return (!ft_strncmp(var, name, len) && var[len] == '=');
 }
 
-int	ft_unset(t_exec *info, char *name)
+int	ft_unset(t_data *data, char *name)
 {
 	char	**env;
 	int		i;
 	int		found;
 
-	env = info->envp;
+	env = data->envp_cpy;
 	i = 0;
 	found = 0;
 	while (env[i])

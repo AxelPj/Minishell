@@ -62,7 +62,10 @@ char	*cmd_path(char *cmd, char **envp)
 		return (NULL);
 	path_env = get_path_env(envp);
 	if (!path_env)
+	{
+		printf("minishell: %s: No such file or directory\n", cmd);
 		return (NULL);
+	}
 	paths = ft_split(path_env, ':');
 	if (!paths)
 		return (NULL);

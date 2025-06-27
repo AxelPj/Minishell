@@ -181,7 +181,7 @@ void	free_split(char **tab);
 void	free_info(t_exec *info);
 void	free_tab_args(char ***cmds_args);
 //---------------INIT_EXEC---------------//
-t_exec	*init_infos(t_exec *info, char **envp);
+t_exec	*init_infos(t_exec *info);
 void	info_heredoc(t_exec *info);
 //---------------MAIN_EXEC----------------//
 void	set_last_status(int status);
@@ -215,7 +215,7 @@ void	heredoc_limit(t_exec *info, char **args, int cmd, int i);
 void	infile(t_exec *info, char **args, int cmd, int i);
 void	outfile(t_exec *info, char **args, int cmd, int i);
 //--------------BUILT-IN--------------//
-int		ft_cd(char **input, t_exec *info);
+int		ft_cd(char **input, t_data *data);
 int		ft_echo(char **input, int fd);
 int		check_n(char **input);
 int		is_all_n(char *s);
@@ -223,7 +223,7 @@ int		ft_exit(char **args, t_exec *info, t_data *data, int bool);
 int		ft_env(t_data *data);
 int		ft_export(t_exec *info, t_data *data);
 int		ft_pwd(void);
-int		ft_unset(t_exec *info, char *str);
+int		ft_unset(t_data *data, char *str);
 //--------------EXPORT_UTILS--------------//
 int		is_valid_varname(char *str);
 int		var_exists(char **env, char *name);

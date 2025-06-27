@@ -74,7 +74,7 @@ int	execute_builtin(char *cmd, char **args, t_exec *info, t_data *data)
 	if (!cmd)
 		return (1);
 	if (!ft_strncmp(cmd, "cd", 2))
-		return (ft_cd(args, info));
+		return (ft_cd(args, data));
 	if (!ft_strncmp(cmd, "echo", 4))
 		return (ft_echo(args, STDOUT_FILENO));
 	if (!ft_strncmp(cmd, "pwd", 3))
@@ -84,7 +84,7 @@ int	execute_builtin(char *cmd, char **args, t_exec *info, t_data *data)
 	if (!ft_strncmp(cmd, "export", 6))
 		return (ft_export(info, data));
 	if (!ft_strncmp(cmd, "unset", 5))
-		return (ft_unset(info, args[1]));
+		return (ft_unset(data, args[1]));
 	if (!ft_strncmp(cmd, "exit", 4))
 		return (ft_exit(args, info, data, 1));
 	return (1);
