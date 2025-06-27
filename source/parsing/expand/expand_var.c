@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:00:49 by axel              #+#    #+#             */
-/*   Updated: 2025/06/17 17:20:57 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/27 22:14:34 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 				{
 					tab = split_into_expand(current->tab_tok[i], data, 0, 0);
 					tab = change_var_to_value(tab, count_dol, 0);
-					free(current->tab_tok[i]);
 					current->tab_tok[i] = join_expand(tab, count_dol);
 					free_tab(tab);
 				}
@@ -101,15 +100,15 @@ char	*join_expand(char **tab, int size)
 	char	*result;
 	int		i;
 	char	*tmp;
-	
 	i = 0;
+
 	tmp = ft_strdup("");
 	while (i < size)
 	{
 		if (tab[i])
 		{
 			result = ft_strjoin(tmp, tab[i]);
-			free(tmp); 
+			free(tmp);
 		}
 		i++;
 	}

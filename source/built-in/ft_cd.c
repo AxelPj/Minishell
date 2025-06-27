@@ -3,79 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:59:35 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/24 15:38:46 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/27 22:11:39 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/header/minishell.h"
+#include "minishell.h"
 
-char	*find_env(const char *name, char **envp)
+char	*cd_home(char *path, t_data *data, int *to_free)
 {
-	int		i;
-	size_t	len;
+	path = find_env("HOME", data->envp_cpy);
+	if (!path)
+		return (NULL);
+	to_free[0] = 1;
+	return (ft_strdup(path));
+}
 
-	i = 0;
-	len = strlen(name);
-	while (envp[i])
+char	*cd_return(t_data *data, int *to_free)
+{
+	char	*oldpwd;
+
+	oldpwd = find_env("OLDPWD", data->envp_cpy);
+	if (!oldpwd)
 	{
-		if (ft_strncmp(envp[i], name, len) == 0 && envp[i][len] == '=')
-			return (ft_strdup(envp[i] + len + 1));
-		i++;
+		ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
+		return (NULL);
 	}
-	return (NULL);
+	ft_putendl_fd(oldpwd, 1);
+	to_free[0] = 1;
+	return (ft_strdup(oldpwd));
 }
 
-int	cd_err(char *str)
+void	update_pwd(t_data *data)
 {
-	ft_putstr_fd("minishell: cd: ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": No such file or directory\n", 2);
-	return (1);
-}
+	char	*cwd;
+	char	*oldpwd;
 
-void	new_pwd(char *input, t_data *data)
-{
-	char	*result;
-	int		i;
-
-	i = 0;
-	while (ft_strncmp(data->envp_cpy[i], "PWD=", 4))
-		i++;
-	result = ft_strjoin(data->envp_cpy[i], "/");
-	result = ft_strjoin(result, input);
-	free(data->envp_cpy[i]);
-	data->envp_cpy[i] = malloc(sizeof(char *) * ft_strlen(result) + 1);
-	data->envp_cpy[i] = result;
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return ;
+	oldpwd = find_env("PWD", data->envp_cpy);
+	if (oldpwd)
+		replace_env("OLDPWD", oldpwd, data->envp_cpy);
+	replace_env("PWD", cwd, data->envp_cpy);
+	free(cwd);
 }
 
 int	ft_cd(char **input, t_data *data)
 {
 	char	*path;
 	int		result;
-	int		to_free;
+	int		to_free[1];
 
-	to_free = 0;
-	result = 0;
-	if (!input[1])
-	{
-		path = find_env("HOME", data->envp_cpy);
-		if (!path)
-			return (1);
-		to_free = 1;
-	}
+	to_free[0] = 0;
+	path = NULL;
+	if (!input[1] || ft_strcmp(input[1], "~") == 0)
+		path = cd_home(path, data, &to_free[0]);
+	else if (ft_strcmp(input[1], "-") == 0)
+		path = cd_return(data, &to_free[0]);
 	else
 		path = input[1];
+	if (!path)
+		return (1);
 	result = chdir(path);
 	if (result != 0)
+	{
+		if (to_free[0])
+			free(path);
 		return (cd_err(input[1]));
-	new_pwd(input[1], data);
-	if (to_free)
+	}
+	update_pwd(data);
+	if (to_free[0])
 		free(path);
-	path = getcwd(NULL, 0);
-	if (path == NULL)
-		ft_pwd(data, input[1]);
 	return (0);
 }
