@@ -222,7 +222,7 @@ int		is_all_n(char *s);
 int		ft_exit(char **args, t_exec *info, t_data *data, int bool);
 int		ft_env(t_data *data);
 int		ft_export(t_exec *info, t_data *data);
-int		ft_pwd(t_data *data);
+int		ft_pwd(t_data *data, char *args);
 int		ft_unset(t_data *data, char *str);
 //--------------EXPORT_UTILS--------------//
 int		is_valid_varname(char *str);
