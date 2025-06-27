@@ -82,7 +82,7 @@ void	minishell(char *command, t_data	*data)
 	info = malloc(sizeof(t_exec));
 	while (1)
 	{
-		command = readline("oh mishell> ");
+		command = readline("OH MI(ni)SHELL> ");
 		if (command == NULL)
 			ctrl_d(data, info);
 		if (ft_strlen(command) >= 1 && !syntax_are_closed(command))

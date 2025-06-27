@@ -12,9 +12,8 @@
 
 #include "minishell.h"
 
-t_exec	*init_infos(t_exec *info, char **envp)
+t_exec	*init_infos(t_exec *info)
 {
-	info->envp = envp;
 	info->fd = 0;
 	if (info->nb_cmds > 1)
 	{

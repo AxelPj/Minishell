@@ -28,7 +28,7 @@ char	*find_env(const char *name, char **envp)
 	return (NULL);
 }
 
-int	ft_cd(char **input, t_exec *info)
+int	ft_cd(char **input, t_data *data)
 {
 	char	*path;
 	int		result;
@@ -38,7 +38,7 @@ int	ft_cd(char **input, t_exec *info)
 	result = 0;
 	if (!input[1])
 	{
-		path = find_env("HOME", info->envp);
+		path = find_env("HOME", data->envp_cpy);
 		if (!path)
 			return (1);
 		to_free = 1;
@@ -49,6 +49,9 @@ int	ft_cd(char **input, t_exec *info)
 	if (to_free)
 		free(path);
 	if (result != 0)
+	{
+		printf("minishell: cd: %s: No such file or directory\n", input[1]);
 		return (1);
+	}
 	return (0);
 }

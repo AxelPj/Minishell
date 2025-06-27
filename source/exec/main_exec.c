@@ -21,7 +21,7 @@ void	launch_child(int idx, t_exec *info, t_data *data)
 	signal(SIGQUIT, SIG_DFL);
 	if (is_builtin_child(info->tab_args[idx][0]))
 		builtin_exec(info, idx, data);
-	command(info, info->envp, idx, data);
+	command(info, data->envp_cpy, idx, data);
 	exit(127);
 }
 
@@ -67,7 +67,7 @@ int	exec_setup(t_data *data, char **tab, t_exec *info)
 		count_nb(info, tab, i);
 		i++;
 	}
-	info = init_infos(info, data->envp_cpy);
+	info = init_infos(info);
 	info_heredoc(info);
 	j = 0;
 	while (info->tab_args[j])

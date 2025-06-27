@@ -43,7 +43,7 @@ int	var_exists(char **env, char *name)
 		len++;
 	while (env[i])
 	{
-		if (!strncmp(env[i], name, len) && env[i][len] == '=')
+		if (!strncmp(env[i], name, len))
 			return (i);
 		i++;
 	}
