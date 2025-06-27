@@ -78,7 +78,7 @@ int	execute_builtin(char *cmd, char **args, t_exec *info, t_data *data)
 	if (!ft_strncmp(cmd, "echo", 4))
 		return (ft_echo(args, STDOUT_FILENO));
 	if (!ft_strncmp(cmd, "pwd", 3))
-		return (ft_pwd());
+		return (ft_pwd(data));
 	if (!ft_strncmp(cmd, "env", 3))
 		return (ft_env(data));
 	if (!ft_strncmp(cmd, "export", 6))

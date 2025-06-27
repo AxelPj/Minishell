@@ -28,6 +28,21 @@ char	*find_env(const char *name, char **envp)
 	return (NULL);
 }
 
+void	new_pwd(char *input, t_data *data)
+{
+	char	*result;
+	int		i;
+
+	i = 0;
+	while (ft_strncmp(data->envp_cpy[i], "PWD=", 4))
+		i++;
+	result = ft_strjoin(data->envp_cpy[i], "/");
+	result = ft_strjoin(result, input);
+	free(data->envp_cpy[i]);
+	data->envp_cpy[i] = malloc(sizeof(char *) * ft_strlen(result) + 1);
+	data->envp_cpy[i] = result;
+}
+
 int	ft_cd(char **input, t_data *data)
 {
 	char	*path;
@@ -46,12 +61,13 @@ int	ft_cd(char **input, t_data *data)
 	else
 		path = input[1];
 	result = chdir(path);
-	if (to_free)
-		free(path);
 	if (result != 0)
 	{
 		printf("minishell: cd: %s: No such file or directory\n", input[1]);
 		return (1);
 	}
+	new_pwd(input[1], data);
+	if (to_free)
+		free(path);
 	return (0);
 }

@@ -12,15 +12,24 @@
 
 #include "../../include/header/minishell.h"
 
-int	ft_pwd(void)
+int	ft_pwd(t_data *data)
 {
 	char	*cwd;
+	int		i;
 
+	i = 0;
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
-		perror("pwd");
-		return (1);
+		while (data->envp_cpy[i])
+		{
+			if (!ft_strncmp(data->envp_cpy[i], "PWD=", 4))
+			{
+				printf("%s\n", data->envp_cpy[i]);
+				return (0);
+			}
+			i++;
+		}
 	}
 	printf("%s\n", cwd);
 	free(cwd);
