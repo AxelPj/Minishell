@@ -54,8 +54,12 @@ void	find_end_word_split_dol(char *s, int *i)
 	}
 	else
 	{
-		while (s[start] && (ft_isalnum(s[start]) || s[start] == '_'))
+		while (s[start] && (ft_isalnum(s[start]) || s[start] == '_' || s[start] == '?'))
+		{
+			if (s[start - 1] == '?')
+				break ;
 			start++;
+		}
 	}
 	*i = start - 1;
 }

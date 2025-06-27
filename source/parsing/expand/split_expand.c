@@ -49,12 +49,8 @@ char	*find_end_dol_expand(char *s, int *start)
 	else
 	{
 		j++;
-		while (s[j] && (ft_isalnum(s[j]) || s[j] == '_'))
-		{
-			if (char_valid_dol(s[j - 1]))
-				break ;
+		while (s[j] && (ft_isalnum(s[j]) || s[j] == '_' || char_valid_dol(s[j])))
 			j++;
-		}
 	}
 	tab = ft_substr(s, i, j - i);
 	*start = j;

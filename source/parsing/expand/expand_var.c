@@ -85,8 +85,12 @@ char	*extract_var_name(char *s, int start)
 	else
 	{
 		end = start;
-		while (s[end] && ((ft_isalnum(s[end])) || s[end] == '_'))
+		while (s[end] && ((ft_isalnum(s[end])) || s[end] == '_' || s[end] == '?'))
+		{
+			if (s[end - 1] == '?')
+				break ;
 			end++;
+		}
 		var_name = ft_substr(s, start, end - start);
 	}
 	return (var_name);
