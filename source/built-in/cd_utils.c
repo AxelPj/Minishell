@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 21:16:34 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/27 22:11:56 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/27 22:23:01 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,5 @@ void	replace_env(char *key, char *value, char **envp)
 		i++;
 	}
 	envp = ft_realloc_env(envp, new_entry);
+	free(new_entry);
 }

@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/27 21:59:59 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/27 22:17:21 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct s_exec
 //---------------MAIN----------------//
 //---------------SHELL_UTILS-------------//
 void	set_shell(t_data *data);
-void	set_old_pwd(t_data *data);
 void	sh_lvl(char **envp);
 void	minishell(char *command, t_data	*data);
 char	*search_sh_lvl(char **envp, int *j);
