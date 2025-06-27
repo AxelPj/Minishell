@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 17:34:00 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/27 22:14:15 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/27 22:17:14 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,26 +73,4 @@ void	set_shell(t_data *data)
 		}
 		i++;
 	}
-}
-
-char	*set_old_pwd(t_data *data)
-{
-	int		i;
-	char	*pwd;
-
-	pwd = ft_strdup(getcwd(NULL, 0));
-	if (!pwd)
-		return(NULL);
-	i = 0;
-	while (data->envp_cpy[i])
-	{
-		if (ft_strncmp(data->envp_cpy[i], "OLDPWD=", 6) == 0)
-		{
-			free(data->envp_cpy[i]);
-			data->envp_cpy[i] = ft_strjoin("OLDPWD=", pwd);
-			free(pwd);
-		}
-		i++;
-	}
-	return (data->envp_cpy[i]);
 }
