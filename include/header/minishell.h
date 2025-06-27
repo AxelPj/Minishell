@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/24 17:32:34 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/27 21:59:59 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,11 @@ int		is_valid_varname(char *str);
 int		var_exists(char **env, char *name);
 void	update_var(char **env, int idx, char *str);
 int		add_var(t_data *data, char *str);
+//--------------CD_UTILS--------------//
+char	*find_env(char *name, char **envp);
+int		cd_err(char *str);
+void	new_pwd(char *input, t_data *data);
+void	replace_env(char *key, char *value, char **envp);
 //--------------GNL--------------//
 char	*ft_readline(int fd, char *stach);
 char	*recoveraftern(char *stach);

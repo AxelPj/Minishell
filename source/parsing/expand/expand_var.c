@@ -29,7 +29,6 @@ t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 				{
 					tab = split_into_expand(current->tab_tok[i], data, 0, 0);
 					tab = change_var_to_value(tab, count_dol, 0);
-					free(current->tab_tok[i]);
 					current->tab_tok[i] = join_expand(tab, count_dol);
 					free_tab(tab);
 				}
@@ -100,13 +99,17 @@ char	*join_expand(char **tab, int size)
 {
 	char	*result;
 	int		i;
-
+	char	*tmp;
 	i = 0;
-	result = ft_strdup("");
+
+	tmp = ft_strdup("");
 	while (i < size)
 	{
 		if (tab[i])
-			result = ft_strjoin(result, tab[i]);
+		{
+			result = ft_strjoin(tmp, tab[i]);
+			free(tmp);
+		}
 		i++;
 	}
 	return (result);
