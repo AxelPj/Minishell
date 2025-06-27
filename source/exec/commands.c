@@ -12,12 +12,11 @@
 
 #include "minishell.h"
 
-int	cmd_notfound(char *arg)
+void	cmd_notfound(char *arg)
 {
 	ft_putstr_fd("Command '", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd("' not found.\n", 2);
-	return (-1);
 }
 
 void	cmd_err(char *arg)
@@ -44,7 +43,10 @@ int	command(t_exec *info, char **envp, int i, t_data *data)
 	{
 		path = cmd_path(args[0], envp);
 		if (!path)
+		{
 			cmd_notfound(args[0]);
+			return (-1);
+		}
 		execve(path, args, envp);
 		free(path);
 	}

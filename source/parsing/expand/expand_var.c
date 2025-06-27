@@ -100,13 +100,17 @@ char	*join_expand(char **tab, int size)
 {
 	char	*result;
 	int		i;
-
+	char	*tmp;
+	
 	i = 0;
-	result = ft_strdup("");
+	tmp = ft_strdup("");
 	while (i < size)
 	{
 		if (tab[i])
-			result = ft_strjoin(result, tab[i]);
+		{
+			result = ft_strjoin(tmp, tab[i]);
+			free(tmp); 
+		}
 		i++;
 	}
 	return (result);

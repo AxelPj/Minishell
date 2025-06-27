@@ -74,6 +74,7 @@ typedef struct s_exec
 //---------------MAIN----------------//
 //---------------SHELL_UTILS-------------//
 void	set_shell(t_data *data);
+void	set_old_pwd(t_data *data);
 void	sh_lvl(char **envp);
 void	minishell(char *command, t_data	*data);
 char	*search_sh_lvl(char **envp, int *j);

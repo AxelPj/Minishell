@@ -96,6 +96,7 @@ void	minishell(char *command, t_data	*data)
 			free(command);
 			ft_putstr_fd("minishell : syntax error.\n", 2);
 		}
+		
 	}
 	free(info);
 }

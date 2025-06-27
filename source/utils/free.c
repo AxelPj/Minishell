@@ -45,12 +45,7 @@ t_pars	*free_lst_pars(t_pars *parsing)
 	{
 		next = current->next;
 		i = 0;
-		while (current->tab_tok[i] != NULL)
-		{
-			free(current->tab_tok[i]);
-			i++;
-		}
-		free(current->tab_tok);
+		current->tab_tok = free_tab(current->tab_tok);
 		free(current);
 		current = next;
 	}
