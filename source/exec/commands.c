@@ -19,19 +19,21 @@ int	command(t_exec *info, char **envp, int i, t_data *data)
 
 	args = info->tab_args[i];
 	if (!args || !args[0])
-	{
-		perror("invalid args");
 		return (-1);
-	}
 	if (strncmp(args[0], "./", 2) == 0 || args[0][0] == '/')
-		execve(args[0], args, envp);
+	{
+		if ((execve(args[0], args, envp) != 0))
+			printf("minishell: %s: No such file or directory\n", args[0]);
+	}
 	else if (!is_builtin(args[0]))
 	{
 		path = cmd_path(args[0], envp);
 		if (!path)
+		{
+			printf("Command '%s' not found.\n", args[0]);
 			return (-1);
+		}
 		execve(path, args, envp);
-		perror("execve échoué");
 		free(path);
 	}
 	else
