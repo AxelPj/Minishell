@@ -12,28 +12,22 @@
 
 #include "minishell.h"
 
-int	token_type(char *s_token, int i)
+int	token_type(char *s_token)
 {
-	while (s_token[i])
-	{
-		if (s_token[0] == '|')
-			return (1);
-		else if (s_token[0] == '<' && s_token[1] == '<')
-			return (2);
-		else if (s_token[0] == '>' && s_token[1] == '>')
-			return (3);
-		else if (s_token[0] == '>')
-			return (4);
-		else if (s_token[0] == '<')
-			return (5);
-		else if (s_token[0] == '>')
-			return (2);
-		else if (s_token[0] == '<')
-			return (3);
-		if (s_token[2])
-			break ;
-		i++;
-	}
+	if (s_token[0] == '|')
+		return (1);
+	else if (s_token[0] == '<' && s_token[1] == '<')
+		return (2);
+	else if (s_token[0] == '>' && s_token[1] == '>')
+		return (3);
+	else if (s_token[0] == '>')
+		return (4);
+	else if (s_token[0] == '<')
+		return (5);
+	else if (s_token[0] == '>')
+		return (2);
+	else if (s_token[0] == '<')
+		return (3);
 	return (0);
 }
 
@@ -44,7 +38,7 @@ t_pars	*sort_token(t_data *data, int i, int size)
 
 	while (i < size)
 	{
-		if (token_type(data->tab_token[i], 0) == 0)
+		if (token_type(data->tab_token[i]) == 0)
 		{
 			count = count_token_word(i, data->tab_token, size);
 			node = ft_lst_parsnw(data->tab_token, 0, &i, count);
@@ -53,7 +47,7 @@ t_pars	*sort_token(t_data *data, int i, int size)
 		{
 			count = count_token_word(i, data->tab_token, size);
 			node = ft_lst_parsnw(data->tab_token,
-					token_type(data->tab_token[i], 0), &i, count);
+					token_type(data->tab_token[i]), &i, count);
 		}
 		if (!data->parsing)
 			data->parsing = node;
@@ -71,7 +65,7 @@ int	count_token_word(int i, char **tab_token, int size)
 	count = 0;
 	while (i < size)
 	{
-		if (token_type(tab_token[i], 0) != 0)
+		if (token_type(tab_token[i]) != 0)
 			return (1);
 		else
 			count++;

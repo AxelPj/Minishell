@@ -74,7 +74,7 @@ typedef struct s_exec
 //---------------MAIN----------------//
 //---------------SHELL_UTILS-------------//
 void	set_shell(t_data *data);
-void	set_old_pwd(t_data *data);
+char	*set_old_pwd(t_data *data);
 void	sh_lvl(char **envp);
 void	minishell(char *command, t_data	*data);
 char	*search_sh_lvl(char **envp, int *j);
@@ -116,7 +116,7 @@ char	*process_del(t_data *data, char *input, int i);
 char	*process_join(t_data *data, char *s2, int start, int end);
 char	*process_join_quote(t_data *data, char *s2, int start, int end);
 				//------tokenisation------//
-int		token_type(char *s_token, int i);
+int		token_type(char *s_token);
 t_pars	*sort_token(t_data *data, int i, int size);
 int		count_token_word(int i, char **tab_token, int size);
 char	*place_token(char *str, int start, int end);
