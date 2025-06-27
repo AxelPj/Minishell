@@ -24,7 +24,7 @@ void	ctrl_d(t_data *data, t_exec *info)
 {
 	info->nb_args = 3;
 	info->nb_cmds = 3;
-	init_infos(info, data->envp_cpy);
+	init_infos(info);
 	ft_exit(NULL, info, data, 0);
 }
 
