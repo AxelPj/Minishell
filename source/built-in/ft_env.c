@@ -20,7 +20,10 @@ int	ft_env(t_data *data)
 	while (data->envp_cpy[i])
 	{
 		if (ft_strchr(data->envp_cpy[i], '='))
-			printf("%s\n", data->envp_cpy[i]);
+		{
+			ft_putstr_fd(data->envp_cpy[i], 1);
+			ft_putstr_fd("\n", 1);
+		}
 		i++;
 	}
 	return (0);

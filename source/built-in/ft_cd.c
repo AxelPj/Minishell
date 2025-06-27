@@ -28,6 +28,14 @@ char	*find_env(const char *name, char **envp)
 	return (NULL);
 }
 
+int	cd_err(char *str)
+{
+	ft_putstr_fd("minishell: cd: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
+	return (1);
+}
+
 void	new_pwd(char *input, t_data *data)
 {
 	char	*result;
@@ -62,12 +70,12 @@ int	ft_cd(char **input, t_data *data)
 		path = input[1];
 	result = chdir(path);
 	if (result != 0)
-	{
-		printf("minishell: cd: %s: No such file or directory\n", input[1]);
-		return (1);
-	}
+		return (cd_err(input[1]));
 	new_pwd(input[1], data);
 	if (to_free)
 		free(path);
+	path = getcwd(NULL, 0);
+	if (path == NULL)
+		ft_pwd(data, input[1]);
 	return (0);
 }

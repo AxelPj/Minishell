@@ -12,6 +12,21 @@
 
 #include "minishell.h"
 
+int	cmd_notfound(char *arg)
+{
+	ft_putstr_fd("Command '", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd("' not found.\n", 2);
+	return (-1);
+}
+
+void	cmd_err(char *arg)
+{
+	ft_putstr_fd("minishell:", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
+}
+
 int	command(t_exec *info, char **envp, int i, t_data *data)
 {
 	char	*path;
@@ -23,16 +38,13 @@ int	command(t_exec *info, char **envp, int i, t_data *data)
 	if (strncmp(args[0], "./", 2) == 0 || args[0][0] == '/')
 	{
 		if ((execve(args[0], args, envp) != 0))
-			printf("minishell: %s: No such file or directory\n", args[0]);
+			cmd_err(args[0]);
 	}
 	else if (!is_builtin(args[0]))
 	{
 		path = cmd_path(args[0], envp);
 		if (!path)
-		{
-			printf("Command '%s' not found.\n", args[0]);
-			return (-1);
-		}
+			cmd_notfound(args[0]);
 		execve(path, args, envp);
 		free(path);
 	}

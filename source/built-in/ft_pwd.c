@@ -12,8 +12,15 @@
 
 #include "../../include/header/minishell.h"
 
-void	pwd_copy(t_data *data, int i, int j, int k, char *cwd)
+void	pwd_copy(t_data *data, char *cwd)
 {
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	j = 0;
+	k = 5;
 	while (data->envp_cpy[i])
 	{
 		if (!ft_strncmp(data->envp_cpy[i], "PWD=", 4))
@@ -34,23 +41,17 @@ void	pwd_copy(t_data *data, int i, int j, int k, char *cwd)
 int	ft_pwd(t_data *data, char *arg)
 {
 	char	*cwd;
-	int		i;
-	int		j;
-	int		k;
 
-	i = 0;
-	j = 0;
-	k = 5;
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL && (ft_strcmp(arg, "..") == 0))
 	{
-		ft_putstr_fd("cd: error retrieving current directory: getcwd: cannot access"
-			"parent directories: No such file or directory\n", 2);
+		ft_putstr_fd("cd: error retrieving current directory: getcwd:"
+			"cannot access parent directories: No such file or directory\n", 2);
 		return (0);
 	}
 	else if (!cwd)
 	{
-		pwd_copy(data, i, j, k, cwd);
+		pwd_copy(data, cwd);
 		return (0);
 	}
 	printf("%s\n", cwd);

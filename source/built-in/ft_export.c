@@ -74,14 +74,12 @@ static void	bubble_sort_env(char **tab, int size)
 	}
 }
 
-static void	print_export(char **envp)
+static void	print_export(char **envp, int i)
 {
 	int		env_len;
-	int		i;
 	char	**tab;
 
 	env_len = 0;
-	i = 0;
 	while (envp[env_len])
 		env_len++;
 	tab = malloc(sizeof(char *) * (env_len + 1));
@@ -97,7 +95,9 @@ static void	print_export(char **envp)
 	i = 0;
 	while (i < env_len)
 	{
-		printf("declare -x %s\n", tab[i]);
+		ft_putstr_fd("declare -x", 1);
+		ft_putstr_fd(tab[i], 1);
+		ft_putstr_fd("\n", 1);
 		i++;
 	}
 	free_tab_export(tab);
@@ -110,7 +110,7 @@ int	ft_export(t_exec *info, t_data *data)
 	i = 1;
 	if (!info->tab_args[0][i])
 	{
-		print_export(data->envp_cpy);
+		print_export(data->envp_cpy, 0);
 		return (0);
 	}
 	while (info->tab_args[0][i])

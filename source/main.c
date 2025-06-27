@@ -18,6 +18,9 @@ static void	sigint_parent(int sig)
 {
 	(void)sig;
 	write(STDOUT_FILENO, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 void	ctrl_d(t_data *data, t_exec *info)
