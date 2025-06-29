@@ -40,15 +40,18 @@ void	new_pwd(char *input, t_data *data)
 {
 	char	*result;
 	int		i;
+	char	*new_result;
 
 	i = 0;
 	while (ft_strncmp(data->envp_cpy[i], "PWD=", 4))
 		i++;
 	result = ft_strjoin(data->envp_cpy[i], "/");
-	result = ft_strjoin(result, input);
+	new_result = ft_strjoin(result, input);
+	free(result);
 	free(data->envp_cpy[i]);
-	data->envp_cpy[i] = malloc(sizeof(char *) * ft_strlen(result) + 1);
-	data->envp_cpy[i] = result;
+	data->envp_cpy[i] = malloc(sizeof(char *) * ft_strlen(new_result) + 1);
+	data->envp_cpy[i] = new_result;
+	free(new_result);
 }
 
 char	**ft_realloc_env(char **envp, char *new_entry)
@@ -79,10 +82,12 @@ void	replace_env(char *key, char *value, char **envp)
 	int		i;
 	char	*new_entry;
 	int		len;
+	char	*new_entry2;
 
 	len = ft_strlen(key);
-	new_entry = ft_strjoin(key, "=");
-	new_entry = ft_strjoin(new_entry, value);
+	new_entry2 = ft_strjoin(key, "=");
+	new_entry = ft_strjoin(new_entry2, value);
+	free(new_entry2);
 	if (!new_entry)
 		return ;
 	i = 0;
