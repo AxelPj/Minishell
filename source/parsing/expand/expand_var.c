@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:00:49 by axel              #+#    #+#             */
-/*   Updated: 2025/06/29 17:32:05 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:31:34 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@ t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 		{
 			if (is_there_a_dol(current->tab_tok[i]))
 			{
-				count_dol = count_word_split_expand(current->tab_tok[i], 0, 0);
-				{
-					tab = split_into_expand(current->tab_tok[i], data, 0, 0);
-					tab = change_var_to_value(tab, count_dol, 0);
-					current->tab_tok[i] = join_expand(tab, count_dol);
-					free_tab(tab);
-				}
+			    count_dol = count_word_split_expand(current->tab_tok[i], 0, 0);
+			    tab = split_into_expand(current->tab_tok[i], data, 0, 0);
+			    tab = change_var_to_value(tab, count_dol, 0);
+			    free(current->tab_tok[i]);
+			    current->tab_tok[i] = join_expand(tab, count_dol);
+			    free_tab(tab);
 			}
 			i++;
 		}

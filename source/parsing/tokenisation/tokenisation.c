@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:31 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/29 18:51:58 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:00:57 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_pars	*sort_token(t_data *data, int i, int size)
 {
 	int		count;
 	t_pars	*node;
-
 	while (data->tab_token[i] && i < size)
 	{
 		count = count_token_word(i, data->tab_token, size);

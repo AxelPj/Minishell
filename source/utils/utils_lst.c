@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:19:44 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/29 18:52:02 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:29:00 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_pars	*ft_lst_parsnw(char **s_tok, int type_tok, int *index, int size)
 	newelem->tab_tok[i] = NULL;
 	newelem->token = type_tok;
 	newelem->next = NULL;
-	*index = j - 1;
+	*index = j;
 	return (newelem);
 }
 
