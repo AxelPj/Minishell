@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:32:15 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/19 13:24:23 by axel             ###   ########.fr       */
+/*   Updated: 2025/06/29 18:53:36 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ void	free_all(t_data *data)
 char	**free_tab(char **tab)
 {
 	int	i;
+	int	size;
 
+	size = tablen((void **)tab);
 	i = 0;
-	while (tab[i])
+	while (i < size)
 	{
-		free(tab[i]);
+		if (tab[i])
+			free(tab[i]);
 		i++;
 	}
 	free(tab);
@@ -39,15 +42,18 @@ t_pars	*free_lst_pars(t_pars *parsing)
 	t_pars	*current;
 	t_pars	*next;
 	int		i;
+	int		size;
 
-	current = parsing;
-	while (current != NULL)
+	size = ft_lst_pars_size(parsing);
+	current = parsing;	
+	while (size > 0)
 	{
 		next = current->next;
 		i = 0;
 		current->tab_tok = free_tab(current->tab_tok);
 		free(current);
 		current = next;
+		size--;
 	}
 	return (NULL);
 }

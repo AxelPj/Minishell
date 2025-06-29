@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 19:07:51 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 17:18:45 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,14 @@ void	print_data_lst(t_data *data);
 
 //------check_error_input------//
 int		quotes_are_closed(char *s);
-int		has_pipe_edges(char *s);
+int		has_pipe_edges(char *s, int i);
+int		check_pipe_syntax_error(char *s, int i, int bool);
+int		check_pipe_syntax_error2(char *s, int j);
+
 //------syntax_utils------//
+int		redir_error_at(char *s, int i, char c, int count);
+int		is_redir(char c);
+int		check_redir_syntax_all(char *s, int i, int count, char c);
 int		in_sq(char c);
 int		in_dq(char c);
 int		has_multi_q(char *input, int i);

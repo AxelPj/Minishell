@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenisation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:31 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/20 16:28:49 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 18:51:58 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,28 @@ t_pars	*sort_token(t_data *data, int i, int size)
 	int		count;
 	t_pars	*node;
 
-	while (i < size)
+	while (data->tab_token[i] && i < size)
 	{
-		if (token_type(data->tab_token[i]) == 0)
-		{
-			count = count_token_word(i, data->tab_token, size);
-			node = ft_lst_parsnw(data->tab_token, 0, &i, count);
-		}
-		else
-		{
-			count = count_token_word(i, data->tab_token, size);
-			node = ft_lst_parsnw(data->tab_token,
-					token_type(data->tab_token[i]), &i, count);
-		}
+		count = count_token_word(i, data->tab_token, size);
+		node = ft_lst_parsnw(data->tab_token,
+				token_type(data->tab_token[i]), &i, count);
 		if (!data->parsing)
 			data->parsing = node;
 		else
 			ft_pars_lstadd_bck(&data->parsing, node);
-		i++;
+		if (data->tab_token[i])
+			i++;
 	}
 	return (data->parsing);
 }
+
 
 int	count_token_word(int i, char **tab_token, int size)
 {
 	int	count;
 
 	count = 0;
-	while (i < size)
+	while (tab_token[i] && i < size)
 	{
 		if (token_type(tab_token[i]) != 0)
 			return (1);

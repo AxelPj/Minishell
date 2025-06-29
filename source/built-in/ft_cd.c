@@ -18,7 +18,7 @@ char	*cd_home(char *path, t_data *data, int *to_free)
 	if (!path)
 		return (NULL);
 	to_free[0] = 1;
-	return (ft_strdup(path));
+	return (path);
 }
 
 char	*cd_return(t_data *data, int *to_free)
@@ -33,7 +33,7 @@ char	*cd_return(t_data *data, int *to_free)
 	}
 	ft_putendl_fd(oldpwd, 1);
 	to_free[0] = 1;
-	return (ft_strdup(oldpwd));
+	return (oldpwd);
 }
 
 void	update_pwd(t_data *data)
@@ -49,6 +49,7 @@ void	update_pwd(t_data *data)
 		replace_env("OLDPWD", oldpwd, data->envp_cpy);
 	replace_env("PWD", cwd, data->envp_cpy);
 	free(cwd);
+	free(oldpwd);
 }
 
 int	ft_cd(char **input, t_data *data)
