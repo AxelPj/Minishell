@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:43:44 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/29 17:21:28 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:47:51 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,3 @@ int	check_redir_syntax_all(char *s, int i, int count, char c)
 	}
 	return (0);
 }
-
-

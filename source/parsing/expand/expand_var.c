@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:00:49 by axel              #+#    #+#             */
-/*   Updated: 2025/06/29 17:32:05 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:54:25 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	**change_var_to_value(char **tab, int count_doll, int i)
 			dol_interog(tab[i]);
 		else if (tab[i][0] == '$' && tab[i][1])
 		{
-			var_name = extract_var_name(tab[i], 0);
+			var_name = extract_var_name(tab[i], 0, 0);
 			var_value = getenv(var_name);
 			free(tab[i]);
 			if (var_value)
@@ -66,12 +66,10 @@ char	**change_var_to_value(char **tab, int count_doll, int i)
 	return (tab);
 }
 
-char	*extract_var_name(char *s, int start)
+char	*extract_var_name(char *s, int start, int end)
 {
 	char	*var_name;
-	int		end;
 
-	end = 0;
 	start++;
 	if (s[start] == '{')
 	{
@@ -84,7 +82,8 @@ char	*extract_var_name(char *s, int start)
 	else
 	{
 		end = start;
-		while (s[end] && ((ft_isalnum(s[end])) || s[end] == '_' || s[end] == '?'))
+		while (s[end] && ((ft_isalnum(s[end]))
+				|| s[end] == '_' || s[end] == '?'))
 		{
 			if (s[end - 1] == '?')
 				break ;
@@ -100,8 +99,8 @@ char	*join_expand(char **tab, int size)
 	char	*result;
 	int		i;
 	char	*tmp;
-	i = 0;
 
+	i = 0;
 	tmp = ft_strdup("");
 	while (i < size)
 	{

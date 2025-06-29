@@ -6,10 +6,9 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 19:27:55 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 19:29:16 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:45:52 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -84,11 +83,11 @@ char	*recover_aftern(char *stash)
 	return (newstash);
 }
 
-char	*get_next_line(int fd, char *line)
+char	*get_next_line(int fd)
 {
-	static char	*stash;
-    
-    stash = NULL;
+	char		*line;
+	static char	*stash = NULL;
+
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash = ft_readline(fd, stash);

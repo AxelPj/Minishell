@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:32:15 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/29 18:53:36 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:49:46 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_pars	*free_lst_pars(t_pars *parsing)
 	int		size;
 
 	size = ft_lst_pars_size(parsing);
-	current = parsing;	
+	current = parsing;
 	while (size > 0)
 	{
 		next = current->next;

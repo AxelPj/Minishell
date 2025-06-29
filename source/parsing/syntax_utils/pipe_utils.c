@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:37:34 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/29 16:17:46 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:47:30 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int	check_pipe_syntax_error(char *s, int i, int bool)
 			i--;
 		if (i >= 0 && s[i] == '|')
 			return (ft_putstr_fd("near unexpected token '`||'\n", 1), 2);
-			
-		else 
+		else
 			return (ft_putstr_fd("near unexpected token '`|'\n", 1), 2);
 	}
 	else
@@ -63,7 +62,7 @@ int	check_pipe_syntax_error(char *s, int i, int bool)
 	return (0);
 }
 
-int check_pipe_syntax_error2(char *s, int j)
+int	check_pipe_syntax_error2(char *s, int j)
 {
 	while (s[j])
 	{

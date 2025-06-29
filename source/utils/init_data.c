@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 17:31:16 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/05/24 14:38:56 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:49:13 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ t_data	*init_data(t_data *data, int bool, char **envp)
 	return (data);
 }
 
-void	init_env (t_data *data)
+void	init_env(t_data *data)
 {
-	int i;
-	char *pwd;
+	int		i;
+	char	*pwd;
 
 	i = 0;
 	data->envp_cpy = (char **) malloc(4 * sizeof(char *));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 18:22:02 by axel              #+#    #+#             */
-/*   Updated: 2025/06/29 17:19:56 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:47:12 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	syntax_are_closed(char *command)
 	if (quotes_are_closed(command) || has_pipe_edges(command, 0)
 		|| parens_are_closed(command) || braces_are_closed(command)
 		|| brackets_are_closed(command)
-		|| check_redir_syntax_all(command, 0 , 0, '\0'))
+		|| check_redir_syntax_all(command, 0, 0, '\0'))
 		return (1);
 	else
 		return (0);

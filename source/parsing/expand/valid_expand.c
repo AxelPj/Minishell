@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 20:33:14 by axel              #+#    #+#             */
-/*   Updated: 2025/06/24 17:19:36 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:51:12 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	find_end_word_split_dol(char *s, int *i)
 	}
 	else
 	{
-		while (s[start] && (ft_isalnum(s[start]) || s[start] == '_' || s[start] == '?'))
+		while (s[start] && (ft_isalnum(s[start])
+				|| s[start] == '_' || s[start] == '?'))
 		{
 			if (s[start - 1] == '?')
 				break ;
@@ -70,7 +71,8 @@ int	find_end_dq_to_expand(int *i, char *s, int count_dol)
 
 	start = *i;
 	start++;
-	while (s[start] && in_dq(s[start]) == 0 && s[start] != '$' && s[start] != '\0')
+	while (s[start] && in_dq(s[start]) == 0
+		&& s[start] != '$' && s[start] != '\0')
 		start++;
 	if (s[start] == '\"')
 		*i = start;

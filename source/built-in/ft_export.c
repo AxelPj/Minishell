@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 11:20:14 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 14:47:53 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:22:17 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	free_tab_export(char **tab)
 
 int	handle_export_arg(t_exec *info, t_data *data, int i)
 {
-	char	*equal;
 	int		idx;
 
 	if (!is_valid_varname(info->tab_args[0][i]))
@@ -37,8 +36,7 @@ int	handle_export_arg(t_exec *info, t_data *data, int i)
 		ft_putstr_fd("': not a valid identifier\n", 2);
 		return (1);
 	}
-	equal = strchr(info->tab_args[0][i], '=');
-	if (equal)
+	else
 	{
 		idx = var_exists(data->envp_cpy, info->tab_args[0][i]);
 		if (idx >= 0)

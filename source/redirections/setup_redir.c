@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 17:24:57 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 19:21:11 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:27:46 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ void	heredoc_while(char *line, char *lim, int *p)
 {
 	while (1)
 	{
-		write(1, "> ", 1);
-		line = get_next_line(STDIN_FILENO, line);
+		write(1, "> ", 2);
+		line = get_next_line(STDIN_FILENO);
 		if (ft_strcmp(line, lim) == 0)
 			break ;
 		write(p[1], line, strlen(line));
-		write(p[1], "\n", 1);
 	}
 	free(line);
 	close(p[1]);

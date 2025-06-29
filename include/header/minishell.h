@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 17:18:45 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:54:45 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int		find_end_dq_to_expand(int *i, char *s, int count_dol);
 void	find_end_word_split_dol(char *s, int *i);
 t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i);
 char	**change_var_to_value(char **tab, int count_doll, int i);
-char	*extract_var_name(char *s, int start);
+char	*extract_var_name(char *s, int start, int end);
 char	*join_expand(char **tab, int size);
 int		is_there_a_dol(char *s);
 int		invalid_car_expand(char *s, int *i);
@@ -249,6 +249,6 @@ void	replace_env(char *key, char *value, char **envp);
 char	*ft_readline(int fd, char *stach);
 char	*recoveraftern(char *stach);
 char	*recoverbeforen(char *line);
-char	*get_next_line(int fd, char *line);
+char	*get_next_line(int fd);
 
 #endif
