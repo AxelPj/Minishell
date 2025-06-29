@@ -14,23 +14,15 @@
 
 void	*ft_calloc(int nmemb, int size)
 {
-	void			*tab;
-	size_t			total_size;
-	unsigned char	*ptr;
-	size_t			i;
+	void *tab;
+	size_t total_size;
 
-	i = 0;
 	total_size = (size_t)nmemb * size;
-	if (nmemb == 0 || size == 0)
-		return (malloc(0));
+	if (total_size == 0)
+		return (NULL);
 	tab = malloc(total_size);
 	if (!tab)
 		return (NULL);
-	ptr = (unsigned char *)tab;
-	while (i < total_size)
-	{
-		ptr[i] = 0;
-		i++;
-	}
+	ft_memset(tab, 0, total_size);
 	return (tab);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:15:49 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/24 17:16:25 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:12:33 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,3 @@ void	print_pars_lst(t_data *data)
 	}
 }
 
-void	print_data_lst(t_data *data)
-{
-	t_list	*current;
-
-	current = data->token_lst;
-	while (current && current->next)
-	{
-		printf("s = %s token = %d\n", current->s, current->token);
-		current = current->next;
-	}
-}

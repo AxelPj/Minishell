@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 10:19:55 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/29 19:38:41 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:36:59 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 #  define BUFFER_SIZE 2
 # endif
 
-char	*ft_readline(int fd, char *stach);
+/* char	*ft_readline(int fd, char *stach);
 char	*recoveraftern(char *stach);
-char	*recoverbeforen(char *line);
+char	*recoverbeforen(char *line); */
 char	*get_next_line(int fd);
 
 #endif
