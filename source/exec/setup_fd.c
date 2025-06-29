@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_fd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 16:56:21 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/24 17:01:47 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 18:52:19 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	setup_output(int idx, t_exec *info)
 		if (fd < 0)
 		{
 			perror(info->outfile[idx]);
+			free(info->outfile[idx]);
 			exit(EXIT_FAILURE);
 		}
 		dup2(fd, STDOUT_FILENO);

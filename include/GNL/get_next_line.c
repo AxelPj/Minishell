@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:16:37 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/24 17:33:55 by lesalmon         ###   ########.fr       */
+/*   Created: 2025/06/29 19:27:55 by lesalmon          #+#    #+#             */
+/*   Updated: 2025/06/29 19:29:16 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -83,11 +84,11 @@ char	*recover_aftern(char *stash)
 	return (newstash);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, char *line)
 {
-	char		*line;
-	static char	*stash = NULL;
-
+	static char	*stash;
+    
+    stash = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash = ft_readline(fd, stash);

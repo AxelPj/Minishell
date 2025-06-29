@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 17:24:57 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/24 17:47:31 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:21:11 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,12 @@ void	handle_heredoc_signal(int sig)
 	exit(130);
 }
 
-static void	trim_eol(char *s)
-{
-	size_t	len;
-
-	len = ft_strlen(s);
-	while (len > 0 && (s[len - 1] == '\n' || s[len - 1] == '\r'
-			|| s[len - 1] == ' ' || s[len - 1] == '\t'))
-		s[--len] = '\0';
-}
-
 void	heredoc_while(char *line, char *lim, int *p)
 {
 	while (1)
 	{
-		write(1, "> ", 2);
-		line = get_next_line(STDIN_FILENO);
-		if (!line)
-			break ;
-		trim_eol(line);
+		write(1, "> ", 1);
+		line = get_next_line(STDIN_FILENO, line);
 		if (ft_strcmp(line, lim) == 0)
 			break ;
 		write(p[1], line, strlen(line));
@@ -87,13 +74,13 @@ void	setup_redir(t_exec *info, char **args)
 	{
 		if (!ft_strcmp(args[i], "|"))
 			cmd++;
-		else if (!ft_strcmp(args[i], "<<") && args[i + 1])
+		else if (!ft_strncmp(args[i], "<<", 2) && args[i + 1])
 			heredoc(info, args, cmd, i);
-		else if (!ft_strcmp(args[i], "<") && args[i + 1])
-			heredoc_limit(info, args, cmd, i);
-		else if (!ft_strcmp(args[i], ">>") && args[i + 1])
+		else if (!ft_strncmp(args[i], ">>", 2) && args[i + 1])
+			append(info, args, cmd, i);
+		else if (!ft_strncmp(args[i], "<", 1) && args[i + 1])
 			infile(info, args, cmd, i);
-		else if (!ft_strcmp(args[i], ">") && args[i + 1])
+		else if (!ft_strncmp(args[i], ">", 1) && args[i + 1])
 			outfile(info, args, cmd, i);
 		i++;
 	}

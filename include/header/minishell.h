@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/27 22:17:21 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:07:51 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,13 @@ typedef struct s_exec
 	int		*fd;
 	int		*infile; // <
 	int		*here_doc; // <<
-	char	**heredoc_lim; // >>
+	char	**append; // >>
 	char	**outfile; // >
 	int		*out_flags; // 0_???
 }	t_exec;
 
 //---------------MAIN----------------//
+void	sigint_parent(int sig);
 //---------------SHELL_UTILS-------------//
 void	set_shell(t_data *data);
 void	sh_lvl(char **envp);
@@ -153,7 +154,7 @@ char	***import_tabs(t_data *data, t_exec *pipex, int count, int i);
 int		verif_built_in(char *str);
 void	print_lst(t_data *data);
 t_data	*init_data(t_data *data, int bool, char **envp);
-void	init_env (t_data *data);
+void	init_env(t_data *data);
 char	**envp_cpy(t_data *data, char **envp);
 //--------------PRINTF_UTILS--------------//
 void	print_pars_lst(t_data *data);
@@ -204,15 +205,18 @@ int		create_pipes(int *fd, int nb_pipes);
 //---------------SETUP_FD----------------//
 void	setup_input(int idx, t_exec *info);
 //---------------REDIRECTION----------------//
+void	sigint_redir(void);
 char	**rm_redir(char **args);
 void	setup_output(int idx, t_exec *info);
 void	close_pipes(t_exec *info);
 //--------------SETUP_REDIR-------------//
+void	trim_eol(char *s);
+void	handle_heredoc_signal(int sig);
 int		setup_here_doc(char *lim);
 void	setup_redir(t_exec *info, char **arg);
 //--------------REDIR_UTILS-------------//
 void	heredoc(t_exec *info, char **args, int cmd, int i);
-void	heredoc_limit(t_exec *info, char **args, int cmd, int i);
+void	append(t_exec *info, char **args, int cmd, int i);
 void	infile(t_exec *info, char **args, int cmd, int i);
 void	outfile(t_exec *info, char **args, int cmd, int i);
 //--------------BUILT-IN--------------//
@@ -239,6 +243,6 @@ void	replace_env(char *key, char *value, char **envp);
 char	*ft_readline(int fd, char *stach);
 char	*recoveraftern(char *stach);
 char	*recoverbeforen(char *line);
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, char *line);
 
 #endif

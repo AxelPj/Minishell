@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:48:08 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/23 15:52:00 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 17:22:32 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	info_heredoc(t_exec *info)
 	i = 0;
 	info->infile = malloc(info->nb_cmds * sizeof(int));
 	info->here_doc = malloc(info->nb_cmds * sizeof(int));
-	info->heredoc_lim = malloc(info->nb_cmds * sizeof(char *));
+	info->append = malloc(info->nb_cmds * sizeof(char *));
 	info->outfile = malloc(info->nb_cmds * sizeof(char *));
 	info->out_flags = malloc(info->nb_cmds * sizeof(int));
-	if (!info->infile || !info->here_doc || !info->heredoc_lim
+	if (!info->infile || !info->here_doc || !info->append
 		|| !info->outfile || !info->out_flags)
 	{
 		perror("malloc");
@@ -52,7 +52,7 @@ void	info_heredoc(t_exec *info)
 	{
 		info->infile[i] = -1;
 		info->here_doc[i] = 0;
-		info->heredoc_lim[i] = NULL;
+		info->append[i] = NULL;
 		info->outfile[i] = NULL;
 		info->out_flags[i] = 0;
 		i++;
