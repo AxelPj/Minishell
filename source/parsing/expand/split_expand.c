@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:07:36 by axel              #+#    #+#             */
-/*   Updated: 2025/06/24 17:11:48 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 17:39:42 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**split_into_expand(char *processed, t_data *data, int i, int j)
 	tab = malloc((data->nb_token + 1) * sizeof(char *));
 	if (!tab || !processed)
 		return (NULL);
-	while (j < data->nb_token)
+	while (processed[i] && j < data->nb_token)
 	{
 		if (processed[i] != '$')
 			tab[j] = find_end_word_split_expand(processed, &i);
@@ -73,7 +73,8 @@ char	*find_end_word_split_expand(char *s, int *start)
 			while (in_sq(s[j]))
 				j++;
 		}
-		j++;
+		if (s[j])
+			j++;
 	}
 	tab = ft_substr(s, i, (j - i));
 	*start = j;

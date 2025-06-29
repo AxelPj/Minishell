@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/24 17:11:07 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 16:42:47 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,14 @@ void	minishell(char *command, t_data	*data)
 		command = readline("OH MI(ni)SHELL> ");
 		if (command == NULL)
 			ctrl_d(data, info);
-		if (ft_strlen(command) >= 1 && !syntax_are_closed(command))
+		if (ft_strlen(command) >= 1)
 		{
 			add_history(command);
-			a_out(data, command, info);
+			if (!syntax_are_closed(command))
+				a_out(data, command, info);
 		}
 		else
-		{
 			free(command);
-			ft_putstr_fd("minishell : syntax error.\n", 2);
-		}
 
 	}
 	free(info);
