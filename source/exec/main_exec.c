@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:56:33 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/24 17:01:02 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 17:54:04 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	exec_main(t_data *data, t_exec *info)
 int	exec_setup(t_data *data, char **tab, t_exec *info)
 {
 	int		i;
-	int		j;
 	char	**new_args;
 
 	g_status = 0;
@@ -69,13 +68,13 @@ int	exec_setup(t_data *data, char **tab, t_exec *info)
 	}
 	info = init_infos(info);
 	info_heredoc(info);
-	j = 0;
-	while (info->tab_args[j])
+	i = 0;
+	while (info->tab_args[i])
 	{
-		new_args = rm_redir(info->tab_args[j]);
-		free_split(info->tab_args[j]);
-		info->tab_args[j] = new_args;
-		j++;
+		new_args = rm_redir(info->tab_args[i]);
+		free_split(info->tab_args[i]);
+		info->tab_args[i] = new_args;
+		i++;
 	}
 	setup_redir(info, tab);
 	exec_main(data, info);

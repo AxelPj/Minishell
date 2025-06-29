@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:45:52 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/24 15:35:18 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 18:52:15 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,23 @@ void	free_info(t_exec *info)
 	i = 0;
 	while (i < info->nb_cmds)
 	{
-		if (info->heredoc_lim && info->heredoc_lim[i])
+		if (info->append && info->append[i])
 		{
-			free(info->heredoc_lim[i]);
-			info->heredoc_lim[i] = NULL;
+			free(info->append[i]);
+			info->append[i] = NULL;
+		}
+		if (info->outfile && info->outfile[i])
+		{
+			free(info->outfile[i]);
+			info->outfile[i] = NULL;
 		}
 		i++;
 	}
-	if (info->infile)
-		free(info->infile);
-	if (info->here_doc)
-		free(info->here_doc);
-	if (info->heredoc_lim)
-		free(info->heredoc_lim);
-	if (info->outfile)
-		free(info->outfile);
-	if (info->out_flags)
-		free(info->out_flags);
+	free(info->infile);
+	free(info->here_doc);
+	free(info->append);
+	free(info->outfile);
+	free(info->out_flags);
 	if (info->tab_args)
 		free_tab_args(info->tab_args);
 }

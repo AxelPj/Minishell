@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 16:56:37 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/23 16:04:40 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 17:49:27 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	sigint_redir()
+{
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
 
 int	count_clean_args(char **args)
 {

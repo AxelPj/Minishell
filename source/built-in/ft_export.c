@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 11:20:14 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 14:47:53 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	print_export(char **envp, int i)
 	i = 0;
 	while (i < env_len)
 	{
-		ft_putstr_fd("declare -x", 1);
+		ft_putstr_fd("declare -x ", 1);
 		ft_putstr_fd(tab[i], 1);
 		ft_putstr_fd("\n", 1);
 		i++;
