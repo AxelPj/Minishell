@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 18:07:11 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/22 13:42:57 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 23:02:15 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,6 @@ static int	is_numeric(char *str)
 
 int	ft_exit(char **args, t_exec *info, t_data *data, int bool)
 {
-	if (args == NULL || !args[1])
-	{
-		ft_putstr_fd("exit\n", 1);
-		if (bool == 1)
-			free_partially(data, info);
-		else
-			free(info->fd);
-		free_and_exit(data, info, 1);
-	}
 	if (!is_numeric(args[1]))
 	{
 		ft_putstr_fd("minishell: exit: \n", 2);
@@ -53,6 +44,15 @@ int	ft_exit(char **args, t_exec *info, t_data *data, int bool)
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		return (1);
+	}
+	else
+	{
+		ft_putstr_fd("exit\n", 1);
+		if (bool == 1)
+			free_partially(data, info);
+		else
+			free(info->fd);
+		free_and_exit(data, info, 1);
 	}
 	exit((unsigned char)atol(args[1]));
 }

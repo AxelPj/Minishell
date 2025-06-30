@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/30 21:45:12 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 23:05:44 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,29 @@ void	ctrl_d(t_data *data, t_exec *info)
 
 void	a_out(t_data *data, char *command, t_exec *info, int size)
 {
-		data->processed = space_to_input(data, command, 0);
-		free(command);
-		command = NULL;
-		data->tab_token = split_into_tokens(data->processed, data);
-		free(data->processed);
-		data->processed = NULL;
-		size = tablen((void **)data->tab_token);
-		data->parsing = sort_token(data, 0, size);
-		data->parsing = process_expand(data, data->parsing, 0, 0);
-		if (!data->parsing->tab_tok || !data->parsing->tab_tok[0])
-		{
-			data->parsing = free_lst_pars(data->parsing);
-			free_all(data);
-			return ;
-		}
-		data->parsing = clear_tab(data);
-		info->tab_args = import_tabs(data, info,
-				ft_lst_pars_size(data->parsing), 0);
+	data->processed = space_to_input(data, command, 0);
+	free(command);
+	command = NULL;
+	data->tab_token = split_into_tokens(data->processed, data);
+	free(data->processed);
+	data->processed = NULL;
+	size = tablen((void **)data->tab_token);
+	data->parsing = sort_token(data, 0, size);
+	data->parsing = process_expand(data, data->parsing, 0, 0);
+	if (!data->parsing->tab_tok || !data->parsing->tab_tok[0])
+	{
 		data->parsing = free_lst_pars(data->parsing);
-		info->nb_args = 0;
-		info->nb_cmds = 1;
-		exec_setup(data, data->tab_token, info);
 		free_all(data);
+		return ;
+	}
+	data->parsing = clear_tab(data);
+	info->tab_args = import_tabs(data, info,
+			ft_lst_pars_size(data->parsing), 0);
+	data->parsing = free_lst_pars(data->parsing);
+	info->nb_args = 0;
+	info->nb_cmds = 1;
+	exec_setup(data, data->tab_token, info);
+	free_all(data);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -66,13 +66,15 @@ int	main(int argc, char **argv, char **envp)
 	command = NULL;
 	signal(SIGINT, sigint_parent);
 	signal(SIGQUIT, SIG_IGN);
-	if (argc > 1 && !ft_strcmp(argv[1], "env") && !ft_strcmp(argv[2], "-i"))
+	if (!envp[0])
 	{
 		envp = NULL;
 		data = init_data(data, 1, envp);
 	}
 	else
 		data = init_data(data, 0, envp);
+	(void)argc;
+	(void)argv;
 	minishell(command, data);
 	data->envp_cpy = free_tab(data->envp_cpy);
 	free(data);

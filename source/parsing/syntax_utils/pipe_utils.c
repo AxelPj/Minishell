@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:37:34 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/30 21:24:42 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/30 23:05:12 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	check_pipe_syntax_error2(char *s, int j)
 			while (s[j])
 			{
 				if (s[j] != '|' && in_space(s[j]))
-					break;
+					break ;
 				if (s[j] == '|')
 				{
 					ft_putstr_fd("near unexpected token '`||'\n", 2);

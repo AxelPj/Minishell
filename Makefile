@@ -6,7 +6,7 @@
 #    By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/06/29 19:29:39 by lesalmon         ###   ########.fr        #
+#    Updated: 2025/06/30 22:12:43 by axelpeti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ $(LIBFT):
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@echo "$(YELLOW)📝 Compiling $<...$(RESET)"
+	@echo "$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@"
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 	@echo "$(GREEN)✅ Compilation of $< finished$(RESET)"
 
