@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 16:46:47 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/24 16:47:14 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 15:23:55 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	set_last_status(int status)
 	else if ((status & 0x7F) > 0)
 		g_status = 128 + (status & 0x7F);
 	else
-		g_status = 1;
+		g_status = 0;
 }
 
 void	builtin_exec(t_exec *info, int idx, t_data *data)

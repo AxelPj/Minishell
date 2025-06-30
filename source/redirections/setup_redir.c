@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 17:24:57 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 21:43:52 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/30 14:57:41 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,24 @@ void	heredoc_while(char *line, char *lim, int *p)
 {
 	int	len;
 	int	len_line;
-	
-	len = ft_strlen(lim);
-    while (1)
-    {
-        write(1, "> ", 2);
-        line = get_next_line(STDIN_FILENO);
-		len_line = ft_strlen(line);
-        if (!line)
-            break ;
-        if (ft_strcmp(line, lim) == 0 && len_line - 1 == len)
-            break ;
-        write(p[1], line, ft_strlen(line));
-        free(line);
-    }
-	free(line);
-    close(p[1]);
-    exit(0);
-}
 
+	len = ft_strlen(lim);
+	while (1)
+	{
+		write(1, "> ", 2);
+		line = get_next_line(STDIN_FILENO);
+		len_line = ft_strlen(line);
+		if (!line)
+			break ;
+		if (ft_strcmp(line, lim) == 0 && len_line - 1 == len)
+			break ;
+		write(p[1], line, ft_strlen(line));
+		free(line);
+	}
+	free(line);
+	close(p[1]);
+	exit(0);
+}
 
 int	setup_here_doc(char *lim)
 {

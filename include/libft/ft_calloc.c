@@ -14,8 +14,8 @@
 
 void	*ft_calloc(int nmemb, int size)
 {
-	void *tab;
-	size_t total_size;
+	void	*tab;
+	size_t	total_size;
 
 	total_size = (size_t)nmemb * size;
 	if (total_size == 0)

@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:00:49 by axel              #+#    #+#             */
-/*   Updated: 2025/06/29 19:54:25 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 15:08:23 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 				{
 					tab = split_into_expand(current->tab_tok[i], data, 0, 0);
 					tab = change_var_to_value(tab, count_dol, 0);
+					free(current->tab_tok[i]);
 					current->tab_tok[i] = join_expand(tab, count_dol);
 					free_tab(tab);
 				}

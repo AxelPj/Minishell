@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:15:49 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 21:12:33 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/30 14:57:05 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ void	print_pars_lst(t_data *data)
 		i++;
 	}
 }
-

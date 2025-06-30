@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:53:23 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/12 18:13:28 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 15:23:42 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
