@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/30 18:26:17 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/30 18:53:11 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_exec
 }	t_exec;
 
 void	pass_quote(char *s, int *i, char c);
-
+char **filter_empty_tokens(char **tab);
 //---------------MAIN----------------//
 void	sigint_parent(int sig);
 //---------------SHELL_UTILS-------------//

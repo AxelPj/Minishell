@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/30 16:48:51 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 18:55:45 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ void	a_out(t_data *data, char *command, t_exec *info)
 		size = tablen((void **)data->tab_token);
 		data->parsing = sort_token(data, 0, size);
 		data->parsing = process_expand(data, data->parsing, 0, 0);
-		data->parsing = clear_tab(data);
-		info->tab_args = import_tabs(data, info,
-				ft_lst_pars_size(data->parsing), 0);
-		if (!info->tab_args || !info->tab_args[0] || !info->tab_args[0][0])
+		if (!data->parsing->tab_tok || !data->parsing->tab_tok[0])
 		{
 			data->parsing = free_lst_pars(data->parsing);
 			free_all(data);
 			return ;
 		}
+		data->parsing = clear_tab(data);
+		info->tab_args = import_tabs(data, info,
+				ft_lst_pars_size(data->parsing), 0);
 		data->parsing = free_lst_pars(data->parsing);
 		info->nb_args = 0;
 		info->nb_cmds = 1;

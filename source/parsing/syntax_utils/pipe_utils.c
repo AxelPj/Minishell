@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:37:34 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/30 18:26:10 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/30 18:35:44 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	check_pipe_syntax_error2(char *s, int j)
 {
 	while (s[j])
 	{
+		if (in_sq(s[j]) ||  in_dq(s[j]))
+			pass_quote(s, &j, s[j]);
 		if (s[j] == '|')
 		{
 			j++;
@@ -81,7 +83,8 @@ int	check_pipe_syntax_error2(char *s, int j)
 				j++;
 			}
 		}
-		j++;
+		if (s[j])
+			j++;
 	}
 	return (0);
 }
