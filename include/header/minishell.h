@@ -24,6 +24,8 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <dirent.h>
+# include <errno.h>
 
 extern long	g_status;
 
