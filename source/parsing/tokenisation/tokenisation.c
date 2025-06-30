@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:31 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/30 19:51:04 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/30 21:06:22 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	count_token_word(int i, char **tab_token, int size)
 	count = 0;
 	while (tab_token[i] && i < size)
 	{
-		if (token_type(tab_token[i]) != 0)
+		if (tab_token[i] && token_type(tab_token[i]) != 0)
 		{
 			if (count > 0)
 				return (count);

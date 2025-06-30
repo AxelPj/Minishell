@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:00:49 by axel              #+#    #+#             */
-/*   Updated: 2025/06/30 19:48:04 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/30 21:03:16 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**change_var_to_value(char **tab, int count_doll, int i)
 	while (tab[i] && count_doll > 0)
 	{
 		if (tab[i][1] && tab[i][0] == '$' && tab[i][1] == '?')
-			dol_interog(tab[i]);
+			tab[i] = dol_interog(tab[i]);
 		else if (tab[i][0] == '$' && tab[i][1])
 		{
 			var_name = extract_var_name(tab[i], 0, 0);

@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:43:44 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/30 19:50:21 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/30 21:12:33 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	redir_error_at(char *s, int i, char c, int count)
 		ft_putstr_fd("'\n", 2);
 		return (1);
 	}
-	else if (is_redir(s[i]))
+	else if (s[i] && is_redir(s[i]))
 	{
 		ft_putstr_fd("syntax error near unexpected token `", 2);
 		write(2, &s[i], 1);
@@ -49,7 +49,7 @@ int	check_redir_syntax_all(char *s, int i, int count, char c)
 	{
 		if (in_sq(s[i]) || in_dq(s[i]))
 			pass_quote(s, &i, s[i]);
-		if (is_redir(s[i]))
+		if (s[i] && is_redir(s[i]))
 		{
 			c = s[i];
 			count = 0;
@@ -62,11 +62,11 @@ int	check_redir_syntax_all(char *s, int i, int count, char c)
 				i++;
 			if (redir_error_at(s, i, c, count))
 				return (1);
-			if (is_redir(s[i]))
+			if (s[i] && is_redir(s[i]))
 				return (ft_putstr_fd("syntax error near unexpected token `", 2),
 					write(2, &s[i], 1), ft_putstr_fd("'\n", 2), 1);
 		}
-		else
+		else if (s[i])
 			i++;
 	}
 	return (0);

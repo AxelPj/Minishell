@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/30 18:55:45 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/30 20:56:49 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,8 @@ void	ctrl_d(t_data *data, t_exec *info)
 	ft_exit(NULL, info, data, 0);
 }
 
-void	a_out(t_data *data, char *command, t_exec *info)
+void	a_out(t_data *data, char *command, t_exec *info, int size)
 {
-	int	size;
-
-	size = 0;
-	if (command)
-	{
 		data->processed = space_to_input(data, command, 0);
 		free(command);
 		command = NULL;
@@ -60,7 +55,6 @@ void	a_out(t_data *data, char *command, t_exec *info)
 		info->nb_cmds = 1;
 		exec_setup(data, data->tab_token, info);
 		free_all(data);
-	}
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -98,7 +92,7 @@ void	minishell(char *command, t_data	*data)
 		{
 			add_history(command);
 			if (!syntax_are_closed(command))
-				a_out(data, command, info);
+				a_out(data, command, info, 0);
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:37:34 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/30 19:50:45 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/30 21:24:42 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ int	check_pipe_syntax_error2(char *s, int j)
 	{
 		if (in_sq(s[j]) || in_dq(s[j]))
 			pass_quote(s, &j, s[j]);
-		if (s[j] == '|')
+		else if (s[j] == '|')
 		{
 			j++;
 			while (s[j])
 			{
 				if (s[j] != '|' && in_space(s[j]))
-					break ;
+					break;
 				if (s[j] == '|')
 				{
 					ft_putstr_fd("near unexpected token '`||'\n", 2);
@@ -83,7 +83,7 @@ int	check_pipe_syntax_error2(char *s, int j)
 				j++;
 			}
 		}
-		if (s[j])
+		else if (s[j])
 			j++;
 	}
 	return (0);
@@ -95,7 +95,7 @@ void	pass_quote(char *s, int *i, char c)
 
 	start = *i;
 	start++;
-	while (s[start] != c)
+	while (s[start] && s[start] != c)
 		start++;
-	*i = start + 1;
+	*i = start;
 }
