@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 19:54:45 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 18:26:17 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct s_exec
 	char	**outfile; // >
 	int		*out_flags; // 0_???
 }	t_exec;
+
+void	pass_quote(char *s, int *i, char c);
 
 //---------------MAIN----------------//
 void	sigint_parent(int sig);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:37:34 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/29 19:47:30 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 18:26:10 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,15 @@ int	check_pipe_syntax_error2(char *s, int j)
 		j++;
 	}
 	return (0);
+}
+
+void	pass_quote(char *s, int *i, char c)
+{
+	int	start;
+
+	start = *i;
+	start++;
+	while (s[start] != c)
+		start++;
+	*i = start + 1;
 }
