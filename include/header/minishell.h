@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/30 19:42:14 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 19:49:13 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int		check_pipe_syntax_error(char *s, int i, int bool);
 int		check_pipe_syntax_error2(char *s, int j);
 
 //------syntax_utils------//
+void	pass_quote(char *s, int *i, char c);
 int		redir_error_at(char *s, int i, char c, int count);
 int		is_redir(char c);
 int		check_redir_syntax_all(char *s, int i, int count, char c);
@@ -136,7 +137,7 @@ void	skip_sq(char *processed, int *i);
 void	skip_to_space_or_q(char *processed, int *i);
 				//------expand------//
 char	**split_into_expand(char *processed, t_data *data, int i, int j);
-char	*find_end_dol_expand(char *s, int *start);
+char	*find_end_dol_expand(char *s, int *start, int i);
 char	*find_end_word_split_expand(char *s, int *start);
 int		count_word_split_expand(char *s, int i, int count_dol);
 int		find_end_dq_to_expand(int *i, char *s, int count_dol);
@@ -149,6 +150,7 @@ int		is_there_a_dol(char *s);
 int		invalid_car_expand(char *s, int *i);
 int		char_valid_dol(char s);
 char	*dol_interog(char *s);
+char	**filter_empty_tokens(char **tab, int i, int j);
 				//------clean_quote------//
 t_pars	*clear_tab(t_data *data);
 int		verif_clean_q(char *tab);

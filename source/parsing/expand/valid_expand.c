@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 20:33:14 by axel              #+#    #+#             */
-/*   Updated: 2025/06/29 19:51:12 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 19:49:32 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	count_word_split_expand(char *s, int i, int count_dol)
 				i++;
 		}
 		else if (in_dq(s[i]))
-			count_dol = find_end_dq_to_expand (&i, s, count_dol);
+			count_dol = find_end_dq_to_expand(&i, s, count_dol);
 		else if (s[i] && s[i] == '$')
 		{
 			if (s[0] == '$')
@@ -33,9 +33,9 @@ int	count_word_split_expand(char *s, int i, int count_dol)
 				count_dol += 2;
 			find_end_word_split_dol(s, &i);
 		}
-		else if (s[i + 1] && s[i] && s[i + 1] == '\0' && s[i])
-			count_dol++;
 		i++;
+		if (s[i] == '\0' && (!in_space(s[i - 1])))
+			count_dol++;
 	}
 	return (count_dol);
 }
