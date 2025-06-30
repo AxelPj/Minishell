@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:45:52 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 18:52:15 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 21:27:51 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ void	free_split(char **tab)
 	while (tab[i])
 		free(tab[i++]);
 	free(tab);
+}
+
+void	free_pipes(t_exec *info)
+{
+	if (info->fd)
+	{
+		free(info->fd);
+		info->fd = NULL;
+	}
 }
 
 void	free_info(t_exec *info)
@@ -50,6 +59,7 @@ void	free_info(t_exec *info)
 	free(info->out_flags);
 	if (info->tab_args)
 		free_tab_args(info->tab_args);
+	free_pipes(info);
 }
 
 void	free_tab_args(char ***cmds_args)

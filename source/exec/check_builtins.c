@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:53:23 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/30 15:53:06 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 21:24:16 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,15 @@ int	execute_builtin(char *cmd, char **args, t_exec *info, t_data *data)
 {
 	if (!cmd)
 		return (1);
-	if (!ft_strncmp(cmd, "cd", 2) && args[2])
-	{
-		ft_putstr_fd("cd: too many arguments\n", 2);
-		return (1);
-	}
 	if (!ft_strncmp(cmd, "cd", 2))
+	{
+		if (args[1] && args[2])
+		{
+			ft_putstr_fd("cd: too many arguments\n", 2);
+			return (1);
+		}
 		return (ft_cd(args, data));
+	}
 	if (!ft_strncmp(cmd, "echo", 4))
 		return (ft_echo(args, STDOUT_FILENO));
 	if (!ft_strncmp(cmd, "pwd", 3))
