@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/29 19:34:16 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 15:52:40 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ void	a_out(t_data *data, char *command, t_exec *info)
 		data->parsing = clear_tab(data);
 		info->tab_args = import_tabs(data, info,
 				ft_lst_pars_size(data->parsing), 0);
+		if (!info->tab_args || !info->tab_args[0] || !info->tab_args[0][0])
+		{
+			data->parsing = free_lst_pars(data->parsing);
+			free_all(data);
+			return ;
+		}
 		data->parsing = free_lst_pars(data->parsing);
 		info->nb_args = 0;
 		info->nb_cmds = 1;
