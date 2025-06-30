@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 19:54:45 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 19:42:14 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <dirent.h>
+# include <errno.h>
 
 extern long	g_status;
 
