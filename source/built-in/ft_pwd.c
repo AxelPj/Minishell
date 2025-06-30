@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:58:17 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/22 13:39:20 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 17:32:37 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int	ft_pwd(t_data *data, char *arg)
 	}
 	printf("%s\n", cwd);
 	free(cwd);
+	g_status = 0;
 	return (0);
 }

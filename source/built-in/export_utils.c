@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:11:02 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/05/24 16:23:52 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 15:30:45 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	var_exists(char **env, char *name)
 			return (i);
 		i++;
 	}
-	return (-1);
+	return (1);
 }
 
 void	update_var(char **env, int idx, char *str)
