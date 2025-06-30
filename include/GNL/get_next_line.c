@@ -6,96 +6,93 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 19:27:55 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 19:45:52 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:31:44 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_readline(int fd, char *stash)
+char	*init_line(char *stash, int *eol_loc)
 {
-	char	*buf;
-	int		bytes;
-
-	buf = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!buf)
-		return (NULL);
-	bytes = 1;
-	while (bytes > 0 && ft_strchr(stash, '\n') == -1)
-	{
-		bytes = read(fd, buf, BUFFER_SIZE);
-		if (bytes == -1)
-			return (free(buf), free(stash), stash = NULL, NULL);
-		buf[bytes] = '\0';
-		if (!stash)
-			stash = ft_strdup(buf);
-		else
-			stash = ft_strjoin(stash, buf);
-	}
-	return (free (buf), stash);
-}
-
-char	*recover_beforen(char *stash)
-{
-	int		i;
-	int		pos;
+	size_t	len;
 	char	*line;
 
-	i = 0;
-	pos = ft_strchr(stash, '\n');
-	if (pos == -1)
-		pos = ft_strlen(stash) + 1;
-	line = ft_calloc(pos + 2, sizeof(char));
+	len = 0;
+	while (stash[len] && stash[len] != '\n')
+		len++;
+	len++;
+	line = malloc(sizeof(char) * (len + 1));
 	if (!line)
-		return (free(stash), stash = NULL, NULL);
-	while (stash[i] && i <= pos)
+		return (NULL);
+	ft_memcpy(line, stash, len);
+	line[len] = '\0';
+	if (len > 0 && line[len - 1] == '\n')
+		*eol_loc = len - 1;
+	return (line);
+}
+
+size_t	locate_eol(char *line)
+{
+	size_t	i;
+
+	i = 0;
+	if (!line)
+		return (-1);
+	while (i < BUFFER_SIZE)
 	{
-		line[i] = stash[i];
+		if (line[i] == '\n' || line[i] == '\0')
+			return (i + 1);
 		i++;
+	}
+	return (i);
+}
+
+char	*extract_line(char *line, char *stash, int *eol_loc, int fd)
+{
+	char	buffer[BUFFER_SIZE + 1];
+	ssize_t	read_check;
+	size_t	line_size;
+
+	while (*eol_loc == -1)
+	{
+		ft_bzero(buffer, (BUFFER_SIZE + 1));
+		read_check = read(fd, buffer, BUFFER_SIZE);
+		if (read_check == -1)
+		{
+			free(line);
+			ft_bzero(stash, (BUFFER_SIZE + 1));
+			return (NULL);
+		}
+		line_size = locate_eol(buffer);
+		ft_strlcpy_gnl(stash, &buffer[line_size], (BUFFER_SIZE + 1));
+		buffer[line_size] = '\0';
+		line = ft_strjoin_gnl(line, buffer, eol_loc);
+		if (read_check == 0)
+		{
+			ft_bzero(stash, BUFFER_SIZE + 1);
+			break ;
+		}
 	}
 	return (line);
 }
 
-char	*recover_aftern(char *stash)
+char	*get_next_line(int fd, char *line)
 {
-	int		i;
-	int		j;
-	int		pos;
-	char	*newstash;
-
-	j = 0;
-	i = ft_strchr(stash, '\n');
-	if (i == -1)
-		return (free(stash), stash = NULL, NULL);
-	pos = ft_strlen(stash);
-	i++;
-	newstash = ft_calloc(pos - i + 1, sizeof(char));
-	if (!newstash)
-		return (free(stash), stash = NULL, NULL);
-	while (stash[i])
-	{
-		newstash[j] = stash[i];
-		j++;
-		i++;
-	}
-	free(stash);
-	stash = NULL;
-	return (newstash);
-}
-
-char	*get_next_line(int fd)
-{
-	char		*line;
-	static char	*stash = NULL;
+	static char	stash[BUFFER_SIZE + 1];
+	int			eol_loc;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stash = ft_readline(fd, stash);
-	if (!stash)
+	eol_loc = -1;
+	line = init_line(stash, &eol_loc);
+	if (!line)
 		return (NULL);
-	if (stash[0] == '\0')
-		return (free(stash), stash = NULL, NULL);
-	line = recover_beforen(stash);
-	stash = recover_aftern(stash);
+	ft_strlcpy_gnl(stash, &stash[eol_loc + 1], BUFFER_SIZE + 1);
+	line = extract_line(line, stash, &eol_loc, fd);
+	if (!line || line[0] == '\0')
+	{
+		free(line);
+		return (NULL);
+	}
 	return (line);
 }

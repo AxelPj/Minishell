@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 17:24:57 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 20:27:46 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:40:14 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,17 @@ void	handle_heredoc_signal(int sig)
 
 void	heredoc_while(char *line, char *lim, int *p)
 {
+	int	len;
+
+	len = ft_strlen(lim);
 	while (1)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
-		if (ft_strcmp(line, lim) == 0)
+		if (ft_strncmp(line, lim, len) == 0)
 			break ;
 		write(p[1], line, strlen(line));
+		write(p[1], "\n", 1);
 	}
 	free(line);
 	close(p[1]);

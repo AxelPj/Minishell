@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 19:54:45 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:31:55 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,9 +246,8 @@ int		cd_err(char *str);
 void	new_pwd(char *input, t_data *data);
 void	replace_env(char *key, char *value, char **envp);
 //--------------GNL--------------//
-char	*ft_readline(int fd, char *stach);
-char	*recoveraftern(char *stach);
-char	*recoverbeforen(char *line);
-char	*get_next_line(int fd);
+char	*ft_strjoin_gnl(char *s1, char *s2, int *eol_loc);
+void	ft_strlcpy_gnl(char *dst, const char *src, size_t dstsize);
+char	*get_next_line(int fd, char *line);
 
 #endif
