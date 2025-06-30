@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:07:36 by axel              #+#    #+#             */
-/*   Updated: 2025/06/30 18:39:57 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/30 19:48:58 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@ char	**split_into_expand(char *processed, t_data *data, int i, int j)
 		if (processed[i] != '$')
 			tab[j] = find_end_word_split_expand(processed, &i);
 		else
-			tab[j] = find_end_dol_expand(processed, &i);
+			tab[j] = find_end_dol_expand(processed, &i, 0);
 		j++;
 	}
 	tab[j] = NULL;
 	return (tab);
 }
 
-char	*find_end_dol_expand(char *s, int *start)
+char	*find_end_dol_expand(char *s, int *start, int i)
 {
-	int		i;
 	int		j;
 	char	*tab;
 
@@ -93,4 +92,27 @@ int	char_valid_dol(char s)
 		return (1);
 	else
 		return (0);
+}
+
+char	**filter_empty_tokens(char **tab, int i, int j)
+{
+	char	**new_tab;
+	int		count;
+
+	count = 0;
+	while (tab[i])
+		count += (tab[i++][0] != '\0');
+	new_tab = malloc(sizeof(char *) * (count + 1));
+	if (!new_tab)
+		return (NULL);
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i][0] != '\0')
+			new_tab[j++] = ft_strdup(tab[i]);
+		free(tab[i++]);
+	}
+	free(tab);
+	new_tab[j] = NULL;
+	return (new_tab);
 }
