@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:56:33 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/30 15:25:04 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 17:11:57 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	launch_child(int idx, t_exec *info, t_data *data)
 	if (is_builtin_child(info->tab_args[idx][0]))
 		builtin_exec(info, idx, data);
 	command(info, data->envp_cpy, idx, data);
-	exit(127);
+	exit(126 + g_status);
 }
 
 int	exec_main(t_data *data, t_exec *info)
@@ -43,7 +43,7 @@ int	exec_main(t_data *data, t_exec *info)
 	{
 		pid = fork();
 		if (pid == -1)
-			return (-1);
+			return (1);
 		if (pid == 0)
 			launch_child(i, info, data);
 		i++;

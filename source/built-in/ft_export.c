@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 11:20:14 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 20:22:17 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 15:32:48 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	handle_export_arg(t_exec *info, t_data *data, int i)
 		if (idx >= 0)
 			update_var(data->envp_cpy, idx, info->tab_args[0][i]);
 		else
-			add_var(data, info->tab_args[0][i]);
+			if (add_var(data, info->tab_args[0][i]) == 1)
+				return (1);
 	}
 	return (0);
 }
@@ -113,11 +114,13 @@ int	ft_export(t_exec *info, t_data *data)
 	}
 	while (info->tab_args[0][i])
 	{
-		if (handle_export_arg(info, data, i))
+		if (handle_export_arg(info, data, i) == 0)
 		{
 			i++;
 			continue ;
 		}
+		else if (handle_export_arg(info, data, i) == 1)
+			return (1);
 		i++;
 	}
 	return (0);

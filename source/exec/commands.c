@@ -6,7 +6,7 @@
 /*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:50:18 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/30 15:22:27 by lesalmon         ###   ########.fr       */
+/*   Updated: 2025/06/30 17:46:39 by lesalmon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,32 @@ void	cmd_notfound(char *arg)
 	ft_putstr_fd("' not found.\n", 2);
 }
 
-void	cmd_err(char *arg)
+int	exec_path(char *arg)
 {
-	ft_putstr_fd("minishell:", 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd(": No such file or directory\n", 2);
+	if (chdir(arg))
+	{
+		if (arg[0] == '.')
+		{
+			ft_putstr_fd("minishell:", 2);
+			ft_putstr_fd(arg, 2);
+			ft_putstr_fd(": Permission denied\n", 2);
+			return (g_status = 0);
+		}
+		else
+		{
+			ft_putstr_fd("minishell:", 2);
+			ft_putstr_fd(arg, 2);
+			ft_putstr_fd(": No such file or directory\n", 2);
+			return (g_status = 1);
+		}
+	}
+	else
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(arg, 1);
+		ft_putstr_fd(": Is a directory\n", 1);
+	}
+	return (g_status = 0);
 }
 
 int	command(t_exec *info, char **envp, int i, t_data *data)
@@ -37,7 +58,7 @@ int	command(t_exec *info, char **envp, int i, t_data *data)
 	if (strncmp(args[0], "./", 2) == 0 || args[0][0] == '/')
 	{
 		if ((execve(args[0], args, envp) != 0))
-			cmd_err(args[0]);
+			return (exec_path(args[0]));
 	}
 	else if (!is_builtin(args[0]))
 	{
@@ -45,7 +66,7 @@ int	command(t_exec *info, char **envp, int i, t_data *data)
 		if (!path)
 		{
 			cmd_notfound(args[0]);
-			return (1);
+			return (g_status = 1);
 		}
 		execve(path, args, envp);
 		free(path);
