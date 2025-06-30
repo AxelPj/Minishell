@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:00:49 by axel              #+#    #+#             */
-/*   Updated: 2025/06/30 18:52:56 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/06/30 19:48:04 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,12 @@ t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 			if (is_there_a_dol(current->tab_tok[i]))
 			{
 				count_dol = count_word_split_expand(current->tab_tok[i], 0, 0);
-				{
-					tab = split_into_expand(current->tab_tok[i], data, 0, 0);
-					tab = change_var_to_value(tab, count_dol, 0);
-					free(current->tab_tok[i]);
-					current->tab_tok[i] = join_expand(tab, count_dol);
-					free_tab(tab);
-				}
-				current->tab_tok = filter_empty_tokens(current->tab_tok);
+				tab = split_into_expand(current->tab_tok[i], data, 0, 0);
+				tab = change_var_to_value(tab, count_dol, 0);
+				free(current->tab_tok[i]);
+				current->tab_tok[i] = join_expand(tab, count_dol);
+				free_tab(tab);
+				current->tab_tok = filter_empty_tokens(current->tab_tok, 0, 0);
 			}
 			i++;
 		}
@@ -122,38 +120,4 @@ char	*dol_interog(char *s)
 	free(s);
 	s = ft_itoa(g_status);
 	return (s);
-}
-char **filter_empty_tokens(char **tab)
-{
-    int i, j;
-    int count = 0;
-    char **new_tab;
-
-    // Compter le nombre de tokens non vides
-    for (i = 0; tab[i]; i++)
-    {
-        if (tab[i][0] != '\0')
-            count++;
-    }
-
-    // Allouer le nouveau tableau
-    new_tab = malloc(sizeof(char *) * (count + 1));
-    if (!new_tab)
-        return NULL; // gestion erreur malloc
-
-    // Remplir le nouveau tableau avec tokens non vides
-    j = 0;
-    for (i = 0; tab[i]; i++)
-    {
-        if (tab[i][0] != '\0')
-        {
-            new_tab[j] = ft_strdup(tab[i]); // dupliquer la chaîne
-            j++;
-        }
-    }
-    new_tab[j] = NULL;
-
-    // On peut aussi free l’ancien tableau si nécessaire
-
-    return new_tab;
 }
