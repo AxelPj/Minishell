@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:00:49 by axel              #+#    #+#             */
-/*   Updated: 2025/06/30 21:03:16 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/21 17:03:40 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 			{
 				count_dol = count_word_split_expand(current->tab_tok[i], 0, 0);
 				tab = split_into_expand(current->tab_tok[i], data, 0, 0);
-				tab = change_var_to_value(tab, count_dol, 0);
+				tab = change_var_to_value(data, tab, count_dol, 0);
 				free(current->tab_tok[i]);
 				current->tab_tok[i] = join_expand(tab, count_dol);
 				free_tab(tab);
@@ -40,7 +40,7 @@ t_pars	*process_expand(t_data *data, t_pars *parsing, int count_dol, int i)
 	return (data->parsing);
 }
 
-char	**change_var_to_value(char **tab, int count_doll, int i)
+char	**change_var_to_value(t_data *data, char **tab, int count_doll, int i)
 {
 	char	*var_name;
 	char	*var_value;
@@ -52,12 +52,13 @@ char	**change_var_to_value(char **tab, int count_doll, int i)
 		else if (tab[i][0] == '$' && tab[i][1])
 		{
 			var_name = extract_var_name(tab[i], 0, 0);
-			var_value = getenv(var_name);
+			var_value = ft_env_expand(data, var_name);
 			free(tab[i]);
 			if (var_value)
 				tab[i] = ft_strdup(var_value);
 			else
 				tab[i] = ft_strdup("");
+			free(var_value);
 			free(var_name);
 			count_doll--;
 		}

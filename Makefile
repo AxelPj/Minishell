@@ -6,7 +6,7 @@
 #    By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/06/30 22:12:43 by axelpeti         ###   ########.fr        #
+#    Updated: 2025/07/21 17:02:29 by axelpeti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,14 @@ SRCS =  source/main.c \
 		source/parsing/syntax_utils/delimiteur_utils.c source/parsing/syntax_utils/quote_utils.c source/parsing/syntax_utils/pipe_utils.c source/parsing/syntax_utils/redir_utils.c source/parsing/syntax_utils/braces_utils.c source/parsing/syntax_utils/parens_utils.c source/parsing/syntax_utils/brackets_utils.c \
 		source/parsing/input/input_normalizer.c source/parsing/input/input_processor.c \
 		source/parsing/tokenisation/split_modif.c source/parsing/tokenisation/tokenisation.c \
-		source/parsing/expand/expand_var.c source/parsing/expand/valid_expand.c source/parsing/expand/split_expand.c \
+		source/parsing/expand/expand_var.c source/parsing/expand/valid_expand.c source/parsing/expand/split_expand.c source/parsing/expand/expand_utils.c \
 		source/parsing/delete_quote/del_q.c source/parsing/tokenisation/split_modif_utils.c \
 		source/parsing/export_in_tab/export_in_tab.c source/utils/utils.c source/utils/free.c \
 		source/utils/init_data.c source/utils/utils_lst.c \
 		source/built-in/ft_cd.c source/built-in/ft_echo.c source/built-in/ft_env.c source/built-in/ft_exit.c source/built-in/shell_utils.c \
-		source/built-in/ft_export.c source/built-in/export_utils.c source/built-in/ft_pwd.c source/built-in/ft_unset.c source/built-in/cd_utils.c\
+		source/built-in/ft_export.c source/built-in/export_utils.c source/built-in/ft_pwd.c source/built-in/ft_unset.c source/built-in/cd_utils.c \
 		source/exec/check_builtins.c source/exec/commands.c source/exec/free_exec.c source/exec/init_exec.c source/exec/main_exec.c source/exec/path.c \
-		source/exec/pipes.c source/exec/exec_utils.c source/exec/setup_fd.c\
+		source/exec/pipes.c source/exec/exec_utils.c source/exec/setup_fd.c \
 		source/redirections/redirection.c source/redirections/setup_redir.c \
 		source/redirections/redir_utils.c \
 		include/GNL/get_next_line.c \
