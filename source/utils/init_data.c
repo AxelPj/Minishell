@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/02 17:31:16 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/30 23:00:47 by axelpeti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/header/minishell.h"
 
 t_data	*init_data(t_data *data, int bool, char **envp)
@@ -38,11 +26,11 @@ void	init_env(t_data *data)
 
 	i = 0;
 	data->envp_cpy = (char **) malloc(5 * sizeof(char *));
-	data->envp_cpy[i++] = ft_strdup("SHELL=minishell");
+	data->envp_cpy[i++] = my_strdup("SHELL=minishell");
 	pwd = getcwd(NULL, 0);
-	data->envp_cpy[i++] = ft_strjoin("PWD=", pwd);
-	data->envp_cpy[i++] = ft_strjoin("OLDPWD=", pwd);
+	data->envp_cpy[i++] = my_strjoin("PWD=", pwd);
+	data->envp_cpy[i++] = my_strjoin("OLDPWD=", pwd);
 	free(pwd);
-	data->envp_cpy[i++] = ft_strdup("SHLVL=1");
+	data->envp_cpy[i++] = my_strdup("SHLVL=1");
 	data->envp_cpy[i] = NULL;
 }

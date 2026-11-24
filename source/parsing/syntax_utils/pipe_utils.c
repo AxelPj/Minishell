@@ -1,20 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pipe_utils.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 15:37:34 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/30 23:05:12 by axelpeti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 int	has_pipe_edges(char *s, int i)
 {
-	if (!ft_strchr(s, '|'))
+	if (my_strchr(s, '|') < 0)
 		return (0);
 	if (check_pipe_syntax_error2(s, 0))
 		return (2);
@@ -26,7 +14,7 @@ int	has_pipe_edges(char *s, int i)
 		if (check_pipe_syntax_error(s, i, 0))
 			return (1);
 	}
-	i = ft_strlen(s);
+	i = my_strlen(s);
 	i--;
 	while (i >= 0 && in_space(s[i]))
 		i--;
@@ -39,52 +27,50 @@ int	has_pipe_edges(char *s, int i)
 	return (0);
 }
 
+static int	pipe_error(int doubled)
+{
+	if (doubled)
+		my_putstr_fd("minishell: syntax error near unexpected token `||'\n", 2);
+	else
+		my_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
+	return (2);
+}
+
+/* Pipe en début (bool == 0, on avance) ou en fin de ligne (bool == 1,
+   on recule) : indique si un second pipe le suit ou le précède. */
 int	check_pipe_syntax_error(char *s, int i, int bool)
 {
 	if (bool == 1)
 	{
 		while (i >= 0 && in_space(s[i]))
 			i--;
-		if (i >= 0 && s[i] == '|')
-			return (ft_putstr_fd("near unexpected token '`||'\n", 1), 2);
-		else
-			return (ft_putstr_fd("near unexpected token '`|'\n", 1), 2);
+		return (pipe_error(i >= 0 && s[i] == '|'));
 	}
-	else
-	{
-		while (in_space(s[i]))
-			i--;
-		if (i >= 0 && s[i] == '|')
-			return (ft_putstr_fd("near unexpected token '`||'\n", 1), 2);
-		else
-			return (ft_putstr_fd("near unexpected token '`|'\n", 1), 2);
-	}
-	return (0);
+	while (s[i] && in_space(s[i]))
+		i++;
+	return (pipe_error(s[i] == '|'));
 }
 
+/* Cherche deux pipes séparés uniquement par des espaces, hors quotes. */
 int	check_pipe_syntax_error2(char *s, int j)
 {
 	while (s[j])
 	{
 		if (in_sq(s[j]) || in_dq(s[j]))
-			pass_quote(s, &j, s[j]);
-		else if (s[j] == '|')
 		{
-			j++;
-			while (s[j])
-			{
-				if (s[j] != '|' && in_space(s[j]))
-					break ;
-				if (s[j] == '|')
-				{
-					ft_putstr_fd("near unexpected token '`||'\n", 2);
-					return (1);
-				}
+			pass_quote(s, &j, s[j]);
+			if (s[j])
 				j++;
-			}
 		}
-		else if (s[j])
-			j++;
+		else if (s[j++] == '|')
+		{
+			if (s[j] == '|')
+				return (pipe_error(1), 1);
+			while (s[j] && in_space(s[j]))
+				j++;
+			if (s[j] == '|')
+				return (pipe_error(0), 1);
+		}
 	}
 	return (0);
 }

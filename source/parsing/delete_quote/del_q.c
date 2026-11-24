@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   del_q.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 15:43:05 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/02 16:42:48 by axelpeti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 t_pars	*clear_tab(t_data *data)
@@ -53,7 +41,7 @@ char	*clean_q(char *tab, int i, int j)
 	char	*clean_tab;
 	char	quote;
 
-	clean_tab = malloc(ft_strlen(tab) + 1);
+	clean_tab = malloc(my_strlen(tab) + 1);
 	if (!clean_tab)
 		return (NULL);
 	while (tab[i])

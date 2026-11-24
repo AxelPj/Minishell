@@ -1,42 +1,30 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 16:50:18 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/30 20:05:12 by lesalmon         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 void	error_message(char *arg, int i)
 {
 	if (i == 0)
 	{
-		ft_putstr_fd("Command '", 2);
-		ft_putstr_fd(arg, 2);
-		ft_putstr_fd("' not found.\n", 2);
+		my_putstr_fd("Command '", 2);
+		my_putstr_fd(arg, 2);
+		my_putstr_fd("' not found.\n", 2);
 	}
 	else if (i == 1)
 	{
-		ft_putstr_fd("minishell:", 2);
-		ft_putstr_fd(arg, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
+		my_putstr_fd("minishell:", 2);
+		my_putstr_fd(arg, 2);
+		my_putstr_fd(": No such file or directory\n", 2);
 	}
 	else if (i == 2)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(arg, 2);
-		ft_putstr_fd(": Is a directory\n", 1);
+		my_putstr_fd("minishell: ", 2);
+		my_putstr_fd(arg, 2);
+		my_putstr_fd(": Is a directory\n", 1);
 	}
 	else if (i == 3)
 	{
-		ft_putstr_fd("minishell:", 2);
-		ft_putstr_fd(arg, 2);
-		ft_putstr_fd(": Permission denied\n", 2);
+		my_putstr_fd("minishell:", 2);
+		my_putstr_fd(arg, 2);
+		my_putstr_fd(": Permission denied\n", 2);
 	}
 }
 
@@ -54,7 +42,7 @@ int	file_exist(char *arg)
 	f = readdir (fd);
 	while (f != NULL)
 	{
-		if (ft_strcmp(f->d_name, arg) == 0)
+		if (my_strcmp(f->d_name, arg) == 0)
 		{
 			closedir(fd);
 			return (g_status = 0);

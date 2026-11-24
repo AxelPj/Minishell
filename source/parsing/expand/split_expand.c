@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   split_expand.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/24 13:07:36 by axel              #+#    #+#             */
-/*   Updated: 2025/06/30 19:48:58 by axelpeti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 char	**split_into_expand(char *processed, t_data *data, int i, int j)
@@ -48,7 +36,7 @@ char	*find_end_dol_expand(char *s, int *start, int i)
 	else
 	{
 		j++;
-		while (s[j] && (ft_isalnum(s[j])
+		while (s[j] && (my_isalnum(s[j])
 				|| s[j] == '_' || char_valid_dol(s[j])))
 		{
 			if (char_valid_dol(s[j - 1]))
@@ -56,7 +44,7 @@ char	*find_end_dol_expand(char *s, int *start, int i)
 			j++;
 		}
 	}
-	tab = ft_substr(s, i, j - i);
+	tab = my_substr(s, i, j - i);
 	*start = j;
 	return (tab);
 }
@@ -80,7 +68,7 @@ char	*find_end_word_split_expand(char *s, int *start)
 		if (s[j])
 			j++;
 	}
-	tab = ft_substr(s, i, (j - i));
+	tab = my_substr(s, i, (j - i));
 	*start = j;
 	return (tab);
 }
@@ -109,7 +97,7 @@ char	**filter_empty_tokens(char **tab, int i, int j)
 	while (tab[i])
 	{
 		if (tab[i][0] != '\0')
-			new_tab[j++] = ft_strdup(tab[i]);
+			new_tab[j++] = my_strdup(tab[i]);
 		free(tab[i++]);
 	}
 	free(tab);

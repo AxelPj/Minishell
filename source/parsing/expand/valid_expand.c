@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   valid_expand.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/23 20:33:14 by axel              #+#    #+#             */
-/*   Updated: 2025/06/30 19:49:32 by axelpeti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 int	count_word_split_expand(char *s, int i, int count_dol)
@@ -54,7 +42,7 @@ void	find_end_word_split_dol(char *s, int *i)
 	}
 	else
 	{
-		while (s[start] && (ft_isalnum(s[start])
+		while (s[start] && (my_isalnum(s[start])
 				|| s[start] == '_' || s[start] == '?'))
 		{
 			if (s[start - 1] == '?')

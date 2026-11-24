@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   free_exec.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 16:45:52 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/30 21:27:51 by lesalmon         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 void	free_split(char **tab)
@@ -40,6 +28,8 @@ void	free_info(t_exec *info)
 	i = 0;
 	while (i < info->nb_cmds)
 	{
+		if (info->infile && info->infile[i] >= 0)
+			close(info->infile[i]);
 		if (info->append && info->append[i])
 		{
 			free(info->append[i]);

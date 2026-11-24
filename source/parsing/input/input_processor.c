@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   input_processor.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/22 13:32:20 by axel              #+#    #+#             */
-/*   Updated: 2025/05/29 16:45:06 by axelpeti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 char	*process_join(t_data *data, char *s2, int start, int end)
@@ -22,7 +10,7 @@ char	*process_join(t_data *data, char *s2, int start, int end)
 	if (!data->processed)
 		new_processed = malloc((end - start) + 3);
 	else
-		new_processed = malloc(ft_strlen(data->processed) + (end - start) + 3);
+		new_processed = malloc(my_strlen(data->processed) + (end - start) + 3);
 	i = 0;
 	while (data->processed && data->processed[i])
 		new_processed[k++] = data->processed[i++];
@@ -49,7 +37,7 @@ char	*process_join_quote(t_data *data, char *s2, int start, int end)
 	if (!data->processed)
 		new_processed = malloc ((end - start) + 3);
 	else
-		new_processed = malloc (ft_strlen(data->processed) + (end - start) + 3);
+		new_processed = malloc (my_strlen(data->processed) + (end - start) + 3);
 	i = 0;
 	while (data->processed && data->processed[i])
 		new_processed[k++] = data->processed[i++];

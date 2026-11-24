@@ -1,19 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   setup_fd.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/24 16:56:21 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 18:52:19 by lesalmon         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 void	setup_input(int idx, t_exec *info)
 {
+	if (info->infile[idx] == -2)
+	{
+		close_pipes(info);
+		exit(EXIT_FAILURE);
+	}
 	if (info->infile[idx] >= 0)
 	{
 		dup2(info->infile[idx], STDIN_FILENO);

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/02 17:29:04 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/29 15:45:28 by axelpeti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 char	**envp_cpy(t_data *data, char **envp)
@@ -24,7 +12,7 @@ char	**envp_cpy(t_data *data, char **envp)
 	i = 0;
 	while (i < sizelen)
 	{
-		data->envp_cpy[i] = ft_strdup(envp[i]);
+		data->envp_cpy[i] = my_strdup(envp[i]);
 		if (!data->envp_cpy[i])
 		{
 			free_tab(data->envp_cpy);
@@ -38,19 +26,19 @@ char	**envp_cpy(t_data *data, char **envp)
 
 int	verif_built_in(char *str)
 {
-	if (!ft_strcmp(str, "echo"))
+	if (!my_strcmp(str, "echo"))
 		return (1);
-	else if (!ft_strcmp(str, "cd"))
+	else if (!my_strcmp(str, "cd"))
 		return (2);
-	else if (!ft_strcmp(str, "pwd"))
+	else if (!my_strcmp(str, "pwd"))
 		return (3);
-	else if (!ft_strcmp(str, "export"))
+	else if (!my_strcmp(str, "export"))
 		return (4);
-	else if (!ft_strcmp(str, "unset"))
+	else if (!my_strcmp(str, "unset"))
 		return (5);
-	else if (!ft_strcmp(str, "env"))
+	else if (!my_strcmp(str, "env"))
 		return (6);
-	else if (!ft_strcmp(str, "exit"))
+	else if (!my_strcmp(str, "exit"))
 		return (7);
 	return (0);
 }

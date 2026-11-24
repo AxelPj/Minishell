@@ -1,36 +1,20 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   expand_utils.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/21 16:54:40 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/21 16:55:08 by axelpeti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
-char	*ft_env_expand(t_data *data, char *var)
-{
-	int		i;
-	char	*var_expand;
-	int		j;
 
-	j = 0;
+/* Renvoie une copie de la valeur de var dans l'environnement du shell,
+   ou NULL si la variable n'existe pas ou n'a pas de valeur. */
+char	*my_env_expand(t_data *data, char *var)
+{
+	int	i;
+	int	len;
+
 	i = 0;
+	len = my_strlen(var);
 	while (data->envp_cpy[i])
 	{
-		while (!ft_strncmp(data->envp_cpy[i], var, ft_strlen(var)))
-		{
-			if (ft_strchr(data->envp_cpy[i], '='))
-			{
-				j = ft_strchr(data->envp_cpy[i], '=') + 1;
-				var_expand = ft_strdup(&data->envp_cpy[i][j]);
-				return(var_expand);
-			}
-		}
+		if (!my_strncmp(data->envp_cpy[i], var, len)
+			&& data->envp_cpy[i][len] == '=')
+			return (my_strdup(&data->envp_cpy[i][len + 1]));
 		i++;
 	}
-	return (0);
+	return (NULL);
 }

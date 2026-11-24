@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 14:32:15 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/29 19:49:46 by lesalmon         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/header/minishell.h"
 
 void	free_all(t_data *data)
@@ -41,15 +29,13 @@ t_pars	*free_lst_pars(t_pars *parsing)
 {
 	t_pars	*current;
 	t_pars	*next;
-	int		i;
 	int		size;
 
-	size = ft_lst_pars_size(parsing);
+	size = my_lst_pars_size(parsing);
 	current = parsing;
 	while (size > 0)
 	{
 		next = current->next;
-		i = 0;
 		current->tab_tok = free_tab(current->tab_tok);
 		free(current);
 		current = next;

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   export_utils.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/24 16:11:02 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/30 15:30:45 by lesalmon         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/header/minishell.h"
 
 int	is_valid_varname(char *str)
@@ -43,11 +31,12 @@ int	var_exists(char **env, char *name)
 		len++;
 	while (env[i])
 	{
-		if (!strncmp(env[i], name, len))
+		if (!my_strncmp(env[i], name, len)
+			&& (env[i][len] == '=' || env[i][len] == '\0'))
 			return (i);
 		i++;
 	}
-	return (1);
+	return (-1);
 }
 
 void	update_var(char **env, int idx, char *str)
@@ -74,7 +63,7 @@ int	add_var(t_data *data, char *str)
 		new_env[i] = data->envp_cpy[i];
 		i++;
 	}
-	new_env[env_len] = ft_strdup(str);
+	new_env[env_len] = my_strdup(str);
 	new_env[env_len + 1] = NULL;
 	free(data->envp_cpy);
 	data->envp_cpy = new_env;

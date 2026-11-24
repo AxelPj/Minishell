@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42perpignan.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 16:44:16 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/12 17:31:45 by lesalmon         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 char	*find_executable(char **paths, char *cmd)
@@ -21,10 +9,10 @@ char	*find_executable(char **paths, char *cmd)
 	i = 0;
 	while (paths[i])
 	{
-		tmp = ft_strjoin(paths[i], "/");
+		tmp = my_strjoin(paths[i], "/");
 		if (!tmp)
 			return (NULL);
-		full_path = ft_strjoin(tmp, cmd);
+		full_path = my_strjoin(tmp, cmd);
 		free(tmp);
 		if (!full_path)
 			return (NULL);
@@ -45,7 +33,7 @@ char	*get_path_env(char **envp)
 		return (NULL);
 	while (envp[i])
 	{
-		if (!ft_strncmp(envp[i], "PATH=", 5))
+		if (!my_strncmp(envp[i], "PATH=", 5))
 			return (envp[i] + 5);
 		i++;
 	}
@@ -63,12 +51,12 @@ char	*cmd_path(char *cmd, char **envp)
 	path_env = get_path_env(envp);
 	if (!path_env)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
+		my_putstr_fd("minishell: ", 2);
+		my_putstr_fd(cmd, 2);
+		my_putstr_fd(": No such file or directory\n", 2);
 		return (NULL);
 	}
-	paths = ft_split(path_env, ':');
+	paths = my_split(path_env, ':');
 	if (!paths)
 		return (NULL);
 	result = find_executable(paths, cmd);

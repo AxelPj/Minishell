@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tokenisation.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 17:34:31 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/30 21:06:22 by axelpeti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 int	token_type(char *s_token)
@@ -39,12 +27,12 @@ t_pars	*sort_token(t_data *data, int i, int size)
 	while (data->tab_token[i] && i < size)
 	{
 		count = count_token_word(i, data->tab_token, size);
-		node = ft_lst_parsnw(data->tab_token,
+		node = my_lst_parsnw(data->tab_token,
 				token_type(data->tab_token[i]), &i, count);
 		if (!data->parsing)
 			data->parsing = node;
 		else
-			ft_pars_lstadd_bck(&data->parsing, node);
+			my_pars_lstadd_bck(&data->parsing, node);
 		if (data->tab_token[i])
 			i++;
 	}

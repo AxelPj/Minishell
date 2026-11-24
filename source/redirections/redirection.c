@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/13 16:56:37 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/29 19:48:44 by lesalmon         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 int	count_clean_args(char **args)
@@ -22,10 +10,10 @@ int	count_clean_args(char **args)
 	while (args[i])
 	{
 		if (args[i + 1] && (
-				!ft_strcmp(args[i], "<")
-				|| !ft_strcmp(args[i], ">")
-				|| !ft_strcmp(args[i], ">>")
-				|| !ft_strcmp(args[i], "<<")))
+				!my_strcmp(args[i], "<")
+				|| !my_strcmp(args[i], ">")
+				|| !my_strcmp(args[i], ">>")
+				|| !my_strcmp(args[i], "<<")))
 			i += 2;
 		else
 		{
@@ -52,13 +40,13 @@ char	**rm_redir(char **args)
 	while (args[i])
 	{
 		if (args[i + 1] && (
-				!ft_strcmp(args[i], "<")
-				|| !ft_strcmp(args[i], ">")
-				|| !ft_strcmp(args[i], ">>")
-				|| !ft_strcmp(args[i], "<<")))
+				!my_strcmp(args[i], "<")
+				|| !my_strcmp(args[i], ">")
+				|| !my_strcmp(args[i], ">>")
+				|| !my_strcmp(args[i], "<<")))
 			i += 2;
 		else
-			clean[j++] = ft_strdup(args[i++]);
+			clean[j++] = my_strdup(args[i++]);
 	}
 	clean[j] = NULL;
 	return (clean);

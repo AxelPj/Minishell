@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/02 14:35:17 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/30 23:05:44 by axelpeti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/header/minishell.h"
 
 long	g_status = 0;
@@ -27,7 +15,7 @@ void	ctrl_d(t_data *data, t_exec *info)
 	info->nb_args = 3;
 	info->nb_cmds = 3;
 	init_infos(info);
-	ft_exit(NULL, info, data, 0);
+	my_exit(NULL, info, data, 0);
 }
 
 void	a_out(t_data *data, char *command, t_exec *info, int size)
@@ -49,7 +37,7 @@ void	a_out(t_data *data, char *command, t_exec *info, int size)
 	}
 	data->parsing = clear_tab(data);
 	info->tab_args = import_tabs(data, info,
-			ft_lst_pars_size(data->parsing), 0);
+			my_lst_pars_size(data->parsing), 0);
 	data->parsing = free_lst_pars(data->parsing);
 	info->nb_args = 0;
 	info->nb_cmds = 1;
@@ -90,17 +78,19 @@ void	minishell(char *command, t_data	*data)
 		command = readline("OH MI(ni)SHELL> ");
 		if (command == NULL)
 			ctrl_d(data, info);
-		if (ft_strlen(command) >= 1)
+		if (my_strlen(command) >= 1)
 		{
 			add_history(command);
 			if (!syntax_are_closed(command))
 				a_out(data, command, info, 0);
+			else
+			{
+				free(command);
+				g_status = 2;
+			}
 		}
 		else
-		{
 			free(command);
-			ft_putstr_fd("minishell : syntax error.\n", 2);
-		}
 	}
 	free(info);
 }

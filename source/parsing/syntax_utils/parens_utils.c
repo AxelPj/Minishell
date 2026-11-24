@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parens_utils.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/22 18:22:02 by axel              #+#    #+#             */
-/*   Updated: 2025/06/29 19:47:12 by lesalmon         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 int	in_open_parens(char c)
@@ -67,11 +55,14 @@ char	*process_parens(t_data *data, char *input, int i)
 
 int	syntax_are_closed(char *command)
 {
-	if (quotes_are_closed(command) || has_pipe_edges(command, 0)
-		|| parens_are_closed(command) || braces_are_closed(command)
-		|| brackets_are_closed(command)
+	if (quotes_are_closed(command) || parens_are_closed(command)
+		|| braces_are_closed(command) || brackets_are_closed(command))
+	{
+		my_putstr_fd("minishell: syntax error: unclosed quote or bracket\n", 2);
+		return (1);
+	}
+	if (has_pipe_edges(command, 0)
 		|| check_redir_syntax_all(command, 0, 0, '\0'))
 		return (1);
-	else
-		return (0);
+	return (0);
 }

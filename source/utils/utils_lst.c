@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils_lst.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 14:19:44 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/06/29 18:52:02 by axelpeti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/header/minishell.h"
 
-t_pars	*ft_lst_parsnw(char **s_tok, int type_tok, int *index, int size)
+t_pars	*my_lst_parsnw(char **s_tok, int type_tok, int *index, int size)
 {
 	t_pars	*newelem;
 	int		i;
@@ -24,7 +12,7 @@ t_pars	*ft_lst_parsnw(char **s_tok, int type_tok, int *index, int size)
 	newelem->tab_tok = (char **)malloc(sizeof(char *) * (size + 1));
 	while (i < size)
 	{
-		newelem->tab_tok[i] = ft_strdup(s_tok[j]);
+		newelem->tab_tok[i] = my_strdup(s_tok[j]);
 		i++;
 		j++;
 	}
@@ -35,7 +23,7 @@ t_pars	*ft_lst_parsnw(char **s_tok, int type_tok, int *index, int size)
 	return (newelem);
 }
 
-void	ft_pars_lstadd_bck(t_pars **lst, t_pars *new)
+void	my_pars_lstadd_bck(t_pars **lst, t_pars *new)
 {
 	t_pars	*last;
 
@@ -60,7 +48,7 @@ t_pars	*pars_lstlast(t_pars *lst)
 	return (lst);
 }
 
-int	ft_lst_pars_size(t_pars *lst)
+int	my_lst_pars_size(t_pars *lst)
 {
 	int		size;
 	t_pars	*current;

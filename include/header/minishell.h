@@ -1,19 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/22 00:22:25 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/07/21 17:21:58 by axelpeti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../libft/libft.h"
+# include "../libmy/libmy.h"
 # include "../GNL/get_next_line.h"
 # include <stdlib.h>
 # include <stdio.h>
@@ -170,10 +158,10 @@ char	**envp_cpy(t_data *data, char **envp);
 void	print_pars_lst(t_data *data);
 void	print_data_lst(t_data *data);
 //------------lst---------------//
-t_pars	*ft_lst_parsnw(char **s_tok, int type_tok, int *index, int size);
-void	ft_pars_lstadd_bck(t_pars **lst, t_pars *new);
+t_pars	*my_lst_parsnw(char **s_tok, int type_tok, int *index, int size);
+void	my_pars_lstadd_bck(t_pars **lst, t_pars *new);
 t_pars	*pars_lstlast(t_pars *lst);
-int		ft_lst_pars_size(t_pars *lst);	
+int		my_lst_pars_size(t_pars *lst);	
 		//-----------free-----------//
 void	free_all(t_data *data);
 char	**free_tab(char **tab);
@@ -230,16 +218,17 @@ void	append(t_exec *info, char **args, int cmd, int i);
 void	infile(t_exec *info, char **args, int cmd, int i);
 void	outfile(t_exec *info, char **args, int cmd, int i);
 //--------------BUILT-IN--------------//
-int		ft_cd(char **input, t_data *data);
-int		ft_echo(char **input, int fd);
+int		my_cd(char **input, t_data *data);
+int		my_echo(char **input, int fd);
 int		check_n(char **input);
 int		is_all_n(char *s);
-int		ft_exit(char **args, t_exec *info, t_data *data, int bool);
-int		ft_env(t_data *data);
-char	*ft_env_expand(t_data *data, char *var);
-int		ft_export(t_exec *info, t_data *data);
-int		ft_pwd(t_data *data, char *args);
-int		ft_unset(t_data *data, char *str);
+int		my_exit(char **args, t_exec *info, t_data *data, int bool);
+int		is_numeric(char *str);
+int		my_env(t_data *data);
+char	*my_env_expand(t_data *data, char *var);
+int		my_export(t_exec *info, t_data *data);
+int		my_pwd(t_data *data, char *args);
+int		my_unset(t_data *data, char **args);
 //--------------EXPORT_UTILS--------------//
 int		is_valid_varname(char *str);
 int		var_exists(char **env, char *name);
@@ -249,9 +238,9 @@ int		add_var(t_data *data, char *str);
 char	*find_env(char *name, char **envp);
 int		cd_err(char *str);
 void	new_pwd(char *input, t_data *data);
-void	replace_env(char *key, char *value, char **envp);
+void	replace_env(char *key, char *value, t_data *data);
 //--------------GNL--------------//
-char	*ft_readline(int fd, char *stach);
+char	*my_readline(int fd, char *stach);
 char	*recoveraftern(char *stach);
 char	*recoverbeforen(char *line);
 char	*get_next_line(int fd);

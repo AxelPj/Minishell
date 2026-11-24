@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   shell_utils.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lesalmon <lesalmon@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 17:34:00 by lesalmon          #+#    #+#             */
-/*   Updated: 2025/06/27 22:17:14 by lesalmon         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 void	sh_lvl(char **envp)
@@ -26,10 +14,10 @@ void	sh_lvl(char **envp)
 		if (strncmp (envp[j], "SHLVL=", 6) == 0)
 		{
 			lvl = search_sh_lvl(envp, &j);
-			new_shlvl = ft_strjoin("SHLVL=", lvl);
+			new_shlvl = my_strjoin("SHLVL=", lvl);
 			free (lvl);
 			free (envp[j]);
-			envp[j] = ft_strdup(new_shlvl);
+			envp[j] = my_strdup(new_shlvl);
 			free (new_shlvl);
 		}
 		j++;
@@ -49,13 +37,13 @@ char	*search_sh_lvl(char **envp, int *j)
 	start = *j;
 	sh_lvl = 0;
 	i = 6;
-	new_shlvl = malloc ((ft_strlen(&envp[start][i]) + 1) * sizeof (char *));
+	new_shlvl = malloc ((my_strlen(&envp[start][i]) + 1) * sizeof (char *));
 	while (envp[start][i] != '\0')
 		new_shlvl[k++] = envp[start][i++];
 	new_shlvl[k] = '\0';
-	sh_lvl = ft_atoi(new_shlvl);
+	sh_lvl = my_atoi(new_shlvl);
 	free (new_shlvl);
-	new_shlvl = ft_itoa(sh_lvl + 1);
+	new_shlvl = my_itoa(sh_lvl + 1);
 	return (new_shlvl);
 }
 
@@ -66,10 +54,10 @@ void	set_shell(t_data *data)
 	i = 0;
 	while (data->envp_cpy[i])
 	{
-		if (ft_strncmp(data->envp_cpy[i], "SHELL=", 6) == 0)
+		if (my_strncmp(data->envp_cpy[i], "SHELL=", 6) == 0)
 		{
 			free(data->envp_cpy[i]);
-			data->envp_cpy[i] = ft_strdup("SHELL=minishell");
+			data->envp_cpy[i] = my_strdup("SHELL=minishell");
 		}
 		i++;
 	}
